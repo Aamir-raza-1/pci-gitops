@@ -37,7 +37,7 @@ spec:
     spec:
       project: pci-dss
       source:
-        repoURL: https://github.com/your-org/pci-gitops.git # IMPORTANT: Change to your Git repository URL
+        repoURL: https://github.com/Aamir-raza-1/pci-gitops.git # IMPORTANT: Change to your Git repository URL
         targetRevision: HEAD
         path: 'charts/{{chart}}'
         helm:

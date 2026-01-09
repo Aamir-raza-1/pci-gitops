@@ -11,4 +11,4 @@ metadata:
     argocd.argoproj.io/managed-by: argocd
   annotations:
     # REQUIRED for Config Connector
-    cnrm.cloud.google.com/project-id: "{{ .Values.gcpProjectId }}"
+    cnrm.cloud.google.com/project-id: "{{ .Values.projectId }}"
