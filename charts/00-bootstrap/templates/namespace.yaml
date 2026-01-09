@@ -9,3 +9,6 @@ metadata:
     # This label identifies the namespace's primary function/tenant.
     tenant: "{{ .Values.tenant }}"
     argocd.argoproj.io/managed-by: argocd
+  annotations:
+    # REQUIRED for Config Connector
+    cnrm.cloud.google.com/project-id: "{{ .Values.gcpProjectId }}"

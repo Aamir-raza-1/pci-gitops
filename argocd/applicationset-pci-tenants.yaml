@@ -9,7 +9,7 @@ spec:
       generators:
         # Generator 1: Discover all tenant directories (e.g., tenants/tenant-a)
         - git:
-            repoURL: https://github.com/your-org/pci-gitops.git # IMPORTANT: Change to your Git repository URL
+            repoURL: https://github.com/Aamir-raza-1/pci-gitops.git # IMPORTANT: Change to your Git repository URL
             revision: HEAD
             directories:
             - path: tenants/*
@@ -20,13 +20,13 @@ spec:
               chart: "00-bootstrap"
             - wave: "10"
               chart: "10-org"
-            - wave: "20"
-              chart: "20-network"
-            - wave: "30"
-              chart: "30-gke"
-            - wave: "40"
-              chart: "40-admission"
-  template:
+  #           - wave: "20"
+  #             chart: "20-network"
+  #           - wave: "30"
+  #             chart: "30-gke"
+  #           - wave: "40"
+  #             chart: "40-admission"
+  # template:
     metadata:
       name: '{{path.basename}}-{{chart}}'
       namespace: argocd
