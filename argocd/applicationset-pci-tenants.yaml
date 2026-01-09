@@ -15,18 +15,12 @@ spec:
             - path: tenants/*
         # Generator 2: Define the sync waves for Helm charts
         - list:
-          elements:
-            - wave: "00"
-              chart: "00-bootstrap"
-            - wave: "10"
-              chart: "10-org"
-  #           - wave: "20"
-  #             chart: "20-network"
-  #           - wave: "30"
-  #             chart: "30-gke"
-  #           - wave: "40"
-  #             chart: "40-admission"
-  # template:
+            elements:
+              - wave: "00"
+                chart: "00-bootstrap"
+              - wave: "10"
+                chart: "10-org"
+  template:
     metadata:
       name: '{{path.basename}}-{{chart}}'
       namespace: argocd
@@ -42,7 +36,7 @@ spec:
         path: 'charts/{{chart}}'
         helm:
           valueFiles:
-          - ../../{{path.path}}/env.yaml
+          - /{{path}}/env.yaml
       destination:
         server: https://kubernetes.default.svc
         # Deploy resources into a namespace named after the tenant.

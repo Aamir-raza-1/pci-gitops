@@ -11,13 +11,4 @@ spec:
     external: "{{ .Values.gcp.folderId }}"
   billingAccountRef:
     external: "{{ .Values.gcp.billingAccount }}"
-  # PCI Req 8.2: In addition to assigning a unique ID, ensure proper user-authentication management for non-consumer users and administrators on all system components.
-  # Enabling essential APIs for identity, security, and container management.
-  serviceAPIs:
-    - "iam.googleapis.com"
-    - "cloudresourcemanager.googleapis.com"
-    - "container.googleapis.com"
-    - "compute.googleapis.com"
-    - "iamcredentials.googleapis.com"
-    - "gkehub.googleapis.com"
-    - "connectgateway.googleapis.com"
+  
