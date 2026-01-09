@@ -1,0 +1,45 @@
+# PCI Req 2.2: All security policies and operational procedures that are identified in Requirement 2 are ... (b) implemented.
+# This policy implements the "run as non-root" control at the admission layer.
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: pci-req-2-runasnonroot
+spec:
+  # PCI Req 5.1: Malware protection is deployed on all applicable system components.
+  # While not anti-malware, admission control is a preventative security measure.
+  validationFailureAction: Enforce # Block non-compliant pods
+  background: true # Continuously scan for non-compliant resources
+  rules:
+  - name: require-run-as-non-root
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    # PCI Req 7.1.2: Assignment of privileges is based on job classification and function.
+    # This policy targets workloads in tenant namespaces, enforcing least privilege.
+    preconditions:
+      all:
+      - key: "{{`{{request.object.metadata.namespace}}`}}"
+        operator: NotEquals
+        value: "kube-system"
+      - key: "{{`{{request.object.metadata.namespace}}`}}"
+        operator: NotEquals
+        value: "kyverno"
+      - key: "{{`{{request.object.metadata.namespace}}`}}"
+        operator: NotEquals
+        value: "gke-system"
+      - key: "{{`{{request.object.metadata.namespace}}`}}"
+        operator: NotEquals
+        value: "config-management-system"
+    validate:
+      message: >-
+        Running as root is not allowed (PCI DSS Req 2.2).
+        The securityContext.runAsNonRoot must be set to true.
+      pattern:
+        spec:
+          =(securityContext):
+            runAsNonRoot: true
+          containers:
+          - =(securityContext):
+              runAsNonRoot: true

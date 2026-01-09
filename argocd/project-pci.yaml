@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: pci-dss
+  namespace: argocd
+spec:
+  description: "PCI-DSS Compliant Environments"
+  sourceRepos:
+  - '*' # In a real-world scenario, lock this down to your Git repository URL.
+  destinations:
+  - server: https://kubernetes.default.svc
+    namespace: '*' # Allow deploying to any tenant-specific namespace.
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'

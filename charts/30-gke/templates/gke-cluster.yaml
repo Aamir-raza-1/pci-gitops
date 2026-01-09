@@ -1,0 +1,58 @@
+# PCI Req 2.2: Develop configuration standards for all system components.
+# This resource defines the secure baseline for the GKE cluster.
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: "{{ .Values.gcp.projectId }}-gke"
+  namespace: "{{ .Values.tenant }}"
+spec:
+  projectRef:
+    name: "{{ .Values.gcp.projectId }}"
+  location: "{{ .Values.gcp.region }}"
+  initialNodeCount: 1
+  networkRef:
+    name: "{{ .Values.gcp.projectId }}-vpc"
+  subnetworkRef:
+    name: "{{ .Values.gcp.projectId }}-subnet"
+  # PCI Req 2.2.2: Enable only necessary services, protocols, daemons, etc., as required for the function of the system.
+  # Minimal addons are enabled.
+  addonsConfig:
+    httpLoadBalancing:
+      disabled: false
+    horizontalPodAutoscaling:
+      disabled: false
+    networkPolicyConfig:
+      disabled: false # Required for PCI Req 1.2.1
+  # PCI Req 1.3: Prohibit direct public access.
+  # This creates a private cluster with no public endpoint.
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+    enablePrivateNodes: true
+    masterIpv4CidrBlock: "172.16.0.0/28"
+  # PCI Req 8.2.5: Do not use group, shared, or generic IDs, passwords, or other authentication methods.
+  # Workload Identity provides granular, non-shared service account credentials.
+  workloadIdentityConfig:
+    workloadPool: "{{ .Values.gcp.projectId }}.svc.id.goog"
+  # PCI Req 2.2.4: Configure system security parameters to prevent misuse.
+  databaseEncryption:
+    state: "ENCRYPTED"
+    keyName: "" # Uses Google-managed key by default. For stricter compliance, use a CMEK.
+  releaseChannel:
+    channel: "REGULAR"
+  # PCI Req 10.3: Audit logs are enabled and protected.
+  loggingService: "logging.googleapis.com/kubernetes"
+  monitoringService: "monitoring.googleapis.com/kubernetes"
+  # Conditional configuration for Autopilot vs Standard
+  {{- if eq .Values.gke.mode "autopilot" }}
+  enableAutopilot: true
+  {{- else }}
+  # Standard-specific settings
+  nodeConfig:
+    machineType: "{{ .Values.gke.machineType }}"
+    # PCI Req 8.2: Assign a unique ID to each person with access.
+    # Service account for nodes with minimal permissions.
+    serviceAccountRef:
+      name: "{{ .Values.gcp.projectId }}-gke-sa"
+    oauthScopes:
+      - "https://www.googleapis.com/auth/cloud-platform"
+  {{- end }}

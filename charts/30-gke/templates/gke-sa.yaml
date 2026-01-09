@@ -1,0 +1,13 @@
+{{- if eq .Values.gke.mode "standard" }}
+# PCI Req 7.1.1: Define access needs for each role.
+# This service account defines the minimal identity for GKE nodes.
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata:
+  name: "{{ .Values.gcp.projectId }}-gke-sa"
+  namespace: "{{ .Values.tenant }}"
+spec:
+  projectRef:
+    name: "{{ .Values.gcp.projectId }}"
+  displayName: "GKE Node SA for {{ .Values.gcp.projectId }}"
+{{- end }}

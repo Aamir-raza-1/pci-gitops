@@ -1,0 +1,4 @@
+apiVersion: v2
+name: 40-admission
+description: PCI Tenant Admission Control Chart (Kyverno)
+version: 0.1.0

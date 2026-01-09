@@ -1,0 +1,24 @@
+{{- if eq .Values.gke.mode "standard" }}
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerNodePool
+metadata:
+  name: "{{ .Values.gcp.projectId }}-nodepool"
+  namespace: "{{ .Values.tenant }}"
+spec:
+  location: "{{ .Values.gcp.region }}"
+  clusterRef:
+    name: "{{ .Values.gcp.projectId }}-gke"
+  initialNodeCount: 1
+  autoscaling:
+    minNodeCount: 1
+    maxNodeCount: 3
+  nodeConfig:
+    machineType: "{{ .Values.gke.machineType }}"
+    serviceAccountRef:
+      name: "{{ .Values.gcp.projectId }}-gke-sa"
+    # PCI Req 2.2.4: Configure system security parameters to prevent misuse.
+    # Shielded nodes provide verifiable integrity of the node boot process.
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+      enableSecureBoot: true
+{{- end }}

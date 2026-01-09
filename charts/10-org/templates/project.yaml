@@ -1,0 +1,23 @@
+# PCI Req 7.1, 7.2: Restrict access to system components and cardholder data to only those individuals whose job requires such access.
+# The GCP Project is the root boundary for all tenant resources and IAM policies.
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: "{{ .Values.gcp.projectId }}"
+  namespace: "{{ .Values.tenant }}" # Deploys KCC resource into the tenant's namespace
+spec:
+  name: "{{ .Values.gcp.projectId }}"
+  folderRef:
+    external: "{{ .Values.gcp.folderId }}"
+  billingAccountRef:
+    external: "{{ .Values.gcp.billingAccount }}"
+  # PCI Req 8.2: In addition to assigning a unique ID, ensure proper user-authentication management for non-consumer users and administrators on all system components.
+  # Enabling essential APIs for identity, security, and container management.
+  serviceAPIs:
+    - "iam.googleapis.com"
+    - "cloudresourcemanager.googleapis.com"
+    - "container.googleapis.com"
+    - "compute.googleapis.com"
+    - "iamcredentials.googleapis.com"
+    - "gkehub.googleapis.com"
+    - "connectgateway.googleapis.com"

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: 30-gke
+description: PCI Tenant GKE Cluster Chart
+version: 0.1.0

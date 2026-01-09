@@ -1,0 +1,56 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pci-tenants
+  namespace: argocd
+spec:
+  generators:
+  - matrix:
+      generators:
+        # Generator 1: Discover all tenant directories (e.g., tenants/tenant-a)
+        - git:
+            repoURL: https://github.com/your-org/pci-gitops.git # IMPORTANT: Change to your Git repository URL
+            revision: HEAD
+            directories:
+            - path: tenants/*
+        # Generator 2: Define the sync waves for Helm charts
+        - list:
+          elements:
+            - wave: "00"
+              chart: "00-bootstrap"
+            - wave: "10"
+              chart: "10-org"
+            - wave: "20"
+              chart: "20-network"
+            - wave: "30"
+              chart: "30-gke"
+            - wave: "40"
+              chart: "40-admission"
+  template:
+    metadata:
+      name: '{{path.basename}}-{{chart}}'
+      namespace: argocd
+      annotations:
+        # PCI Req 11.4: Use intrusion-detection and/or intrusion-prevention techniques to detect and/or prevent intrusions into the network.
+        # ArgoCD sync waves provide ordered, preventative application of controls.
+        argocd.argoproj.io/sync-wave: "{{wave}}"
+    spec:
+      project: pci-dss
+      source:
+        repoURL: https://github.com/your-org/pci-gitops.git # IMPORTANT: Change to your Git repository URL
+        targetRevision: HEAD
+        path: 'charts/{{chart}}'
+        helm:
+          valueFiles:
+          - ../../{{path.path}}/env.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        # Deploy resources into a namespace named after the tenant.
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true

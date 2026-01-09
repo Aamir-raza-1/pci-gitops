@@ -1,0 +1,11 @@
+# PCI Req 7.2.1: An inventory of system components and data flows is maintained.
+# Namespaces provide logical separation for tenant resources.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "{{ .Values.tenant }}"
+  labels:
+    # PCI Req 2.4: Only one primary function is implemented per server.
+    # This label identifies the namespace's primary function/tenant.
+    tenant: "{{ .Values.tenant }}"
+    argocd.argoproj.io/managed-by: argocd

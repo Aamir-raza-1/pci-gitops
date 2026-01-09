@@ -1,0 +1,20 @@
+# PCI Req 1.2.1: Restrict inbound and outbound traffic to that which is necessary for the cardholder data environment.
+# This firewall rule establishes a default-deny posture for all ingress traffic.
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeFirewall
+metadata:
+  name: "{{ .Values.gcp.projectId }}-deny-all-ingress"
+  namespace: "{{ .Values.tenant }}"
+spec:
+  projectRef:
+    name: "{{ .Values.gcp.projectId }}"
+  networkRef:
+    name: "{{ .Values.gcp.projectId }}-vpc"
+  direction: INGRESS
+  priority: 65534 # Lowest priority to ensure it's a default rule
+  denied:
+    - ipProtocol: "all"
+  sourceRanges:
+    - "0.0.0.0/0"
+  logConfig:
+    metadata: "INCLUDE_ALL_METADATA"

@@ -1,0 +1,12 @@
+# PCI Req 1.2: Build firewall and router configurations that restrict connections between untrusted networks and any system components in the cardholder data environment.
+# The VPC provides a logically isolated network for the tenant's CDE.
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: "{{ .Values.gcp.projectId }}-vpc"
+  namespace: "{{ .Values.tenant }}"
+spec:
+  projectRef:
+    name: "{{ .Values.gcp.projectId }}"
+  autoCreateSubnetworks: false
+  routingMode: REGIONAL
