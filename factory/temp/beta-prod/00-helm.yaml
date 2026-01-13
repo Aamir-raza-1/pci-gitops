@@ -1,0 +1,114 @@
+---
+# Source: tenant-factory-chart/templates/00-bootstrap/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: t-beta-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/tenant-name": "beta-corp-prod"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/pci-dss": "true"
+---
+# Source: tenant-factory-chart/templates/23-infra-artifacts/registry.yaml
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  name: artifactregistry-beta-prod
+  namespace: t-beta-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  location: "us-east4"
+  repositoryId: "beta-prod-repo"
+  format: "docker"
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: computenetwork-beta-prod
+  namespace: t-beta-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: computesubnetwork-beta-prod
+  namespace: t-beta-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  ipCidrRange: "10.0.0.0/24"
+  region: "us-east4"
+  privateIpGoogleAccess: false
+  networkRef:
+    name: computenetwork-beta-prod
+---
+# Source: tenant-factory-chart/templates/22-infra-gke/cluster.yaml
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: containercluster-beta-prod
+  namespace: t-beta-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "prod"
+    "platform.eazyops.com/gke-size": "small"
+    "platform.eazyops.com/gke-runtime": "gke-standard"
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  location: "us-east4"
+  initialNodeCount: 1
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-beta-prod
+  namespace: t-beta-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "prod"
+    "platform.eazyops.com/use-folder": "true"
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  name: project-beta-prod
+  folderRef:
+    name: production-tenants
+  billingAccountRef:
+    external: "016112-AAF779-C59A78"
+---
+# Source: tenant-factory-chart/templates/20-infra-database/database.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: sqlinstance-beta-prod
+  namespace: t-beta-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "prod"
+    "platform.eazyops.com/db-size": "medium"
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  region: "us-east4"
+  databaseVersion: POSTGRES_14
+  settings:
+    # The tier is now set by a Kyverno sizing policy, but we could set a default here.
+    tier: db-g1-small
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false # This will be mutated by a Kyverno policy

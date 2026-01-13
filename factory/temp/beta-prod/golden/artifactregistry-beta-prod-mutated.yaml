@@ -1,0 +1,54 @@
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: artifactregistry-beta-prod
+  namespace: t-beta-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: beta-prod-repo
+
+---
+
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: artifactregistry-beta-prod
+  namespace: t-beta-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: beta-prod-repo
+
+---
+
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: artifactregistry-beta-prod
+  namespace: t-beta-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: beta-prod-repo
+
+---
+

@@ -1,0 +1,75 @@
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: large
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: sqlinstance-aci-prod
+  namespace: t-aci-prod
+spec:
+  databaseVersion: POSTGRES_13
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: large
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: sqlinstance-aci-prod
+  namespace: t-aci-prod
+spec:
+  databaseVersion: POSTGRES_13
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-n1-standard-4
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: large
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: sqlinstance-aci-prod
+  namespace: t-aci-prod
+spec:
+  databaseVersion: POSTGRES_13
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-n1-standard-4
+
+---
+

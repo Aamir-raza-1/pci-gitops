@@ -1,0 +1,16 @@
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: {{ include "tenant.resourceName" (dict "kind" "Project" "Values" .Values) }}
+  namespace: {{ include "tenant.namespace" . }}
+spec:
+  name: {{ include "tenant.resourceName" (dict "kind" "Project" "Values" .Values) }}
+  {{- if .Values.organization.use_folder }}
+  folderRef:
+    name: {{ required "organization.folder_name is required when use_folder is true" .Values.organization.folder_name }}
+  {{- else }}
+  organizationRef:
+    external: {{ required "gcp.org_id is required" .Values.gcp.org_id | quote }}
+  {{- end }}
+  billingAccountRef:
+    external: {{ required "gcp.billing_account_id is required" .Values.gcp.billing_account_id | quote }}

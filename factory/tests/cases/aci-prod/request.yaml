@@ -1,0 +1,14 @@
+# tests/cases/aci-prod/request.yaml
+# This is just a copy of the main request file for the test case
+tenant_code: "aci"
+tenant_name: "acme-inc-prod"
+environment: "prod"
+region: "us-east4"
+foundation:
+  org: { use_folder: true }
+  network: { type: "project" }
+infra:
+  gke: { runtime: "gke-standard", size: "large" }
+  database: { type: "postgres", size: "large" }
+compliance:
+  packs: ["cis", "pci-dss", "hipaa"]

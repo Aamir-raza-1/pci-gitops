@@ -1,0 +1,49 @@
+# 00-bootstrap/enforce-naming.yaml
+# This policy is now simplified. It only validates that the names computed by Helm are correct.
+# It also adds the mandatory ArgoCD sync-wave annotations.
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: bootstrap-naming-and-syncwaves
+spec:
+  rules:
+  - name: "add-sync-waves"
+    match:
+      any:
+      - resources:
+          kinds: ["Namespace", "Project"]
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          annotations:
+            argocd.argoproj.io/sync-wave: "0"
+  - name: "add-sync-waves-network"
+    match:
+      any:
+      - resources:
+          kinds: ["ComputeNetwork", "ComputeSubnetwork"]
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          annotations:
+            argocd.argoproj.io/sync-wave: "1"
+  - name: "add-sync-waves-gke"
+    match:
+      any:
+      - resources:
+          kinds: ["ContainerCluster"]
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          annotations:
+            argocd.argoproj.io/sync-wave: "2"
+  - name: "add-sync-waves-apps"
+    match:
+      any:
+      - resources:
+          kinds: ["SQLInstance", "SecretManagerSecret", "ArtifactRegistryRepository"]
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          annotations:
+            argocd.argoproj.io/sync-wave: "3"

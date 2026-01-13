@@ -1,0 +1,9 @@
+# This is a "bad" VPC that does not disable default firewall rules.
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: bad-vpc
+  namespace: t-aci-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false

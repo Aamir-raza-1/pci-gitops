@@ -1,0 +1,5 @@
+apiVersion: v2
+name: tenant-factory-blueprint
+description: A Helm chart to generate enterprise-grade GCP tenant environments.
+type: application
+version: 0.1.0

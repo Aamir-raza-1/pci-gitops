@@ -1,0 +1,39 @@
+# tests/layers/03-core-infra/request.yaml
+# Adds the 'infra.database' and 'infra.gke' sections.
+tenant_code: "layer3"
+environment: "test"
+
+gcp:
+  region: "us-central1"
+  billing_account_id: "016112-AAF779-C59A78"
+  org_id: "547574100405"
+
+organization:
+  use_folder: false
+
+network:
+  mode: "dedicated"
+  dedicated:
+    vpc:
+      auto_create_subnetworks: false
+    subnets:
+      - name: "main"
+        cidr: "10.101.0.0/24"
+        private_ip_google_access: true
+
+infra:
+  database:
+    enabled: true
+    postgres:
+      name: "main-db-pg"
+      version: "POSTGRES_14"
+      tier: "db-g1-small"
+    mysql:
+      name: "main-db-mysql"
+      version: "MYSQL_8_0"
+      tier: "db-g1-small"
+  gke:
+    enabled: true
+    cluster:
+      name: "main-cluster"
+      initial_node_count: 1

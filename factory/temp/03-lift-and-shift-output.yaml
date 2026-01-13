@@ -1,0 +1,128 @@
+---
+# Source: tenant-factory-chart/templates/00-bootstrap/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: t-gamma-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "gamma"
+    "platform.eazyops.com/tenant-name": "gamma-migrated-app"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/cis": "true"
+---
+# Source: tenant-factory-chart/templates/23-infra-artifacts/registry.yaml
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  name: artifactregistry-gamma-prod
+  namespace: t-gamma-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "gamma"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/cis": "true"
+spec:
+  location: "us-central1"
+  repositoryId: "gamma-prod-repo"
+  format: "docker"
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+# --- Core VPC and Subnets ---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: vpc-gamma-prod
+  namespace: t-gamma-prod
+spec:
+  autoCreateSubnetworks: false
+  mtu: 1460
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-gamma-prod-app-tier
+  namespace: t-gamma-prod
+spec:
+  ipCidrRange: 10.50.1.0/24
+  region: us-east1
+  privateIpGoogleAccess: true
+  networkRef:
+    name: vpc-gamma-prod
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-gamma-prod-db-tier
+  namespace: t-gamma-prod
+spec:
+  ipCidrRange: 10.50.2.0/24
+  region: us-east1
+  privateIpGoogleAccess: true
+  networkRef:
+    name: vpc-gamma-prod
+---
+# Source: tenant-factory-chart/templates/22-infra-gke/cluster.yaml
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: containercluster-gamma-prod
+  namespace: t-gamma-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "gamma"
+    "platform.eazyops.com/environment": "prod"
+    "platform.eazyops.com/gke-size": "small"
+    "platform.eazyops.com/gke-runtime": "gke-autopilot"
+    "compliance.eazyops.com/cis": "true"
+spec:
+  location: "us-central1"
+  initialNodeCount: 1
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-gamma-prod-networkAdmin
+  namespace: t-gamma-prod
+spec:
+  member: "group:gcp-net-admins-hybrid@example.com"
+  role: "roles/networkAdmin"
+  resourceRef:
+    kind: Project
+    name: project-gamma-prod
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-gamma-prod
+  namespace: t-gamma-prod
+spec:
+  name: project-gamma-prod
+  folderRef:
+    name: migrated-workloads
+  billingAccountRef:
+    external: "016112-AAF779-C59A78"
+---
+# Source: tenant-factory-chart/templates/20-infra-database/database.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: sqlinstance-gamma-prod
+  namespace: t-gamma-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "gamma"
+    "platform.eazyops.com/environment": "prod"
+    "platform.eazyops.com/db-size": "large"
+    "compliance.eazyops.com/cis": "true"
+spec:
+  region: "us-central1"
+  databaseVersion: POSTGRES_14
+  settings:
+    # The tier is now set by a Kyverno sizing policy, but we could set a default here.
+    tier: db-g1-small
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false # This will be mutated by a Kyverno policy

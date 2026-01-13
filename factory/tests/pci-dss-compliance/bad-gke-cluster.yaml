@@ -1,0 +1,11 @@
+# This is a "bad" GKE cluster that is not private.
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: bad-gke-cluster
+  namespace: t-aci-prod
+spec:
+  location: "us-east4"
+  initialNodeCount: 1
+  privateClusterConfig:
+    enablePrivateEndpoint: false

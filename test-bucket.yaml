@@ -1,0 +1,9 @@
+apiVersion: storage.cnrm.cloud.google.com/v1beta1
+kind: StorageBucket
+metadata:
+  name: cnrm-local-bucket-1767868627
+  namespace: gcp-resources
+  annotations:
+    cnrm.cloud.google.com/project-id: dev-ezo
+spec:
+  location: US-CENTRAL1

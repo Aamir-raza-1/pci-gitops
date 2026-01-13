@@ -1,0 +1,471 @@
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: artifactregistry-aci-prod
+  namespace: t-aci-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: aci-prod-repo
+
+---
+
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: artifactregistry-aci-prod
+  namespace: t-aci-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: aci-prod-repo
+
+---
+
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: artifactregistry-aci-prod
+  namespace: t-aci-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: aci-prod-repo
+
+---
+
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computenetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computenetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computenetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: true
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+
+---
+
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computesubnetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-aci-prod
+  privateIpGoogleAccess: false
+  region: us-east4
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computesubnetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-aci-prod
+  privateIpGoogleAccess: false
+  region: us-east4
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computesubnetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-aci-prod
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+  region: us-east4
+
+---
+
+---
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: large
+    platform.eazyops.com/tenant-code: aci
+  name: containercluster-aci-prod
+  namespace: t-aci-prod
+spec:
+  initialNodeCount: 1
+  location: us-east4
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: large
+    platform.eazyops.com/tenant-code: aci
+  name: containercluster-aci-prod
+  namespace: t-aci-prod
+spec:
+  initialNodeCount: 5
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-8
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: large
+    platform.eazyops.com/tenant-code: aci
+  name: containercluster-aci-prod
+  namespace: t-aci-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  initialNodeCount: 5
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-8
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+
+---
+
+---
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/use-folder: "true"
+  name: project-aci-prod
+  namespace: t-aci-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: placeholder-folder-name
+  name: project-aci-prod
+  organizationRef:
+    external: "547574100405"
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/use-folder: "true"
+  name: project-aci-prod
+  namespace: t-aci-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: placeholder-folder-name
+  name: project-aci-prod
+  organizationRef:
+    external: "547574100405"
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/use-folder: "true"
+  name: project-aci-prod
+  namespace: t-aci-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: placeholder-folder-name
+  name: project-aci-prod
+  organizationRef:
+    external: "547574100405"
+
+---
+
+---
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: large
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: sqlinstance-aci-prod
+  namespace: t-aci-prod
+spec:
+  databaseVersion: POSTGRES_13
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: large
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: sqlinstance-aci-prod
+  namespace: t-aci-prod
+spec:
+  databaseVersion: POSTGRES_13
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-n1-standard-4
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: large
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: sqlinstance-aci-prod
+  namespace: t-aci-prod
+spec:
+  databaseVersion: POSTGRES_13
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-n1-standard-4
+
+---
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/tenant-name: acme-inc-prod
+  name: t-aci-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/tenant-name: acme-inc-prod
+  name: t-aci-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/tenant-name: acme-inc-prod
+  name: t-aci-prod
+  namespace: default
+
+---
+

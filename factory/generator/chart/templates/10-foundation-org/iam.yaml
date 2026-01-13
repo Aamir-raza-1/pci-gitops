@@ -1,0 +1,14 @@
+{{- range .Values.organization.iam }}
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: {{ include "tenant.resourceName" (dict "kind" "Project" "Values" $.Values) }}-{{ .role | replace "roles/" "" | replace "." "-" }}
+  namespace: {{ include "tenant.namespace" $ }}
+spec:
+  member: {{ .member | quote }}
+  role: {{ .role | quote }}
+  resourceRef:
+    kind: Project
+    name: {{ include "tenant.resourceName" (dict "kind" "Project" "Values" $.Values) }}
+---
+{{- end }}

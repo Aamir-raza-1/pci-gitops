@@ -1,0 +1,17 @@
+name: pci-dss-policy-tests
+policies:
+  - ../../generator/policies/20-compliance/pci-dss.yaml
+resources:
+  - bad-gke-cluster.yaml
+  - bad-vpc.yaml
+results:
+- policy: compliance-pci-dss
+  rule: pci-dss-gke-must-be-private
+  resource: bad-gke-cluster
+  kind: ContainerCluster
+  result: fail
+- policy: compliance-pci-dss
+  rule: pci-dss-vpc-must-disable-default-http
+  resource: bad-vpc
+  kind: ComputeNetwork
+  result: fail

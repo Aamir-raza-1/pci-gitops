@@ -1,0 +1,14 @@
+tenant_code: "layer1"
+environment: "test"
+gcp:
+  billing_account_id: "016112-AAF779-C59A78"
+  org_id: "547574100405"
+organization:
+  use_folder: false
+  iam:
+    - role: "roles/viewer"
+      member: "group:test-auditors@example.com"
+project_services:
+  - "compute.googleapis.com"
+network:
+  mode: "default"

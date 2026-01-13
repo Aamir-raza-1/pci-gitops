@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: tenant-factory
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/your-org/your-repo.git # MUST BE REPLACED
+      revision: HEAD
+      # This will find all the 'request.yaml' files in our final tenant directories.
+      files:
+      - path: "tenants/*/*/request.yaml"
+  template:
+    metadata:
+      name: '{{path.basename}}-{{path[1]}}' # ex: prod-alpha
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/your-org/your-repo.git # MUST BE REPLACED
+        targetRevision: HEAD
+        # The source for each app is the directory containing the request.yaml.
+        path: '{{path.directory}}'
+        # We instruct Argo CD to only sync our final, golden manifest.
+        directory:
+          include: '02-golden.yaml'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 't-{{path[1]}}-{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true

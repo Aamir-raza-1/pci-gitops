@@ -1,0 +1,14 @@
+# This is a "bad" database that does not have Point-in-Time Recovery enabled.
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: bad-database
+  namespace: t-aci-prod
+spec:
+  region: "us-east4"
+  databaseVersion: POSTGRES_13
+  settings:
+    tier: "db-g1-small"
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false

@@ -1,0 +1,27 @@
+# scenarios/02-lean-startup-shared/request.yaml
+tenant_code: "beta"
+environment: "nonprod"
+gcp:
+  region: "us-central1"
+  billing_account_id: "016112-AAF779-C59A78"
+  org_id: "547574100405"
+organization:
+  use_folder: false
+project_services:
+  - "run.googleapis.com"
+  - "secretmanager.googleapis.com"
+network:
+  mode: "shared"
+  shared:
+    host_project_id: "gcp-shared-vpc-host"
+infra:
+  cloud_run:
+    enabled: true
+    service:
+      name: "webapp"
+      template:
+        containers: [{ image: "us-docker.pkg.dev/cloudrun/container/hello" }]
+  secrets:
+    enabled: true
+    secrets:
+      - name: "api-token"

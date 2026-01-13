@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/tenant-name: acme-inc-prod
+  name: t-aci-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/tenant-name: acme-inc-prod
+  name: t-aci-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/tenant-name: acme-inc-prod
+  name: t-aci-prod
+  namespace: default
+
+---
+

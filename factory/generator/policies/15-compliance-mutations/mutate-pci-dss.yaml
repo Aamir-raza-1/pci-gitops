@@ -1,0 +1,25 @@
+# 15-compliance-mutations/mutate-pci-dss.yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: compliance-mutations-pci-dss
+spec:
+  rules:
+  - name: "mutate-pci-dss-requirements"
+    match:
+      any:
+      - resources:
+          kinds:
+          - ContainerCluster
+          - ComputeNetwork
+          - ComputeSubnetwork
+          selector:
+            matchLabels:
+              "compliance.eazyops.com/pci-dss": "true"
+    mutate:
+      patchStrategicMerge:
+        spec:
+          privateClusterConfig:
+            enablePrivateEndpoint: true
+          deleteDefaultRoutesOnCreate: true
+          privateIpGoogleAccess: true

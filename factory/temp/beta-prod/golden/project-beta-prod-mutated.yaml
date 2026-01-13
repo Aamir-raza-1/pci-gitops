@@ -1,0 +1,63 @@
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/use-folder: "true"
+  name: project-beta-prod
+  namespace: t-beta-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-beta-prod
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/use-folder: "true"
+  name: project-beta-prod
+  namespace: t-beta-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-beta-prod
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/use-folder: "true"
+  name: project-beta-prod
+  namespace: t-beta-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-beta-prod
+
+---
+

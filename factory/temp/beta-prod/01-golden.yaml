@@ -1,0 +1,423 @@
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: artifactregistry-beta-prod
+  namespace: t-beta-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: beta-prod-repo
+
+---
+
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: artifactregistry-beta-prod
+  namespace: t-beta-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: beta-prod-repo
+
+---
+
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: artifactregistry-beta-prod
+  namespace: t-beta-prod
+spec:
+  format: docker
+  location: us-east4
+  repositoryId: beta-prod-repo
+
+---
+
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computenetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computenetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computenetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: true
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+
+---
+
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computesubnetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-beta-prod
+  privateIpGoogleAccess: false
+  region: us-east4
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computesubnetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-beta-prod
+  privateIpGoogleAccess: false
+  region: us-east4
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computesubnetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-beta-prod
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+  region: us-east4
+
+---
+
+---
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: small
+    platform.eazyops.com/tenant-code: beta
+  name: containercluster-beta-prod
+  namespace: t-beta-prod
+spec:
+  initialNodeCount: 1
+  location: us-east4
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: small
+    platform.eazyops.com/tenant-code: beta
+  name: containercluster-beta-prod
+  namespace: t-beta-prod
+spec:
+  initialNodeCount: 1
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-2
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: small
+    platform.eazyops.com/tenant-code: beta
+  name: containercluster-beta-prod
+  namespace: t-beta-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  initialNodeCount: 1
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-2
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+
+---
+
+---
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/use-folder: "true"
+  name: project-beta-prod
+  namespace: t-beta-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-beta-prod
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/use-folder: "true"
+  name: project-beta-prod
+  namespace: t-beta-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-beta-prod
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/use-folder: "true"
+  name: project-beta-prod
+  namespace: t-beta-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-beta-prod
+
+---
+
+---
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: medium
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: sqlinstance-beta-prod
+  namespace: t-beta-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: medium
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: sqlinstance-beta-prod
+  namespace: t-beta-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: medium
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: sqlinstance-beta-prod
+  namespace: t-beta-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/tenant-name: beta-corp-prod
+  name: t-beta-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/tenant-name: beta-corp-prod
+  name: t-beta-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/tenant-name: beta-corp-prod
+  name: t-beta-prod
+  namespace: default
+
+---
+

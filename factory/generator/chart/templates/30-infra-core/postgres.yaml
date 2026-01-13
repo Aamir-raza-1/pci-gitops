@@ -1,0 +1,16 @@
+# templates/30-infra-core/postgres.yaml
+{{- if and .Values.infra.database.enabled .Values.infra.database.postgres }}
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: {{ .Values.infra.database.postgres.name }}
+  namespace: {{ include "tenant.namespace" . }}
+  labels:
+    # This label is used by the sizing policy
+    "platform.eazyops.com/db-size": "{{ .Values.infra.database.size | default "small" }}"
+spec:
+  region: {{ .Values.gcp.region }}
+  databaseVersion: {{ .Values.infra.database.postgres.version }}
+  settings:
+    tier: {{ .Values.infra.database.postgres.tier }}
+{{- end }}

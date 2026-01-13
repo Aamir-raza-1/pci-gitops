@@ -1,0 +1,644 @@
+
+Applying 8 policy rule(s) to 9 resource(s)...
+
+policy abstractions-sizing-defaults applied to t-alpha-prod/Service/alpha-compute:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-compute
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/Service/alpha-compute:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-compute
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Service/alpha-compute:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-compute
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Service/alpha-compute:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-compute
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/Service/alpha-container:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-container
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/Service/alpha-container:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-container
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Service/alpha-container:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-container
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Service/alpha-container:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-container
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/Service/alpha-sqladmin:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-sqladmin
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/Service/alpha-sqladmin:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-sqladmin
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Service/alpha-sqladmin:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-sqladmin
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Service/alpha-sqladmin:
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-sqladmin
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/ComputeNetwork/vpc-alpha-prod:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: vpc-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  autoCreateSubnetworks: false
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/ComputeNetwork/vpc-alpha-prod:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: vpc-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  autoCreateSubnetworks: false
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/ComputeNetwork/vpc-alpha-prod:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: vpc-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  autoCreateSubnetworks: false
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/ComputeNetwork/vpc-alpha-prod:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: vpc-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  autoCreateSubnetworks: false
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/ComputeSubnetwork/subnet-alpha-prod-main:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-alpha-prod-main
+  namespace: t-alpha-prod
+spec:
+  ipCidrRange: 10.10.0.0/20
+  networkRef:
+    name: vpc-alpha-prod
+  privateIpGoogleAccess: true
+  region: us-east4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/ComputeSubnetwork/subnet-alpha-prod-main:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-alpha-prod-main
+  namespace: t-alpha-prod
+spec:
+  ipCidrRange: 10.10.0.0/20
+  networkRef:
+    name: vpc-alpha-prod
+  privateIpGoogleAccess: true
+  region: us-east4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/ComputeSubnetwork/subnet-alpha-prod-main:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-alpha-prod-main
+  namespace: t-alpha-prod
+spec:
+  ipCidrRange: 10.10.0.0/20
+  networkRef:
+    name: vpc-alpha-prod
+  privateIpGoogleAccess: true
+  region: us-east4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/ComputeSubnetwork/subnet-alpha-prod-main:
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-alpha-prod-main
+  namespace: t-alpha-prod
+spec:
+  ipCidrRange: 10.10.0.0/20
+  networkRef:
+    name: vpc-alpha-prod
+  privateIpGoogleAccess: true
+  region: us-east4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/ContainerCluster/main-cluster:
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/gke-size: large
+  name: main-cluster
+  namespace: t-alpha-prod
+spec:
+  initialNodeCount: 5
+  location: us-east4
+  networkRef:
+    name: vpc-alpha-prod
+  nodeConfig:
+    machineType: e2-standard-8
+  subnetworkRef:
+    name: subnet-alpha-prod-main
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/ContainerCluster/main-cluster:
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/gke-size: large
+  name: main-cluster
+  namespace: t-alpha-prod
+spec:
+  initialNodeCount: 5
+  location: us-east4
+  networkRef:
+    name: vpc-alpha-prod
+  nodeConfig:
+    machineType: e2-standard-8
+  subnetworkRef:
+    name: subnet-alpha-prod-main
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/ContainerCluster/main-cluster:
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/gke-size: large
+  name: main-cluster
+  namespace: t-alpha-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  initialNodeCount: 5
+  location: us-east4
+  networkRef:
+    name: vpc-alpha-prod
+  nodeConfig:
+    machineType: e2-standard-8
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+  subnetworkRef:
+    name: subnet-alpha-prod-main
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/ContainerCluster/main-cluster:
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/gke-size: large
+  name: main-cluster
+  namespace: t-alpha-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  initialNodeCount: 5
+  location: us-east4
+  networkRef:
+    name: vpc-alpha-prod
+  nodeConfig:
+    machineType: e2-standard-8
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+  subnetworkRef:
+    name: subnet-alpha-prod-main
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/IAMPolicyMember/project-alpha-prod-owner:
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-alpha-prod-owner
+  namespace: t-alpha-prod
+spec:
+  member: group:gcp-platform-admins@example.com
+  resourceRef:
+    kind: Project
+    name: project-alpha-prod
+  role: roles/owner
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/IAMPolicyMember/project-alpha-prod-owner:
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-alpha-prod-owner
+  namespace: t-alpha-prod
+spec:
+  member: group:gcp-platform-admins@example.com
+  resourceRef:
+    kind: Project
+    name: project-alpha-prod
+  role: roles/owner
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/IAMPolicyMember/project-alpha-prod-owner:
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-alpha-prod-owner
+  namespace: t-alpha-prod
+spec:
+  member: group:gcp-platform-admins@example.com
+  resourceRef:
+    kind: Project
+    name: project-alpha-prod
+  role: roles/owner
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/IAMPolicyMember/project-alpha-prod-owner:
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-alpha-prod-owner
+  namespace: t-alpha-prod
+spec:
+  member: group:gcp-platform-admins@example.com
+  resourceRef:
+    kind: Project
+    name: project-alpha-prod
+  role: roles/owner
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/Project/project-alpha-prod:
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/Project/project-alpha-prod:
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Project/project-alpha-prod:
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/Project/project-alpha-prod:
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: production-tenants
+  name: project-alpha-prod
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/SQLInstance/main-db:
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  labels:
+    platform.eazyops.com/db-size: large
+  name: main-db
+  namespace: t-alpha-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    tier: db-n1-standard-4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy abstractions-sizing-defaults applied to t-alpha-prod/SQLInstance/main-db:
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  labels:
+    platform.eazyops.com/db-size: large
+  name: main-db
+  namespace: t-alpha-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    tier: db-n1-standard-4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/SQLInstance/main-db:
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  labels:
+    platform.eazyops.com/db-size: large
+  name: main-db
+  namespace: t-alpha-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    tier: db-n1-standard-4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+policy compliance-mutations-pci-dss applied to t-alpha-prod/SQLInstance/main-db:
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  labels:
+    platform.eazyops.com/db-size: large
+  name: main-db
+  namespace: t-alpha-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    tier: db-n1-standard-4
+
+---
+
+
+Mutation:
+Mutation has been applied successfully.
+skipped mutate policy abstractions-sizing-defaults -> resource t-alpha-prod/ContainerCluster/main-cluster
+
+skipped mutate policy compliance-mutations-pci-dss -> resource t-alpha-prod/ContainerCluster/main-cluster
+
+skipped mutate policy abstractions-sizing-defaults -> resource t-alpha-prod/SQLInstance/main-db
+
+skipped mutate policy abstractions-sizing-defaults -> resource t-alpha-prod/SQLInstance/main-db
+
+pass: 2, fail: 0, warn: 0, error: 0, skip: 4 

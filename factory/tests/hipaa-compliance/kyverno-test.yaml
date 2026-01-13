@@ -1,0 +1,17 @@
+name: hipaa-policy-tests
+policies:
+  - ../../generator/policies/20-compliance/hipaa.yaml
+resources:
+  - bad-database.yaml
+  - bad-registry.yaml
+results:
+- policy: compliance-hipaa
+  rule: hipaa-db-must-have-point-in-time-recovery
+  resource: bad-database
+  kind: SQLInstance
+  result: fail
+- policy: compliance-hipaa
+  rule: hipaa-artifacts-must-be-encrypted-with-cmek
+  resource: bad-registry
+  kind: ArtifactRegistryRepository
+  result: fail

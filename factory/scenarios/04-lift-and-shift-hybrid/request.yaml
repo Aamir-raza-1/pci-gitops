@@ -1,0 +1,23 @@
+# scenarios/04-lift-and-shift-hybrid/request.yaml
+tenant_code: "delta"
+environment: "prod"
+gcp:
+  region: "us-east1"
+  billing_account_id: "016112-AAF779-C59A78"
+  org_id: "547574100405"
+organization:
+  use_folder: true
+  folder_name: "migrated-workloads"
+project_services: ["compute.googleapis.com"]
+network:
+  mode: "dedicated"
+  dedicated:
+    vpc: { auto_create_subnetworks: false }
+    subnets:
+      - { name: "app-tier", cidr: "10.50.1.0/24", private_ip_google_access: true }
+    # This router is the anchor for hybrid connectivity.
+    router:
+      enabled: true
+      name: "router-to-onprem"
+      bgp:
+        asn: 64514

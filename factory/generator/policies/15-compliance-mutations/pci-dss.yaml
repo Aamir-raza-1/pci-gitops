@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: compliance-mutations-pci-dss
+spec:
+  rules:
+  - name: "mutate-gke-private-for-pci"
+    match:
+      any:
+      - resources:
+          kinds: ["ContainerCluster"]
+          selector:
+            matchLabels:
+              "compliance.eazyops.com/pci-dss": "true"
+    mutate:
+      patchStrategicMerge:
+        spec:
+          privateClusterConfig:
+            enablePrivateEndpoint: true

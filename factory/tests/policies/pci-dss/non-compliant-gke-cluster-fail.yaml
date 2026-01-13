@@ -1,0 +1,12 @@
+# This GKE cluster has the 'privateClusterConfig' block but it's disabled.
+# Our validation policy should catch this and fail it.
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: test-cluster-for-validation-fail
+  labels:
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  location: "us-central1"
+  privateClusterConfig:
+    enablePrivateEndpoint: false

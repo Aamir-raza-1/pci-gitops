@@ -1,0 +1,33 @@
+# scenarios/05-web-scale-app/request.yaml
+tenant_code: "epsilon"
+environment: "prod"
+gcp: { region: "us-west2", billing_account_id: "016112-AAF779-C59A78", org_id: "547574100405" }
+organization: { use_folder: true, folder_name: "web-apps" }
+project_services: ["compute.googleapis.com", "container.googleapis.com", "redis.googleapis.com", "dns.googleapis.com"]
+network:
+  mode: "dedicated"
+  dedicated:
+    vpc: { auto_create_subnetworks: false }
+    subnets:
+      - { name: "gke-main", cidr: "10.70.0.0/20", private_ip_google_access: true }
+infra:
+  gke: { enabled: true, cluster: { name: "web-cluster", initial_node_count: 5 } }
+  memorystore: { enabled: true, redis: { name: "session-cache", tier: "STANDARD_HA", memory_size_gb: 5 } }
+  dns: { enabled: true, managed_zones: [{ name: "epsilon-prod-zone", dns_name: "epsilon.prod.example.com.", description: "Prod DNS for Epsilon" }] }
+  security:
+    enabled: true
+    cloud_armor:
+      description: "WAF policy for web app"
+      rules:
+        - action: "deny(403)"
+          priority: 1000
+          match:
+            versioned_expr: "SRC_IPS_V1"
+            config:
+              src_ip_ranges: ["192.0.2.0/24"] # Example blocklist
+        - action: "allow"
+          priority: 2147483647 # Default allow
+          match:
+            versioned_expr: "SRC_IPS_V1"
+            config:
+              src_ip_ranges: ["*"]

@@ -1,0 +1,11 @@
+# tests/cases/bad-request/request.yaml
+# This file is intentionally missing required values to test schema validation.
+tenant_code: "bad"
+environment: "prod"
+region: "us-central1"
+# Missing foundation.org.billing_account_id and foundation.org.org_id
+foundation:
+  org:
+    use_folder: false
+  network:
+    type: "project"

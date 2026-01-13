@@ -1,0 +1,33 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: abstractions-sizing-defaults
+spec:
+  rules:
+  - name: "mutate-gke-large"
+    match:
+      any:
+      - resources:
+          kinds: ["ContainerCluster"]
+          selector:
+            matchLabels:
+              "platform.eazyops.com/gke-size": "large"
+    mutate:
+      patchStrategicMerge:
+        spec:
+          initialNodeCount: 5
+          nodeConfig:
+            machineType: "e2-standard-8"
+  - name: "mutate-db-large"
+    match:
+      any:
+      - resources:
+          kinds: ["SQLInstance"]
+          selector:
+            matchLabels:
+              "platform.eazyops.com/db-size": "large"
+    mutate:
+      patchStrategicMerge:
+        spec:
+          settings:
+            tier: "db-n1-standard-4"

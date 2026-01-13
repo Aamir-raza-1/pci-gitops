@@ -1,0 +1,10 @@
+# This is a "bad" project manifest that is missing the required CIS label.
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: prj-d-bad-project-abcd-bad
+  namespace: t-aci-prod # Pretend it's in our CIS namespace
+spec:
+  name: prj-d-bad-project-abcd-bad
+  folderRef:
+    name: fldr-dev

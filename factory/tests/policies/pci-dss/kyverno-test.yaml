@@ -1,0 +1,28 @@
+# This file defines the test suite for our PCI-DSS policies using the correct, modern schema.
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: pci-dss-policy-tests
+policies:
+  - ../../../generator/policies/15-compliance-mutations/pci-dss.yaml
+  - ../../../generator/policies/20-compliance-validations/pci-dss.yaml
+resources:
+  - non-compliant-gke-cluster.yaml
+  - non-compliant-gke-cluster-fail.yaml
+results:
+# Test Case 1: Test the mutation policy.
+# We expect the 'mutate-gke-private-for-pci' rule to pass.
+# The link to the resource is implicit: Kyverno will apply this rule to all resources in the 'resources' list above.
+- policy: compliance-mutations-pci-dss
+  rule: mutate-gke-private-for-pci
+  kind: ContainerCluster
+  result: pass
+# Test Case 2: Test the validation policy.
+# We expect the 'validate-gke-is-private-for-pci' rule to fail against the specific non-compliant resource.
+- policy: compliance-validations-pci-dss
+  rule: validate-gke-is-private-for-pci
+  kind: ContainerCluster
+  result: fail
+  # The 'resources' field (plural) can be used here to scope a result to a specific resource name if needed.
+  resources:
+  - non-compliant-gke-cluster-fail

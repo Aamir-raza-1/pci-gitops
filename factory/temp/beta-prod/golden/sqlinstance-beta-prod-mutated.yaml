@@ -1,0 +1,69 @@
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: medium
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: sqlinstance-beta-prod
+  namespace: t-beta-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: medium
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: sqlinstance-beta-prod
+  namespace: t-beta-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/db-size: medium
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: sqlinstance-beta-prod
+  namespace: t-beta-prod
+spec:
+  databaseVersion: POSTGRES_14
+  region: us-east4
+  settings:
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false
+    tier: db-g1-small
+
+---
+

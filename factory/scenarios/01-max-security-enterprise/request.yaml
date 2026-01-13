@@ -1,0 +1,23 @@
+tenant_code: "alpha"
+environment: "prod"
+gcp:
+  region: "us-east4"
+  billing_account_id: "016112-AAF779-C59A78"
+  org_id: "547574100405"
+organization:
+  use_folder: true
+  folder_name: "production-tenants"
+  iam:
+    - { role: "roles/owner", member: "group:gcp-platform-admins@example.com" }
+project_services: ["compute.googleapis.com", "container.googleapis.com", "sqladmin.googleapis.com"]
+network:
+  mode: "dedicated"
+  dedicated:
+    vpc: { auto_create_subnetworks: false }
+    subnets:
+      - { name: "main", cidr: "10.10.0.0/20", private_ip_google_access: true }
+infra:
+  gke: { enabled: true, cluster: { name: "main-cluster", initial_node_count: 3 }, size: "large" }
+  database: { enabled: true, postgres: { name: "main-db", version: "POSTGRES_14", tier: "db-n1-standard-4" }, size: "large" }
+compliance:
+  packs: ["pci-dss"]

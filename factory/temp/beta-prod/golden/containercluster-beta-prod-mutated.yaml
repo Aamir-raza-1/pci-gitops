@@ -1,0 +1,69 @@
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: small
+    platform.eazyops.com/tenant-code: beta
+  name: containercluster-beta-prod
+  namespace: t-beta-prod
+spec:
+  initialNodeCount: 1
+  location: us-east4
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: small
+    platform.eazyops.com/tenant-code: beta
+  name: containercluster-beta-prod
+  namespace: t-beta-prod
+spec:
+  initialNodeCount: 1
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-2
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: small
+    platform.eazyops.com/tenant-code: beta
+  name: containercluster-beta-prod
+  namespace: t-beta-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  initialNodeCount: 1
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-2
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+
+---
+

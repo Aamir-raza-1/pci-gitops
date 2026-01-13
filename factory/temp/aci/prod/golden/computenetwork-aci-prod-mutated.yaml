@@ -1,0 +1,60 @@
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computenetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computenetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: false
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+  name: computenetwork-aci-prod
+  namespace: t-aci-prod
+spec:
+  autoCreateSubnetworks: false
+  deleteDefaultRoutesOnCreate: true
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+
+---
+

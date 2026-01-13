@@ -1,0 +1,75 @@
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/use-folder: "true"
+  name: project-aci-prod
+  namespace: t-aci-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: placeholder-folder-name
+  name: project-aci-prod
+  organizationRef:
+    external: "547574100405"
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/use-folder: "true"
+  name: project-aci-prod
+  namespace: t-aci-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: placeholder-folder-name
+  name: project-aci-prod
+  organizationRef:
+    external: "547574100405"
+
+---
+
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: aci
+    platform.eazyops.com/use-folder: "true"
+  name: project-aci-prod
+  namespace: t-aci-prod
+spec:
+  billingAccountRef:
+    external: 016112-AAF779-C59A78
+  folderRef:
+    name: placeholder-folder-name
+  name: project-aci-prod
+  organizationRef:
+    external: "547574100405"
+
+---
+

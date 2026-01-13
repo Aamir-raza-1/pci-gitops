@@ -1,0 +1,11 @@
+name: cis-policy-tests
+policies:
+  - ../../generator/policies/20-compliance/cis.yaml
+resources:
+  - bad-project.yaml
+results:
+- policy: compliance-cis
+  rule: cis-project-must-have-cis-label
+  resource: prj-d-bad-project-abcd-bad
+  kind: Project
+  result: fail

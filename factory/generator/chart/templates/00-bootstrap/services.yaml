@@ -1,0 +1,11 @@
+{{- range .Values.project_services }}
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: {{ $.Values.tenant_code }}-{{ . | replace ".googleapis.com" "" | replace "." "-" }}
+  namespace: {{ include "tenant.namespace" $ }}
+spec:
+  projectRef:
+    name: {{ include "tenant.resourceName" (dict "kind" "Project" "Values" $.Values) }}
+---
+{{- end }}

@@ -1,0 +1,23 @@
+# 20-compliance-validations/pci-dss.yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: compliance-validations-pci-dss
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: "validate-gke-is-private-for-pci"
+    match:
+      any:
+      - resources:
+          kinds:
+          - ContainerCluster
+          selector:
+            matchLabels:
+              "compliance.eazyops.com/pci-dss": "true"
+    validate:
+      message: "PCI-DSS VALIDATION FAILED: GKE cluster must be private."
+      pattern:
+        spec:
+          privateClusterConfig:
+            enablePrivateEndpoint: true

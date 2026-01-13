@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TenantRequest",
+  "description": "The complete and validated schema for a new tenant environment request.",
+  "type": "object",
+  "required": ["tenant_code", "environment", "gcp", "organization", "network"],
+  "properties": {
+    "tenant_code": { "type": "string", "description": "Short, unique, lowercase code for the tenant." },
+    "environment": { "type": "string", "description": "Deployment environment (e.g., 'prod', 'nonprod')." },
+    "gcp": {
+      "type": "object",
+      "required": ["region", "billing_account_id", "org_id"],
+      "properties": {
+        "region": { "type": "string" },
+        "billing_account_id": { "type": "string" },
+        "org_id": { "type": "string" }
+      }
+    },
+    "organization": {
+      "type": "object",
+      "properties": {
+        "use_folder": { "type": "boolean", "default": false },
+        "folder_name": { "type": "string" },
+        "iam": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "project_services": { "type": "array", "items": { "type": "string" } },
+    "network": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["dedicated", "shared", "default"] },
+        "dedicated": { "type": "object" },
+        "shared": { "type": "object" }
+      }
+    },
+    "infra": {
+      "type": "object",
+      "properties": {
+        "gke": { "type": "object" },
+        "database": { "type": "object" },
+        "alloydb": { "type": "object" },
+        "dataproc": { "type": "object" },
+        "cloud_run": { "type": "object" },
+        "memorystore": { "type": "object" },
+        "pubsub": { "type": "object" },
+        "eventarc": { "type": "object" },
+        "storage": { "type": "object" },
+        "secrets": { "type": "object" },
+        "dns": { "type": "object" },
+        "security": { "type": "object" }
+      }
+    }
+  },
+  "if": {
+    "properties": { "organization": { "properties": { "use_folder": { "const": true } } } }
+  },
+  "then": {
+    "properties": { "organization": { "required": ["folder_name"] } }
+  }
+}

@@ -1,0 +1,91 @@
+---
+# Source: tenant-factory-chart/templates/00-bootstrap/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: t-beta-nonprod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/tenant-name": "beta-startup"
+    "platform.eazyops.com/environment": "nonprod"
+    "compliance.eazyops.com/cis": "true"
+---
+# Source: tenant-factory-chart/templates/23-infra-artifacts/registry.yaml
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  name: artifactregistry-beta-nonprod
+  namespace: t-beta-nonprod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "nonprod"
+    "compliance.eazyops.com/cis": "true"
+spec:
+  location: "us-central1"
+  repositoryId: "beta-nonprod-repo"
+  format: "docker"
+---
+# Source: tenant-factory-chart/templates/22-infra-gke/cluster.yaml
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: containercluster-beta-nonprod
+  namespace: t-beta-nonprod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "nonprod"
+    "platform.eazyops.com/gke-size": "small"
+    "platform.eazyops.com/gke-runtime": "gke-autopilot"
+    "compliance.eazyops.com/cis": "true"
+spec:
+  location: "us-central1"
+  initialNodeCount: 1
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-beta-nonprod-editor
+  namespace: t-beta-nonprod
+spec:
+  member: "group:gcp-developers-beta@example.com"
+  role: "roles/editor"
+  resourceRef:
+    kind: Project
+    name: project-beta-nonprod
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-beta-nonprod
+  namespace: t-beta-nonprod
+spec:
+  name: project-beta-nonprod
+  organizationRef:
+    external: "547574100405"
+  billingAccountRef:
+    external: "016112-AAF779-C59A78"
+---
+# Source: tenant-factory-chart/templates/20-infra-database/database.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: sqlinstance-beta-nonprod
+  namespace: t-beta-nonprod
+  labels:
+    "platform.eazyops.com/tenant-code": "beta"
+    "platform.eazyops.com/environment": "nonprod"
+    "platform.eazyops.com/db-size": "small"
+    "compliance.eazyops.com/cis": "true"
+spec:
+  region: "us-central1"
+  databaseVersion: POSTGRES_14
+  settings:
+    # The tier is now set by a Kyverno sizing policy, but we could set a default here.
+    tier: db-g1-small
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false # This will be mutated by a Kyverno policy

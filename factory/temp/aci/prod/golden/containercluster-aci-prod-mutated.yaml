@@ -1,0 +1,75 @@
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: large
+    platform.eazyops.com/tenant-code: aci
+  name: containercluster-aci-prod
+  namespace: t-aci-prod
+spec:
+  initialNodeCount: 1
+  location: us-east4
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: large
+    platform.eazyops.com/tenant-code: aci
+  name: containercluster-aci-prod
+  namespace: t-aci-prod
+spec:
+  initialNodeCount: 5
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-8
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+
+---
+
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    compliance.eazyops.com/cis: "true"
+    compliance.eazyops.com/hipaa: "true"
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/gke-runtime: gke-standard
+    platform.eazyops.com/gke-size: large
+    platform.eazyops.com/tenant-code: aci
+  name: containercluster-aci-prod
+  namespace: t-aci-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  initialNodeCount: 5
+  location: us-east4
+  nodeConfig:
+    machineType: e2-standard-8
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+
+---
+

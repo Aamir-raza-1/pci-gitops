@@ -1,0 +1,22 @@
+# templates/30-infra-core/gke.yaml
+{{- if and .Values.infra.gke.enabled .Values.infra.gke.cluster }}
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: {{ .Values.infra.gke.cluster.name }}
+  namespace: {{ include "tenant.namespace" . }}
+  labels:
+    # This label is used by the sizing policy
+    "platform.eazyops.com/gke-size": "{{ .Values.infra.gke.size | default "small" }}"
+    # This label is used by the compliance policy
+    {{- if (has "pci-dss" .Values.compliance.packs) }}
+    "compliance.eazyops.com/pci-dss": "true"
+    {{- end }}
+spec:
+  location: {{ .Values.gcp.region }}
+  initialNodeCount: {{ .Values.infra.gke.cluster.initial_node_count }}
+  networkRef:
+    name: {{ include "tenant.resourceName" (dict "kind" "VPC" "Values" .Values) }}
+  subnetworkRef:
+    name: {{ include "tenant.subnetName" (dict "subnet" (first .Values.network.dedicated.subnets) "Values" .Values) }}
+{{- end }}

@@ -1,0 +1,63 @@
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computesubnetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-beta-prod
+  privateIpGoogleAccess: false
+  region: us-east4
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computesubnetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-beta-prod
+  privateIpGoogleAccess: false
+  region: us-east4
+
+---
+
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+  name: computesubnetwork-beta-prod
+  namespace: t-beta-prod
+spec:
+  deleteDefaultRoutesOnCreate: true
+  ipCidrRange: 10.0.0.0/24
+  networkRef:
+    name: computenetwork-beta-prod
+  privateClusterConfig:
+    enablePrivateEndpoint: true
+  privateIpGoogleAccess: true
+  region: us-east4
+
+---
+

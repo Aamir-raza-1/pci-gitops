@@ -1,0 +1,26 @@
+{{- if eq .Values.network.mode "dedicated" -}}
+{{- with .Values.network.dedicated }}
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: {{ include "tenant.resourceName" (dict "kind" "VPC" "Values" $.Values) }}
+  namespace: {{ include "tenant.namespace" $ }}
+spec:
+  autoCreateSubnetworks: {{ .vpc.auto_create_subnetworks }}
+---
+{{- range .subnets }}
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-{{ $.Values.tenant_code }}-{{ $.Values.environment }}-{{ .name }}
+  namespace: {{ include "tenant.namespace" $ }}
+spec:
+  ipCidrRange: {{ .cidr }}
+  region: {{ $.Values.gcp.region }}
+  privateIpGoogleAccess: {{ .private_ip_google_access }}
+  networkRef:
+    name: {{ include "tenant.resourceName" (dict "kind" "VPC" "Values" $.Values) }}
+---
+{{- end }}
+{{- end }}
+{{- end }}

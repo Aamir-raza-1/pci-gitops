@@ -1,0 +1,30 @@
+# tests/layers/02-network/request.yaml
+# Adds the 'network' section to the Layer 1 request.
+tenant_code: "layer2"
+environment: "test"
+
+gcp:
+  region: "us-central1"
+  billing_account_id: "016112-AAF779-C59A78"
+  org_id: "547574100405"
+
+organization:
+  use_folder: false
+  iam:
+    - role: "roles/viewer"
+      member: "group:test-auditors@example.com"
+
+network:
+  mode: "dedicated"
+  dedicated:
+    vpc:
+      auto_create_subnetworks: false
+    subnets:
+      - name: "main"
+        cidr: "10.100.0.0/24"
+        private_ip_google_access: true
+    firewall_rules:
+      - name: "allow-testing"
+        direction: "INGRESS"
+        allowed: [{ protocol: "tcp", ports: ["80"] }]
+        source_ranges: ["0.0.0.0/0"]

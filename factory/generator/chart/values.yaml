@@ -1,0 +1,8 @@
+# Default values for the tenant factory.
+# All values are expected to be provided by a request.yaml file.
+tenant_code: "example"
+environment: "test"
+gcp: {}
+organization: {}
+network:
+  mode: "default" # Required by schema, but not used in this layer.

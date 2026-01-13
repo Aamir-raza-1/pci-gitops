@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/tenant-name: beta-corp-prod
+  name: t-beta-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/tenant-name: beta-corp-prod
+  name: t-beta-prod
+  namespace: default
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    compliance.eazyops.com/pci-dss: "true"
+    platform.eazyops.com/environment: prod
+    platform.eazyops.com/tenant-code: beta
+    platform.eazyops.com/tenant-name: beta-corp-prod
+  name: t-beta-prod
+  namespace: default
+
+---
+

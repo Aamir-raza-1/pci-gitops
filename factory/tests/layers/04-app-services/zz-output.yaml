@@ -1,0 +1,53 @@
+---
+# Source: tenant-factory-chart/templates/30-infra-core/mysql.yaml
+# templates/30-infra-core/mysql.yaml
+---
+# Source: tenant-factory-chart/templates/30-infra-core/gke.yaml
+# templates/30-infra-core/gke.yaml
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: main-cluster
+  namespace: t-layer4-test
+spec:
+  location: us-central1
+  initialNodeCount: 1
+  networkRef:
+    name: vpc-layer4-test
+  subnetworkRef:
+    name: subnet-layer4-test-main
+---
+# Source: tenant-factory-chart/templates/40-infra-app/pubsub.yaml
+# templates/40-infra-app/pubsub.yaml
+apiVersion: pubsub.cnrm.cloud.google.com/v1beta1
+kind: PubSubTopic
+metadata:
+  name: event-stream
+  namespace: t-layer4-test
+---
+# Source: tenant-factory-chart/templates/40-infra-app/memorystore.yaml
+# templates/40-infra-app/memorystore.yaml
+apiVersion: redis.cnrm.cloud.google.com/v1beta1
+kind: RedisInstance
+metadata:
+  name: session-cache
+  namespace: t-layer4-test
+spec:
+  tier: BASIC
+  memorySizeGb: 1
+  locationId: us-central1
+  authorizedNetworkRef:
+    name: vpc-layer4-test
+---
+# Source: tenant-factory-chart/templates/30-infra-core/postgres.yaml
+# templates/30-infra-core/postgres.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: main-db-pg
+  namespace: t-layer4-test
+spec:
+  region: us-central1
+  databaseVersion: POSTGRES_14
+  settings:
+    tier: db-g1-small

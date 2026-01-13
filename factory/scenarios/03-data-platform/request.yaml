@@ -1,0 +1,37 @@
+# scenarios/03-data-platform/request.yaml
+tenant_code: "gamma"
+environment: "prod"
+gcp:
+  region: "us-west1"
+  billing_account_id: "016112-AAF779-C59A78"
+  org_id: "547574100405"
+organization:
+  use_folder: true
+  folder_name: "data-platforms"
+project_services:
+  - "compute.googleapis.com"
+  - "dataproc.googleapis.com"
+  - "storage.googleapis.com"
+network:
+  mode: "dedicated"
+  dedicated:
+    vpc: { auto_create_subnetworks: false }
+    subnets:
+      - { name: "dataproc-main", cidr: "10.60.0.0/20", private_ip_google_access: true }
+    nat: { enabled: true }
+infra:
+  dataproc:
+    enabled: true
+    cluster:
+      name: "spark-cluster"
+      master:
+        machine_type: "n2-standard-4"
+      worker:
+        num_instances: 4
+        machine_type: "n2-standard-8"
+  storage:
+    enabled: true
+    buckets:
+      - name: "gamma-dataproc-staging"
+        location: "US-WEST1"
+        versioning: { enabled: true }

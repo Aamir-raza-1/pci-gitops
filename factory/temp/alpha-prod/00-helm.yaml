@@ -1,0 +1,114 @@
+---
+# Source: tenant-factory-blueprint/templates/00-bootstrap/services.yaml
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-compute
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+---
+# Source: tenant-factory-blueprint/templates/00-bootstrap/services.yaml
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-container
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+---
+# Source: tenant-factory-blueprint/templates/00-bootstrap/services.yaml
+apiVersion: serviceusage.cnrm.cloud.google.com/v1beta1
+kind: Service
+metadata:
+  name: alpha-sqladmin
+  namespace: t-alpha-prod
+spec:
+  projectRef:
+    name: project-alpha-prod
+---
+# Source: tenant-factory-blueprint/templates/20-network/dedicated.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: vpc-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  autoCreateSubnetworks: false
+---
+# Source: tenant-factory-blueprint/templates/20-network/dedicated.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-alpha-prod-main
+  namespace: t-alpha-prod
+spec:
+  ipCidrRange: 10.10.0.0/20
+  region: us-east4
+  privateIpGoogleAccess: true
+  networkRef:
+    name: vpc-alpha-prod
+---
+# Source: tenant-factory-blueprint/templates/30-infra-core/gke.yaml
+# templates/30-infra-core/gke.yaml
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: main-cluster
+  namespace: t-alpha-prod
+  labels:
+    # This label is used by the sizing policy
+    "platform.eazyops.com/gke-size": "large"
+    # This label is used by the compliance policy
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  location: us-east4
+  initialNodeCount: 3
+  networkRef:
+    name: vpc-alpha-prod
+  subnetworkRef:
+    name: subnet-alpha-prod-main
+---
+# Source: tenant-factory-blueprint/templates/10-foundation-org/iam.yaml
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-alpha-prod-owner
+  namespace: t-alpha-prod
+spec:
+  member: "group:gcp-platform-admins@example.com"
+  role: "roles/owner"
+  resourceRef:
+    kind: Project
+    name: project-alpha-prod
+---
+# Source: tenant-factory-blueprint/templates/10-foundation-org/project.yaml
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  name: project-alpha-prod
+  folderRef:
+    name: production-tenants
+  billingAccountRef:
+    external: "016112-AAF779-C59A78"
+---
+# Source: tenant-factory-blueprint/templates/30-infra-core/postgres.yaml
+# templates/30-infra-core/postgres.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: main-db
+  namespace: t-alpha-prod
+  labels:
+    # This label is used by the sizing policy
+    "platform.eazyops.com/db-size": "large"
+spec:
+  region: us-east4
+  databaseVersion: POSTGRES_14
+  settings:
+    tier: db-n1-standard-4

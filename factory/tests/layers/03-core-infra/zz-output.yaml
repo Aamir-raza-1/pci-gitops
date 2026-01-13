@@ -1,0 +1,41 @@
+---
+# Source: tenant-factory-chart/templates/30-infra-core/gke.yaml
+# templates/30-infra-core/gke.yaml
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: main-cluster
+  namespace: t-layer3-test
+spec:
+  location: us-central1
+  initialNodeCount: 1
+  networkRef:
+    name: vpc-layer3-test
+  subnetworkRef:
+    name: subnet-layer3-test-main
+---
+# Source: tenant-factory-chart/templates/30-infra-core/mysql.yaml
+# templates/30-infra-core/mysql.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: main-db-mysql
+  namespace: t-layer3-test
+spec:
+  region: us-central1
+  databaseVersion: MYSQL_8_0
+  settings:
+    tier: db-g1-small
+---
+# Source: tenant-factory-chart/templates/30-infra-core/postgres.yaml
+# templates/30-infra-core/postgres.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: main-db-pg
+  namespace: t-layer3-test
+spec:
+  region: us-central1
+  databaseVersion: POSTGRES_14
+  settings:
+    tier: db-g1-small

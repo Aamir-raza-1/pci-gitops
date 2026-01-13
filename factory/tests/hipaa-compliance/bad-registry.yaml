@@ -1,0 +1,10 @@
+# This is a "bad" artifact registry that is not encrypted with CMEK.
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  name: bad-registry
+  namespace: t-aci-prod
+spec:
+  location: "us-east4"
+  repositoryId: "my-repo"
+  format: "DOCKER"

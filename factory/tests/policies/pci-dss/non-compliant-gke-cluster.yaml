@@ -1,0 +1,10 @@
+# This GKE cluster is missing the 'privateClusterConfig' block.
+# Our mutation policy should add it.
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: test-cluster-for-mutation
+  labels:
+    "compliance.eazyops.com/pci-dss": "true"
+spec:
+  location: "us-central1"

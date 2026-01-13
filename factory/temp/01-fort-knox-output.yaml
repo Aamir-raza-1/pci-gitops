@@ -1,0 +1,149 @@
+---
+# Source: tenant-factory-chart/templates/00-bootstrap/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: t-alpha-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "alpha"
+    "platform.eazyops.com/tenant-name": "alpha-pharma"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/cis": "true"
+    "compliance.eazyops.com/pci-dss": "true"
+    "compliance.eazyops.com/hipaa": "true"
+---
+# Source: tenant-factory-chart/templates/23-infra-artifacts/registry.yaml
+apiVersion: artifactregistry.cnrm.cloud.google.com/v1beta1
+kind: ArtifactRegistryRepository
+metadata:
+  name: artifactregistry-alpha-prod
+  namespace: t-alpha-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "alpha"
+    "platform.eazyops.com/environment": "prod"
+    "compliance.eazyops.com/cis": "true"
+    "compliance.eazyops.com/pci-dss": "true"
+    "compliance.eazyops.com/hipaa": "true"
+spec:
+  location: "us-central1"
+  repositoryId: "alpha-prod-repo"
+  format: "docker"
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+# --- Core VPC and Subnets ---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: vpc-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  autoCreateSubnetworks: false
+  mtu: 1460
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-alpha-prod-gke-main
+  namespace: t-alpha-prod
+spec:
+  ipCidrRange: 10.1.0.0/20
+  region: us-east4
+  privateIpGoogleAccess: true
+  networkRef:
+    name: vpc-alpha-prod
+---
+# Source: tenant-factory-chart/templates/11-foundation-network/network.yaml
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeSubnetwork
+metadata:
+  name: subnet-alpha-prod-db-private
+  namespace: t-alpha-prod
+spec:
+  ipCidrRange: 10.1.16.0/24
+  region: us-east4
+  privateIpGoogleAccess: true
+  networkRef:
+    name: vpc-alpha-prod
+---
+# Source: tenant-factory-chart/templates/22-infra-gke/cluster.yaml
+apiVersion: container.cnrm.cloud.google.com/v1beta1
+kind: ContainerCluster
+metadata:
+  name: containercluster-alpha-prod
+  namespace: t-alpha-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "alpha"
+    "platform.eazyops.com/environment": "prod"
+    "platform.eazyops.com/gke-size": "large"
+    "platform.eazyops.com/gke-runtime": "gke-standard"
+    "compliance.eazyops.com/cis": "true"
+    "compliance.eazyops.com/pci-dss": "true"
+    "compliance.eazyops.com/hipaa": "true"
+spec:
+  location: "us-central1"
+  initialNodeCount: 1
+  privateClusterConfig:
+    enablePrivateEndpoint: false
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-alpha-prod-owner
+  namespace: t-alpha-prod
+spec:
+  member: "group:gcp-platform-admins@example.com"
+  role: "roles/owner"
+  resourceRef:
+    kind: Project
+    name: project-alpha-prod
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: project-alpha-prod-viewer
+  namespace: t-alpha-prod
+spec:
+  member: "group:gcp-auditors@example.com"
+  role: "roles/viewer"
+  resourceRef:
+    kind: Project
+    name: project-alpha-prod
+---
+# Source: tenant-factory-chart/templates/10-foundation-org/project.yaml
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Project
+metadata:
+  name: project-alpha-prod
+  namespace: t-alpha-prod
+spec:
+  name: project-alpha-prod
+  folderRef:
+    name: production-tenants
+  billingAccountRef:
+    external: "016112-AAF779-C59A78"
+---
+# Source: tenant-factory-chart/templates/20-infra-database/database.yaml
+apiVersion: sql.cnrm.cloud.google.com/v1beta1
+kind: SQLInstance
+metadata:
+  name: sqlinstance-alpha-prod
+  namespace: t-alpha-prod
+  labels:
+    "platform.eazyops.com/tenant-code": "alpha"
+    "platform.eazyops.com/environment": "prod"
+    "platform.eazyops.com/db-size": "large"
+    "compliance.eazyops.com/cis": "true"
+    "compliance.eazyops.com/pci-dss": "true"
+    "compliance.eazyops.com/hipaa": "true"
+spec:
+  region: "us-central1"
+  databaseVersion: POSTGRES_14
+  settings:
+    # The tier is now set by a Kyverno sizing policy, but we could set a default here.
+    tier: db-g1-small
+    backupConfiguration:
+      enabled: true
+      pointInTimeRecoveryEnabled: false # This will be mutated by a Kyverno policy

@@ -1,0 +1,10 @@
+
+Applying 1 policy rule(s) to 21 resource(s)...
+policy compliance-validations-pci-dss -> resource t-beta-prod/ContainerCluster/containercluster-beta-prod failed:
+1 - validate-pci-dss-gke-is-private validation error: PCI-DSS validation failed: GKE cluster must be private. rule validate-pci-dss-gke-is-private failed at path /spec/privateClusterConfig/enablePrivateEndpoint/
+
+policy compliance-validations-pci-dss -> resource t-beta-prod/ContainerCluster/containercluster-beta-prod failed:
+1 - validate-pci-dss-gke-is-private validation error: PCI-DSS validation failed: GKE cluster must be private. rule validate-pci-dss-gke-is-private failed at path /spec/privateClusterConfig/enablePrivateEndpoint/
+
+
+pass: 1, fail: 2, warn: 0, error: 0, skip: 0 

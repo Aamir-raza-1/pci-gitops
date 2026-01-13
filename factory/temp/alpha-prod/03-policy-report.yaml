@@ -1,0 +1,45 @@
+apiVersion: openreports.io/v1alpha1
+kind: ClusterReport
+metadata:
+  name: merged
+results:
+- message: validation rule 'validate-gke-is-private-for-pci' passed.
+  policy: compliance-validations-pci-dss
+  properties:
+    process: background scan
+  resources:
+  - apiVersion: container.cnrm.cloud.google.com/v1beta1
+    kind: ContainerCluster
+    name: main-cluster
+    namespace: t-alpha-prod
+  result: pass
+  rule: validate-gke-is-private-for-pci
+  scored: true
+  source: kyverno
+  timestamp:
+    nanos: 0
+    seconds: 1768219552
+- message: validation rule 'validate-pci-dss-gke-is-private' passed.
+  policy: compliance-validations-pci-dss
+  properties:
+    process: background scan
+  resources:
+  - apiVersion: container.cnrm.cloud.google.com/v1beta1
+    kind: ContainerCluster
+    name: main-cluster
+    namespace: t-alpha-prod
+  result: pass
+  rule: validate-pci-dss-gke-is-private
+  scored: true
+  source: kyverno
+  timestamp:
+    nanos: 0
+    seconds: 1768219552
+source: ""
+summary:
+  error: 0
+  fail: 0
+  pass: 2
+  skip: 0
+  warn: 0
+
