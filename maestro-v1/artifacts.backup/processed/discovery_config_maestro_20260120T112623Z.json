@@ -1,0 +1,95 @@
+{
+  "version": "2.0",
+  "run_id": "maestro_20260120T112623Z",
+  "timestamp": "20260120T112623Z",
+  "confidence": 55,
+  "confidence_factors": [
+    "company_name",
+    "cloud_provider",
+    "project_id",
+    "auth_mode",
+    "uploaded_docs"
+  ],
+  "source": "form_submission",
+  "discovery": {
+    "mode": "full",
+    "provider": "gcp",
+    "auth": {
+      "mode": "adc",
+      "project": "stg-ezo",
+      "region": "us-central1",
+      "service_account_key": ""
+    },
+    "scope": {
+      "compute": true,
+      "storage": true,
+      "networking": true,
+      "databases": false,
+      "kubernetes": false,
+      "serverless": true,
+      "iam": true,
+      "repositories": false,
+      "websites": false,
+      "terraform": false
+    }
+  },
+  "repositories": {
+    "scan": false,
+    "application": [],
+    "infrastructure": [],
+    "helm": [],
+    "cicd": "",
+    "terraform": ""
+  },
+  "kubernetes": {
+    "enabled": false,
+    "mode": "current",
+    "contexts": [],
+    "clusters": []
+  },
+  "databases": {
+    "enabled": false,
+    "types": []
+  },
+  "websites": {
+    "enabled": false,
+    "urls": []
+  },
+  "iac": {
+    "available": false,
+    "mode": "no_iac",
+    "terraform_repo": ""
+  },
+  "uploaded_docs": {
+    "available": true,
+    "files": [
+      {
+        "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+        "saved_as": "20260120_162424_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+        "path": "docs/20260120_162424_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+        "size": 18267
+      }
+    ],
+    "billing_reports": [
+      "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+    ],
+    "architecture_docs": []
+  },
+  "validation_required": {
+    "cloud_auth": true,
+    "kubernetes": false,
+    "databases": false,
+    "repositories": false,
+    "storage": true,
+    "terraform": false,
+    "only_docs": false
+  },
+  "metadata": {
+    "company_name": "tissue",
+    "form_version": "2.0",
+    "submitted_at": "2026-01-20T16:24:24.632277",
+    "migration_timeline": "immediate",
+    "downtime_tolerance": "",
+    "compliance": []
+  }
+}

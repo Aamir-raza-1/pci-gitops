@@ -1,0 +1,27 @@
+{
+  "run_id": "maestro_20260120T103556Z",
+  "timestamp": "20260120T103556Z",
+  "phase": "00-input",
+  "status": "completed",
+  "confidence_score": 60,
+  "provider": "aws",
+  "auth_mode": "adc",
+  "artifacts_created": [
+    "raw/form_data_maestro_20260120T103556Z.json",
+    "processed/form_processed_maestro_20260120T103556Z.json",
+    "processed/discovery_config_maestro_20260120T103556Z.json",
+    "processed/execute_phase_01_maestro_20260120T103556Z.sh",
+    "metadata/run_metadata_maestro_20260120T103556Z.json"
+  ],
+  "next_steps": [
+    "Review the discovery configuration",
+    "Execute Phase 01: ./artifacts/processed/execute_phase_01_maestro_20260120T103556Z.sh",
+    "Or run directly: ./01-discover/run-discovery.sh --config ./artifacts/processed/discovery_config_maestro_20260120T103556Z.json --run-id maestro_20260120T103556Z"
+  ],
+  "estimated_discovery_time": "5-10 minutes",
+  "recommendations": [
+    "Moderate confidence - discovery will proceed with available data",
+    "Consider adding IaC repository for infrastructure analysis",
+    "Ensure AWS CLI is configured: aws configure"
+  ]
+}

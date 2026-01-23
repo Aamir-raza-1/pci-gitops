@@ -1,0 +1,27 @@
+{
+  "company_name": "yoke",
+  "website_url": "https://yoke.com",
+  "contact_email": "yoke@gmail.com",
+  "industry": "healthcare",
+  "serving_customers": "yes",
+  "migration_timeline": "immediate",
+  "current_budget": "<1000",
+  "cloud_provider": "aws",
+  "auth_mode": "adc",
+  "iac_mode": "no_iac",
+  "k8s_mode": "custom",
+  "form_version": "2.0",
+  "submitted_at": "2026-01-20T15:33:21.736552",
+  "run_id": "maestro_20260120_153321",
+  "uploaded_files": [
+    "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+  ],
+  "uploaded_files_details": [
+    {
+      "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+      "saved_as": "20260120_153321_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+      "path": "docs/20260120_153321_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+      "size": 18267
+    }
+  ]
+}

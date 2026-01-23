@@ -1,0 +1,30 @@
+{
+  "run_id": "maestro_20260120T102430Z",
+  "timestamp": "20260120T102430Z",
+  "phase": "00-input",
+  "status": "processing",
+  "environment": {
+    "script": "./process-assessment.sh",
+    "working_dir": "/Users/aamirraza/asr/maestro-v1/00-input",
+    "user": "aamirraza",
+    "hostname": "MacBook-Pro.local"
+  },
+  "configuration": {
+    "provider": "gcp",
+    "auth_mode": "adc",
+    "confidence": 0,
+    "dry_run": "false",
+    "verbose": "false"
+  },
+  "artifacts": {
+    "raw_form": "raw/form_data_maestro_20260120T102430Z.json",
+    "processed_form": "processed/form_processed_maestro_20260120T102430Z.json",
+    "discovery_config": "processed/discovery_config_maestro_20260120T102430Z.json",
+    "next_phase_script": "processed/execute_phase_01_maestro_20260120T102430Z.sh"
+  },
+  "next_phase": {
+    "phase": "01-discover",
+    "script": "01-discover/run-discovery.sh",
+    "estimated_duration": "5-10 minutes"
+  }
+}

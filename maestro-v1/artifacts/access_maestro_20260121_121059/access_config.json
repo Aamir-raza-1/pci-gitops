@@ -1,0 +1,43 @@
+{
+  "run_id": "maestro_20260121_121059",
+  "timestamp": "20260121T071327Z",
+  "provider": "unknown",
+  "auth_mode": "adc",
+  "project": "",
+  "validations": {
+    "core_tools": {
+      "required": true,
+      "tools": [
+        "bash",
+        "python3",
+        "curl",
+        "jq"
+      ]
+    },
+    "cloud_auth": {
+      "required": false,
+      "skip_if_docs_only": false
+    },
+    "kubernetes": {
+      "required": false,
+      "contexts": []
+    },
+    "databases": {
+      "required": false,
+      "types": []
+    },
+    "repositories": {
+      "required": false,
+      "repos": {
+        "application": [],
+        "infrastructure": []
+      }
+    },
+    "terraform": {
+      "required": false,
+      "repo": ""
+    }
+  },
+  "skip_all_if_docs_only": false,
+  "next_phase": "discovery"
+}

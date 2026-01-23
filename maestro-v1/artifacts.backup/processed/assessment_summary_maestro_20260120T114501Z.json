@@ -1,0 +1,35 @@
+{
+  "run_id": "maestro_20260120T114501Z",
+  "timestamp": "20260120T114501Z",
+  "phase": "00-input",
+  "status": "completed",
+  "confidence_score": 75,
+  "provider": "gcp",
+  "auth_mode": "adc",
+  "artifacts_created": [
+    "raw/form_data_maestro_20260120T114501Z.json",
+    "processed/form_processed_maestro_20260120T114501Z.json",
+    "processed/discovery_config_maestro_20260120T114501Z.json",
+    "access_maestro_20260120T114501Z/access_config.json",
+    "processed/assessment_summary_maestro_20260120T114501Z.json"
+  ],
+  "next_steps": [
+    "Review the discovery configuration",
+    "Run ACCESS validation: ./01-access/comprehensive-validation.sh artifacts/processed/discovery_config_maestro_20260120T114501Z.json",
+    "If validation passes, proceed with discovery phase",
+    "For document-only uploads, proceed to document analysis"
+  ],
+  "validation_scope": {
+    "compute": true,
+    "storage": true,
+    "networking": true,
+    "databases": true,
+    "serverless": true,
+    "iam": true,
+    "repositories": true,
+    "containers": true
+  },
+  "recommendations": [
+    "Ensure gcloud CLI is authenticated: gcloud auth application-default login"
+  ]
+}

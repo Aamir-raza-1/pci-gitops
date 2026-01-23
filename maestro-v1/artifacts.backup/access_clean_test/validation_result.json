@@ -1,0 +1,58 @@
+{
+  "run_id": "clean_test",
+  "timestamp": "20260120T102502Z",
+  "provider": "gcp",
+  "mode": "full",
+  "status": "SUCCESS",
+  "validations": {
+    "core_tools": {
+      "bash": {
+        "status": "present",
+        "message": "/opt/homebrew/bin/bash"
+      },
+      "python3": {
+        "status": "present",
+        "message": "/opt/homebrew/bin/python3"
+      },
+      "curl": {
+        "status": "present",
+        "message": "/usr/bin/curl"
+      }
+    },
+    "provider_tools": {
+      "gcloud": {
+        "status": "present",
+        "message": "522.0.0"
+      }
+    },
+    "authentication": {
+      "gcp": {
+        "status": "active",
+        "message": "Account: amir.raza@zazmic.com, Project: ai-poc-390318"
+      }
+    },
+    "permissions": {
+      "gcp_projects": {
+        "status": "granted",
+        "message": ""
+      },
+      "gcp_compute": {
+        "status": "granted",
+        "message": ""
+      },
+      "gcp_storage": {
+        "status": "granted",
+        "message": ""
+      }
+    }
+  },
+  "missing_tools": [],
+  "missing_permissions": [],
+  "remediation": {
+    "tools": [],
+    "permissions": [],
+    "auth": []
+  },
+  "ready_for_discovery": true,
+  "issue_count": 0
+}

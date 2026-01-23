@@ -1,0 +1,91 @@
+{
+  "version": "2.0",
+  "run_id": "maestro_20260120T113621Z",
+  "timestamp": "20260120T113621Z",
+  "confidence": 25,
+  "confidence_factors": [
+    "company_name",
+    "auth_mode",
+    "uploaded_docs"
+  ],
+  "source": "form_submission",
+  "discovery": {
+    "mode": "targeted",
+    "provider": "unknown",
+    "auth": {
+      "mode": "adc",
+      "project": "",
+      "region": "us-central1",
+      "service_account_key": ""
+    },
+    "scope": {
+      "compute": false,
+      "storage": false,
+      "networking": false,
+      "databases": false,
+      "kubernetes": false,
+      "serverless": false,
+      "iam": false,
+      "repositories": false,
+      "websites": false,
+      "terraform": false
+    }
+  },
+  "repositories": {
+    "scan": false,
+    "application": [],
+    "infrastructure": [],
+    "helm": [],
+    "cicd": "",
+    "terraform": ""
+  },
+  "kubernetes": {
+    "enabled": false,
+    "mode": "custom",
+    "contexts": [],
+    "clusters": []
+  },
+  "databases": {
+    "enabled": false,
+    "types": []
+  },
+  "websites": {
+    "enabled": false,
+    "urls": []
+  },
+  "iac": {
+    "available": false,
+    "mode": "no_iac",
+    "terraform_repo": ""
+  },
+  "uploaded_docs": {
+    "available": true,
+    "files": [
+      {
+        "original_name": "001000000000082143_001_251294047_C55_117_1.pdf",
+        "saved_as": "20260120_163529_001000000000082143_001_251294047_C55_117_1.pdf",
+        "path": "docs/20260120_163529_001000000000082143_001_251294047_C55_117_1.pdf",
+        "size": 79982
+      }
+    ],
+    "billing_reports": [],
+    "architecture_docs": []
+  },
+  "validation_required": {
+    "cloud_auth": false,
+    "kubernetes": false,
+    "databases": false,
+    "repositories": false,
+    "storage": false,
+    "terraform": false,
+    "only_docs": false
+  },
+  "metadata": {
+    "company_name": "Test Company",
+    "form_version": "2.0",
+    "submitted_at": "2026-01-20T16:35:29.638392",
+    "migration_timeline": "",
+    "downtime_tolerance": "",
+    "compliance": []
+  }
+}

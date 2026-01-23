@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Cloud Migration Assessment Form</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 4px;
+        }
+
+        .form-content {
+            padding: 3rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .section-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+
+        .required::after {
+            content: ' *';
+            color: #dc3545;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 0.75rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,123,255,0.15);
+        }
+
+        .checkbox-item.selected {
+            background: #e7f3ff;
+            border-color: #007bff;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .radio-item:hover {
+            border-color: #007bff;
+            background: #f0f8ff;
+        }
+
+        .radio-item input[type="radio"] {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .radio-item.selected {
+            border-color: #007bff;
+            background: #e7f3ff;
+        }
+
+        .compliance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .compliance-table th {
+            background: #007bff;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .compliance-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+            background: white;
+        }
+
+        .compliance-table tr:hover td {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .badge.mandatory {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge.optional {
+            background: #6c757d;
+            color: white;
+        }
+
+        .slo-table {
+            width: 100%;
+            margin-top: 1rem;
+            border-collapse: collapse;
+        }
+
+        .slo-table th {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .slo-table td {
+            padding: 10px;
+            background: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .slo-table input {
+            padding: 6px;
+            border: 1px solid #ced4da;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,123,255,0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #856404;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Comprehensive Cloud Migration Assessment</h1>
+            <p>Complete this detailed form to receive a customized cloud migration strategy tailored to your organization's specific needs and requirements.</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <form class="form-content" id="migrationForm">
+
+            <!-- Section 1: Company Information -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">1</span>
+                    Company Information
+                </h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company_name" class="required">Company Name</label>
+                        <input type="text" id="company_name" name="company_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="industry" class="required">Industry</label>
+                        <select id="industry" name="industry" required>
+                            <option value="">Select Industry...</option>
+                            <option value="technology">Technology</option>
+                            <option value="finance">Finance & Banking</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="retail">Retail & E-commerce</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="education">Education</option>
+                            <option value="government">Government</option>
+                            <option value="media">Media & Entertainment</option>
+                            <option value="telecom">Telecommunications</option>
+                            <option value="energy">Energy & Utilities</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="current_provider">Current Cloud Provider(s)</label>
+                        <input type="text" id="current_provider" name="current_provider"
+                               placeholder="e.g., On-premises, AWS, Azure, GCP">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target_provider">Target Cloud Provider(s)</label>
+                        <input type="text" id="target_provider" name="target_provider"
+                               placeholder="e.g., AWS, Azure, GCP, Multi-cloud">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="primary_contact" class="required">Primary Contact Name</label>
+                        <input type="text" id="primary_contact" name="primary_contact" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="primary_email" class="required">Primary Contact Email</label>
+                        <input type="email" id="primary_email" name="primary_email" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start_date">Preferred Project Start Date</label>
+                        <input type="date" id="start_date" name="start_date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="end_date">Preferred Project End Date</label>
+                        <input type="date" id="end_date" name="end_date">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Current Infrastructure Overview -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">2</span>
+                    Current Infrastructure Overview
+                </h2>
+
+                <div class="form-group">
+                    <label>Current Hosting Type (Select One)</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="hosting_type" value="on-premises"> On-Premises
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="hosting_type" value="aws"> AWS
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="hosting_type" value="azure"> Azure
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="hosting_type" value="gcp"> GCP
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="hosting_type" value="hetzner"> Hetzner
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="hosting_type" value="other"> Other
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Core Components in Use (Select All That Apply)</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="vms"> Virtual Machines
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="databases"> Databases
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="storage"> Object Storage
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="containers"> Containers
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="serverless"> Serverless
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="cicd"> CI/CD Tools
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="data_pipelines"> Data Pipelines
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="security"> Security Tools
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="kafka"> Kafka/Messaging
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="components" value="ai_ml"> AI/ML Systems
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="other_components">Other Components</label>
+                    <input type="text" id="other_components" name="other_components"
+                           placeholder="Please specify any other components...">
+                </div>
+            </div>
+
+            <!-- Section 3: Region & Source Environment -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">3</span>
+                    Region & Source Environment
+                </h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="current_regions">Current Deployment Region(s)</label>
+                        <input type="text" id="current_regions" name="current_regions"
+                               placeholder="e.g., us-east-1, europe-west1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer_regions">Customer Serving Region(s)</label>
+                        <input type="text" id="customer_regions" name="customer_regions"
+                               placeholder="e.g., North America, Europe, Asia">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="target_regions">Preferred Target Region(s)</label>
+                    <input type="text" id="target_regions" name="target_regions"
+                           placeholder="e.g., us-west-2, eu-central-1">
+                </div>
+
+                <div class="form-group">
+                    <label>Source Environment (Select One or More)</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="source_env" value="on-premises"> On-Premises
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="source_env" value="private_hosting"> Private Hosting
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="source_env" value="another_cloud"> Another Cloud Provider
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="source_env" value="gcp_region_migration"> Google Cloud Region-to-Region
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Migration Preferences -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">4</span>
+                    Migration Preferences
+                </h2>
+
+                <h3 style="margin: 1.5rem 0 1rem; color: #007bff;">Cost, Reliability & Deployment</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cost_sensitivity">Cost Sensitivity</label>
+                        <select id="cost_sensitivity" name="cost_sensitivity">
+                            <option value="cost-efficient">Cost-Efficient</option>
+                            <option value="balanced">Balanced Cost</option>
+                            <option value="premium">Premium Budget</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reliability">Reliability Expectation</label>
+                        <select id="reliability" name="reliability">
+                            <option value="good">Good (99.9%)</option>
+                            <option value="high">High (99.99%)</option>
+                            <option value="maximum">Maximum Uptime (99.999%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="deployment_model">Deployment Model</label>
+                        <select id="deployment_model" name="deployment_model">
+                            <option value="basic_hybrid">Basic Hybrid</option>
+                            <option value="balanced_hybrid">Balanced Hybrid</option>
+                            <option value="enterprise_hybrid">Enterprise Hybrid</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scaling">Scaling Preference</label>
+                        <select id="scaling" name="scaling">
+                            <option value="manual">Manual</option>
+                            <option value="automatic">Automatic</option>
+                            <option value="predictive">Predictive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="support_model">Support Model</label>
+                        <select id="support_model" name="support_model">
+                            <option value="self-service">Self-Service</option>
+                            <option value="shared">Shared</option>
+                            <option value="dedicated">Dedicated</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="downtime_tolerance">Downtime Tolerance</label>
+                        <select id="downtime_tolerance" name="downtime_tolerance">
+                            <option value="4-8h">4-8 Hours</option>
+                            <option value="1-4h">1-4 Hours</option>
+                            <option value="near-zero">Near Zero</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Change Freeze Period</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="change_freeze" value="yes"
+                                   onclick="document.getElementById('freeze_dates').style.display='block'"> Yes
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="change_freeze" value="no"
+                                   onclick="document.getElementById('freeze_dates').style.display='none'"> No
+                        </label>
+                    </div>
+                    <div id="freeze_dates" style="display:none; margin-top:1rem;">
+                        <input type="text" name="freeze_period" placeholder="Specify dates (e.g., Dec 15 - Jan 5)">
+                    </div>
+                </div>
+
+                <h3 style="margin: 2rem 0 1rem; color: #007bff;">Cloud Migration Compliance Preferences</h3>
+
+                <table class="compliance-table">
+                    <thead>
+                        <tr>
+                            <th>Preference</th>
+                            <th>Priority</th>
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Minimal Downtime</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="minimal_downtime" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="minimal_downtime" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Smooth Transition</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="smooth_transition" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="smooth_transition" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data Durability Preference</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="data_durability" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="data_durability" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data Residency Compliance</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="data_residency" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="data_residency" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data Encryption at Rest</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="encryption_rest" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="encryption_rest" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data Encryption in Transit</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="encryption_transit" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="encryption_transit" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Network Latency Sensitivity</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="latency_sensitivity" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="latency_sensitivity" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Bandwidth Requirements</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="bandwidth_req" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="bandwidth_req" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cost Optimization Preference</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="cost_optimization" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="cost_optimization" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Committed Discounts Willingness</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="committed_discounts" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="committed_discounts" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Performance Sensitivity</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="performance_sensitivity" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="performance_sensitivity" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Scaling Requirements</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="scaling_requirements" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="scaling_requirements" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Security Hardening</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="security_hardening" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="security_hardening" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Compliance Certifications (HIPAA, SOC2, etc.)</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="compliance_certs" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="compliance_certs" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Disaster Recovery Preference</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="disaster_recovery" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="disaster_recovery" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Backup Strategy</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="backup_strategy" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="backup_strategy" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>High Availability Preference</td>
+                            <td><span class="badge mandatory">Mandatory</span></td>
+                            <td>
+                                <label><input type="radio" name="high_availability" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="high_availability" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Operational Automation</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="operational_automation" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="operational_automation" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Monitoring and Observability</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="monitoring" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="monitoring" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Change Management Process</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="change_management" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="change_management" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Support and SLA Requirements</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="sla_requirements" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="sla_requirements" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Geographic Failover Requirement</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="geo_failover" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="geo_failover" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Incident Response Plan</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="incident_response" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="incident_response" value="no"> No</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Multi-region or Multi-zone Deployment</td>
+                            <td><span class="badge optional">Optional</span></td>
+                            <td>
+                                <label><input type="radio" name="multi_region" value="yes"> Yes</label>
+                                <label style="margin-left: 20px;"><input type="radio" name="multi_region" value="no"> No</label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin: 2rem 0 1rem; color: #007bff;">AI/ML Specific Migration Preferences</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Model Freshness Priority</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="model_freshness" value="yes"> Yes
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="model_freshness" value="no"> No
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Model Accuracy Retention</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="model_accuracy" value="yes"> Yes
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="model_accuracy" value="no"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Explainability / Drift Monitoring</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="explainability" value="required"> Required
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="explainability" value="not_required"> Not Required
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Retraining Pipeline Readiness</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="retraining_ready" value="ready"> Ready
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="retraining_ready" value="not_ready"> Not Ready
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Key Contacts and Roles -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">5</span>
+                    Key Contacts and Roles
+                </h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="finops_engineer">FinOps Engineer</label>
+                        <input type="text" id="finops_engineer" name="finops_engineer" placeholder="Name and email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="business_leader">Business Leader</label>
+                        <input type="text" id="business_leader" name="business_leader" placeholder="Name and email">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cloud_engineer">Cloud Engineer</label>
+                        <input type="text" id="cloud_engineer" name="cloud_engineer" placeholder="Name and email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_engineer">Data Engineer</label>
+                        <input type="text" id="data_engineer" name="data_engineer" placeholder="Name and email">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="security_engineer">Security Engineer</label>
+                        <input type="text" id="security_engineer" name="security_engineer" placeholder="Name and email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observability_engineer">Observability Engineer</label>
+                        <input type="text" id="observability_engineer" name="observability_engineer" placeholder="Name and email">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="internal_approver">Internal Approver</label>
+                        <input type="text" id="internal_approver" name="internal_approver" placeholder="Name and email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="external_approver">External Approver</label>
+                        <input type="text" id="external_approver" name="external_approver" placeholder="Name and email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="other_contacts">Other Key Contacts</label>
+                    <textarea id="other_contacts" name="other_contacts"
+                              placeholder="Additional stakeholders and their roles..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 6: Special Requirements -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">6</span>
+                    Special Requirements
+                </h2>
+
+                <div class="checkbox-grid">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="special_req" value="sole_tenancy"> Sole Tenancy Needed
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="special_req" value="multi_tenancy"> Multi-Tenancy Needed
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="special_req" value="secrets_mgmt"> Secrets Management Required
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="special_req" value="realtime_dashboard"> Real-Time Migration Dashboard Required
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="special_req" value="sensitive_data"> Sensitive Data Involved (PCI, Healthcare, PII)
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="special_req" value="model_armor"> Model Armor / AI Security Required
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section 7: Approval Workflow -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">7</span>
+                    Approval Workflow
+                </h2>
+
+                <div class="form-group">
+                    <label for="internal_approval">Internal Approval Steps</label>
+                    <textarea id="internal_approval" name="internal_approval"
+                              placeholder="Describe your internal approval process..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="external_approval">External Approval Steps</label>
+                    <textarea id="external_approval" name="external_approval"
+                              placeholder="Describe any external approval requirements..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Approval Mode</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="approval_mode" value="automated"> Automated
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="approval_mode" value="manual"> Manual with Pause Points
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Source Environment Responsibility Matrix -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">8</span>
+                    Source Environment Responsibility Matrix
+                </h2>
+
+                <table class="compliance-table">
+                    <thead>
+                        <tr>
+                            <th>Resource</th>
+                            <th>On-Premises</th>
+                            <th>Private Hosting</th>
+                            <th>Public Cloud</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Physical Security and Safety</td>
+                            <td>You</td>
+                            <td>Service Provider</td>
+                            <td>Service Provider</td>
+                        </tr>
+                        <tr>
+                            <td>Power and Network Cabling</td>
+                            <td>You</td>
+                            <td>Service Provider</td>
+                            <td>Service Provider</td>
+                        </tr>
+                        <tr>
+                            <td>Hardware (incl. Maintenance)</td>
+                            <td>You</td>
+                            <td>Depends</td>
+                            <td>Service Provider</td>
+                        </tr>
+                        <tr>
+                            <td>Virtualization Platform</td>
+                            <td>You</td>
+                            <td>You</td>
+                            <td>Service Provider</td>
+                        </tr>
+                        <tr>
+                            <td>Application Resources</td>
+                            <td>You</td>
+                            <td>You</td>
+                            <td>You (or managed)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 9: Starting Situation -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">9</span>
+                    Starting Situation
+                </h2>
+
+                <div class="form-group">
+                    <label>Select Your Current Situation</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="starting_situation" value="on_prem_legacy">
+                            On-premises/private hosting with legacy workloads
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="starting_situation" value="on_prem_optimized">
+                            On-premises/private hosting with cloud-optimized workloads
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="starting_situation" value="cloud_legacy">
+                            Public cloud/private hosting with legacy workloads
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="starting_situation" value="cloud_optimized">
+                            Public cloud/private hosting with cloud-optimized workloads
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10: Migration Type -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">10</span>
+                    Migration Type
+                </h2>
+
+                <div class="form-group">
+                    <label>Select Your Preferred Migration Strategy</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="migration_type" value="rehost">
+                            Rehost (Lift and Shift)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_type" value="replatform">
+                            Replatform (Lift and Optimize)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_type" value="refactor">
+                            Refactor (Move and Improve)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_type" value="rearchitect">
+                            Re-architect (Continue to Modernize)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_type" value="rebuild">
+                            Rebuild (Rip and Replace)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_type" value="repurchase">
+                            Repurchase (SaaS replacement)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 11: Migration Motivation -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">11</span>
+                    Migration Motivation
+                </h2>
+
+                <div class="form-group">
+                    <label>Select Your Primary Motivation</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="migration_motivation" value="tactical">
+                            Tactical (Quick ROI, low disruption, no long-term strategy)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_motivation" value="strategic">
+                            Strategic (Mid-term optimization, scaling focus)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_motivation" value="transformational">
+                            Transformational (Long-term innovation, advanced cloud maturity)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 12: Assessment Mode -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">12</span>
+                    Assessment Mode
+                </h2>
+
+                <div class="form-group">
+                    <label>Select Assessment Type</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="assessment_mode" value="offline">
+                            Offline Assessment
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="assessment_mode" value="online_agentless">
+                            Online Assessment (Agentless)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="assessment_mode" value="online_agent">
+                            Online Assessment (With Agent)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 13: Migration Fit Evaluation -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">13</span>
+                    Migration Fit Evaluation
+                </h2>
+
+                <div class="form-group">
+                    <label>Self-Assessment of Migration Readiness</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="migration_fit" value="excellent">
+                            Excellent Fit
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_fit" value="good">
+                            Good Fit (Minor issues)
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_fit" value="minimal_work">
+                            Needs Minimal Work
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_fit" value="moderate_work">
+                            Needs Moderate Work
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_fit" value="major_work">
+                            Needs Major Work
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_fit" value="no_fit">
+                            No Fit
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="migration_fit" value="insufficient">
+                            Insufficient Data
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 14: SRE Migration Level Objectives -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">14</span>
+                    SRE Migration Level Objectives (MLO)
+                </h2>
+
+                <table class="slo-table">
+                    <thead>
+                        <tr>
+                            <th>SLI</th>
+                            <th>Target</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>API Availability</td>
+                            <td><input type="text" name="slo_api_availability" value="99.9%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_api_notes" placeholder="During migration"></td>
+                        </tr>
+                        <tr>
+                            <td>Latency</td>
+                            <td><input type="text" name="slo_latency" value="Within 5%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_latency_notes" placeholder="Of pre-migration baseline"></td>
+                        </tr>
+                        <tr>
+                            <td>Data Durability</td>
+                            <td><input type="text" name="slo_data_durability" value="100%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_data_notes" placeholder="Zero data loss"></td>
+                        </tr>
+                        <tr>
+                            <td>Pipeline Freshness</td>
+                            <td><input type="text" name="slo_pipeline_freshness" value="< 2 hours" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_pipeline_notes" placeholder="From source data"></td>
+                        </tr>
+                        <tr>
+                            <td>Storage Integrity</td>
+                            <td><input type="text" name="slo_storage_integrity" value="100%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_storage_notes" placeholder="Checksum validation"></td>
+                        </tr>
+                        <tr>
+                            <td>Event Replay</td>
+                            <td><input type="text" name="slo_event_replay" value="99.99%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_event_notes" placeholder="Message delivery rate"></td>
+                        </tr>
+                        <tr>
+                            <td>Batch Job Success</td>
+                            <td><input type="text" name="slo_batch_success" value="95%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_batch_notes" placeholder="Post-migration success rate"></td>
+                        </tr>
+                        <tr>
+                            <td>Model Accuracy</td>
+                            <td><input type="text" name="slo_model_accuracy" value="Within 2%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_model_accuracy_notes" placeholder="Of pre-migration baseline"></td>
+                        </tr>
+                        <tr>
+                            <td>Model Freshness</td>
+                            <td><input type="text" name="slo_model_freshness" value="< 24 hours" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_model_freshness_notes" placeholder="From source retraining"></td>
+                        </tr>
+                        <tr>
+                            <td>Feature Store Consistency</td>
+                            <td><input type="text" name="slo_feature_consistency" value="100%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_feature_notes" placeholder="Feature availability"></td>
+                        </tr>
+                        <tr>
+                            <td>Model Drift</td>
+                            <td><input type="text" name="slo_model_drift" value="< 1%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_drift_notes" placeholder="Acceptable drift threshold"></td>
+                        </tr>
+                        <tr>
+                            <td>Model Latency</td>
+                            <td><input type="text" name="slo_model_latency" value="Within 5%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_model_latency_notes" placeholder="Prediction latency baseline"></td>
+                        </tr>
+                        <tr>
+                            <td>Explainability Coverage</td>
+                            <td><input type="text" name="slo_explainability" value="100%" style="width: 100px;"></td>
+                            <td><input type="text" name="slo_explainability_notes" placeholder="Metadata preserved"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 15: Additional Notes -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-number">15</span>
+                    Additional Notes
+                </h2>
+
+                <div class="form-group">
+                    <label for="additional_notes">Additional Information</label>
+                    <textarea id="additional_notes" name="additional_notes" rows="6"
+                              placeholder="Please provide any additional context, requirements, or concerns about your migration..."></textarea>
+                </div>
+            </div>
+
+            <!-- Submission Acknowledgment -->
+            <div class="info-box">
+                <h3>✅ Submission Acknowledgment</h3>
+                <p>By submitting this form, you agree to initiate the AI-driven cloud migration discovery process. You will receive:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Draft migration strategies tailored to your requirements</li>
+                    <li>Migration SLOs and success criteria</li>
+                    <li>Real-time migration dashboard access</li>
+                    <li>Comprehensive assessment report within 48 hours</li>
+                </ul>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-secondary" onclick="saveDraft()">💾 Save Draft</button>
+                <button type="submit" class="btn-primary">🚀 Submit Assessment</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        // Progress bar update
+        function updateProgress() {
+            const form = document.getElementById('migrationForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            const required = form.querySelectorAll('[required]');
+            let filled = 0;
+
+            required.forEach(input => {
+                if (input.value) filled++;
+            });
+
+            const progress = (filled / required.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Add event listeners for progress
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('change', updateProgress);
+            element.addEventListener('input', updateProgress);
+        });
+
+        // Checkbox and radio styling
+        document.querySelectorAll('.checkbox-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                }
+                this.classList.toggle('selected', this.querySelector('input').checked);
+            });
+        });
+
+        document.querySelectorAll('.radio-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                }
+                const name = this.querySelector('input[type="radio"]').name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                    r.parentElement.classList.remove('selected');
+                });
+                if (this.querySelector('input[type="radio"]').checked) {
+                    this.classList.add('selected');
+                }
+            });
+        });
+
+        // Save draft functionality
+        function saveDraft() {
+            const formData = new FormData(document.getElementById('migrationForm'));
+            const data = Object.fromEntries(formData.entries());
+            localStorage.setItem('migrationFormDraft', JSON.stringify(data));
+            alert('Draft saved successfully! Your progress has been stored locally.');
+        }
+
+        // Load draft on page load
+        window.addEventListener('load', function() {
+            const draft = localStorage.getItem('migrationFormDraft');
+            if (draft) {
+                const data = JSON.parse(draft);
+                const form = document.getElementById('migrationForm');
+
+                Object.keys(data).forEach(key => {
+                    const element = form.elements[key];
+                    if (element) {
+                        if (element.type === 'checkbox' || element.type === 'radio') {
+                            element.checked = true;
+                        } else {
+                            element.value = data[key];
+                        }
+                    }
+                });
+
+                updateProgress();
+            }
+        });
+
+        // Form submission
+        document.getElementById('migrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            // Show processing message
+            alert('Form submitted successfully!\n\nIn a production environment, this data would be sent to the Maestro Input Engine for processing.\n\nYou would receive:\n• Migration assessment report\n• Customized migration strategy\n• Access to migration dashboard');
+
+            // In production, this would send data to process-form.sh or an API endpoint
+            console.log('Form data:', data);
+
+            // Clear draft after successful submission
+            localStorage.removeItem('migrationFormDraft');
+        });
+
+        // Initial progress update
+        updateProgress();
+    </script>
+</body>
+</html>

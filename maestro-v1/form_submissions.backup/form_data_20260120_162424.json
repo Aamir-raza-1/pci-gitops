@@ -1,0 +1,39 @@
+{
+  "company_name": "tissue",
+  "website_url": "https://tissue.com",
+  "contact_email": "tissue@mail.com",
+  "industry": "manufacturing",
+  "serving_customers": "yes",
+  "migration_timeline": "immediate",
+  "current_budget": "100000-250000",
+  "cloud_provider": "gcp",
+  "gcloud_project": "stg-ezo",
+  "region": "us-central1",
+  "current_hosting": "gcp",
+  "current_regions": "us-central1",
+  "customer_regions": "Global",
+  "preferred_target_regions": "us-central1",
+  "app_repos[]": "https://github.com/Eazy-Ops/frontend",
+  "gcr_registry": "us-central1-docker.pkg.dev/fluted-polymer-376517/ez-repo",
+  "current_context": "Using current kubectl context",
+  "databases[]": "postgresql",
+  "postgresql_size": "30gb",
+  "redis_size": "30",
+  "auth_mode": "adc",
+  "iac_mode": "no_iac",
+  "k8s_mode": "current",
+  "form_version": "2.0",
+  "submitted_at": "2026-01-20T16:24:24.632277",
+  "run_id": "maestro_20260120_162424",
+  "uploaded_files": [
+    "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+  ],
+  "uploaded_files_details": [
+    {
+      "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+      "saved_as": "20260120_162424_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+      "path": "docs/20260120_162424_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+      "size": 18267
+    }
+  ]
+}

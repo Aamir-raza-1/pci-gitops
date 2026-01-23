@@ -1,0 +1,122 @@
+Service description,Service ID,SKU description,SKU ID,Usage amount,Usage unit,Cost ($),Savings programs ($),Other savings ($),Unrounded subtotal ($),Subtotal ($),Percent change in subtotal compared to previous period
+Kubernetes Engine,CCD8-9BF1-090E,Autopilot Pod mCPU Requests (us-central1),3194-8714-B3AD,"964,693.222",hour,42.93,0.00,0.00,42.928257,42.93,New
+Kubernetes Engine,CCD8-9BF1-090E,Autopilot Kubernetes Clusters,F52D-A61F-C7D1,180.597,hour,18.06,0.00,0.00,18.059614,18.06,New
+Kubernetes Engine,CCD8-9BF1-090E,Autopilot Pod Memory Requests (us-central1),C097-3083-F510,"2,053.814",gibibyte hour,10.11,0.00,0.00,10.109176,10.11,New
+Cloud Monitoring,58CD-E7C3-72CA,Prometheus Samples Ingested,A4E4-DF03-CDB6,"106,535,585",Samples,6.39,0.00,0.00,6.391330,6.39,New
+Cloud SQL,9662-B51E-5089,Cloud SQL for PostgreSQL: Zonal - Micro instance in Americas,C2D4-F7DF-B8D0,496.176,hour,5.21,0.00,0.00,5.209843,5.21,New
+Networking,E505-1604-58F8,Cloud Load Balancer Forwarding Rule Minimum for Americas (multi-region),CBE2-3343-9091,183.018,hour,4.58,0.00,0.00,4.575372,4.58,New
+Networking,E505-1604-58F8,Cloud Load Balancer Forwarding Rule Minimum Global,DEE3-C42E-3E4D,183.018,hour,4.58,0.00,0.00,4.575372,4.58,New
+Cloud SQL,9662-B51E-5089,Cloud SQL for PostgreSQL: Zonal - Standard storage in Americas,C18F-7FE0-0717,9.129,gibibyte month,1.55,0.00,0.00,1.551735,1.55,New
+Secret Manager,EE82-7A5E-871C,Secret version replica storage,7756-ADEF-84F4,13.038,month,0.78,0.00,0.00,0.781931,0.78,New
+Kubernetes Engine,CCD8-9BF1-090E,Autopilot SSD Pod Ephemeral Storage Requests (us-central1),50A2-5B90-7622,"2,142.49",gibibyte hour,0.30,0.00,0.00,0.296450,0.30,New
+Compute Engine,6F81-5844-456A,E2 Instance Core running in Americas,CF4E-A0C7-E3BF,10.781,hour,0.24,0.00,0.00,0.235105,0.24,New
+Secret Manager,EE82-7A5E-871C,Secret access operations,EBA7-264F-2D2C,"50,566",count,0.15,0.00,0.00,0.151698,0.15,New
+Compute Engine,6F81-5844-456A,E2 Instance Ram running in Americas,F449-33EC-A5EF,43.124,gibibyte hour,0.13,0.00,0.00,0.126037,0.13,New
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to Americas,F274-1692-F213,0.28,gibibyte,0.03,0.00,0.00,0.033277,0.03,New
+Compute Engine,6F81-5844-456A,Balanced PD Capacity,6AE1-525F-8B80,0.246,gibibyte month,0.02,0.00,0.00,0.024469,0.02,New
+Compute Engine,6F81-5844-456A,Storage PD Capacity,D973-5D65-BAB2,0.612,gibibyte month,0.02,0.00,0.00,0.024449,0.02,New
+Artifact Registry,149C-F9EC-3994,Artifact Registry Storage,8502-299A-ABAF,0.163,gibibyte month,0.02,0.00,0.00,0.016093,0.02,New
+Compute Engine,6F81-5844-456A,Network Inter Zone Data Transfer Out,DE9E-AFBC-A15A,0.401,gibibyte,0.00,0.00,0.00,0.003813,0.00,0%
+Networking,E505-1604-58F8,Global External Application Load Balancer Outbound Data Processing for Iowa (us-central1),1481-64C8-6805,0.312,gibibyte,0.00,0.00,0.00,0.002405,0.00,0%
+Cloud SQL,9662-B51E-5089,Storage PD Snapshot,66AB-BA17-351C,0.014,gibibyte month,0.00,0.00,0.00,0.000899,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Internet Data Transfer Out from Americas to EMEA,7EB3-F1EB-EC4A,0.005,gibibyte,0.00,0.00,0.00,0.000855,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Inter Connect Data Transfer Out Americas,AFEC-8830-099C,0.011,gibibyte,0.00,0.00,0.00,0.000555,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Internet Data Transfer Out from Americas to APAC,094A-C58C-9FD6,0.001,gibibyte,0.00,0.00,0.00,0.000181,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to EMEA,DFA5-B5C6-36D6,0.01,gibibyte,0.00,0.00,0.00,0.000111,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Internet Data Transfer Out from Americas to Americas,238B-D94B-7243,0,gibibyte,0.00,0.00,0.00,0.000073,0.00,0%
+Cloud Monitoring,58CD-E7C3-72CA,Time series billed count,6E35-67F5-C3C6,66,count,0.00,0.00,0.00,0.000032,0.00,0%
+Compute Engine,6F81-5844-456A,Network Data Transfer Out via Carrier Peering Network - Americas Based,984A-1F27-2D1F,0.001,gibibyte,0.00,0.00,0.00,0.000028,0.00,0%
+Networking,E505-1604-58F8,Global External Application Load Balancer Inbound Data Processing for Iowa (us-central1),C134-B6DB-FFCB,0.012,gibibyte,0.00,0.00,0.00,0.000006,0.00,0%
+Artifact Registry,149C-F9EC-3994,Artifact Registry Network Intra Region Egress,546B-E8F2-6FF5,1.891,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Artifact Registry,149C-F9EC-3994,"Artifact Registry Network Internet Egress Intercontinental (Excl Oceania, Africa and China)",72BD-5309-1C4C,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud Logging,5490-F7B7-8DF6,Log Storage cost,143F-A1B0-E0BE,3.293,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to South America,03A5-1B2A-3485,0.019,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Los Angeles,0C3C-6B13-B1E8,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Jakarta to Americas,0D56-2F80-52A5,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to Africa,11D6-3D11-8E77,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Data Transfer In from Google Services from Americas to Americas,123C-0EFC-B7C8,158.997,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Intra Zone Data Transfer Out,14F9-7705-2FD4,0.661,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Salt Lake City to Americas,1779-5CD6-D18B,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Montreal to Americas,1B9B-60EB-AF3D,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from South America to Americas,1CFF-8100-5F11,0.011,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Sydney,1D3E-3C54-0FA7,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Americas to Americas,1E55-5CEB-2AB1,0.002,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from China to Americas,227B-5B2B-A75A,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Stockholm to Americas,22A3-1909-2C0A,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Zurich to Americas,23F1-7159-60E3,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to APAC,2583-7659-D94A,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Berlin to Americas,2CBD-46DE-DC80,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,E2 Instance Ram running with free tier discount,2E72-F977-86B9,45.545,gibibyte hour,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from EMEA to Americas,2F99-3A90-373B,0.004,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Dallas to Americas,3091-E573-A86C,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Las Vegas to Americas,3606-CAF7-7ACF,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to Apac(Excluding Korea and Indonesia),378D-6896-1041,0.001,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Salt Lake City,40D6-DDD1-E008,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Mumbai,4120-E8FB-841B,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Data Transfer In via Carrier Peering Network - Americas Based,427E-B4F2-B5CF,0.013,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Dallas,4CCF-185C-4E98,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Virginia to Americas,587F-0E36-6A26,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Sao Paulo to Americas,5D89-42F2-7725,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Montreal,5E0D-5F20-E67E,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network HTTP Load Balancing Data Transfer Out to Load Balancer,6C67-1253-BB04,0.898,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Columbus,735D-08F9-4DB3,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to London,7618-3912-3F75,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network HTTP Load Balancing Data Transfer In from Load Balancer,761A-BA86-D467,0.312,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from Australia to Americas,773D-F52D-63CD,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Jakarta,7C79-34BD-F61B,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Licensing Fee for Debian 12 Bookworm,7DA4-2B85-2064,45.545,hour,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Japan to Americas,8497-0F70-3439,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from London to Americas,8687-6D6B-5B8B,0.001,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Finland,878C-B028-AAFE,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Toronto to Americas,892C-ECAD-0554,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from EMEA to Americas,8E2F-8EE0-E9FD,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Mumbai to Americas,90C1-86D9-BD3F,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Data Transfer to Google Services from Americas to Americas,92CB-C25F-B1D1,105.512,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from Apac(Excluding Korea and Indonesia) to Americas,93F4-2190-D5EF,0.001,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Intra Zone Data Transfer In,9C76-A3FB-C60A,3.661,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to China,9DE9-9092-B3BC,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to Middle East,A6C3-31B5-6D26,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Columbus to Americas,A9E6-10FA-84BE,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Las Vegas,ACC0-9F23-6029,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Sao Paulo,B62C-9514-EC43,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Zurich,B9A0-D107-024E,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from APAC to Americas,BBF8-C07D-1DF4,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Frankfurt to Americas,BE6F-687A-D530,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Netherlands to Americas,C1BB-5F08-C60D,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Netherlands,C2F8-6C2C-1847,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from Middle East to Americas,C4A4-76CD-56D0,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Doha,C85C-4E19-F585,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Virginia,C863-37DA-506E,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Americas,C8EA-1A86-3D28,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Sydney to Americas,CD2E-8A37-FA48,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Milan to Americas,CD33-945A-B41F,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to EMEA,D011-1819-740D,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Zone Data Transfer In,D0CC-50DF-59D2,0.5,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Doha to Americas,D2DA-41CC-0B33,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Finland to Americas,D72A-E5E4-973E,0.001,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Berlin,DBFA-0FA4-9F4A,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Japan,DE89-F11A-D163,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from Americas to Americas,E926-D07C-E1A4,0.12,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Toronto,EA63-657C-F08B,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Los Angeles to Americas,EB67-3CB7-1BF5,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer In from Africa to Americas,EF89-EF79-A587,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer In from Singapore to Americas,F208-E30F-07D3,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Inter Region Data Transfer Out from Americas to Singapore,FAD1-829C-5E63,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,Network Internet Data Transfer Out from Americas to Australia,FDBC-6E3B-D4D8,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud Storage,95FF-2EF5-5EA1,Download Worldwide Destinations (excluding Asia & Australia),22EB-AAE8-FBCD,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Inter Region Data Transfer Out from Americas to Finland,13EA-07C9-BE0C,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Inter Region Data Transfer Out from Americas to EMEA,1E2D-CB83-77E7,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Inter Region Data Transfer Out from Americas to Singapore,460A-D7CD-94BB,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Inter Region Data Transfer Out from Americas to Americas,8524-4DD5-9D67,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Data Transfer to Google Services from Americas to Americas,85F4-8AFC-FF68,0.72,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Inter Region Data Transfer Out from Americas to London,A064-C398-CA09,0,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Cloud SQL,9662-B51E-5089,Network Inter Zone Data Transfer Out in Americas,D32E-3B98-00B6,2.362,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Networking,E505-1604-58F8,Network Private Service Connect Google Managed Service GKE Consumer Data Processing Primary,11AD-2790-7C4B,31.438,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Networking,E505-1604-58F8,Networking Service Directory Integrated Resource,50F4-D7E5-3682,0.756,month,0.00,0.00,0.00,0.000000,0.00,0%
+Networking,E505-1604-58F8,Networking Private Service Connect Partner Select End Point,6882-BFB0-B7E5,180.597,hour,1.81,0.00,-1.81,0.000000,0.00,0%
+Networking,E505-1604-58F8,Network Intelligence Center Network Analyzer Resource Hours,9BF8-CD36-F9B8,551,count,0.61,0.00,-0.61,0.000000,0.00,0%
+Networking,E505-1604-58F8,Regional External Passthrough Network Load Balancer Outbound Data Processing for Iowa (us-central1),BB2A-D2B6-E858,0.001,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Networking,E505-1604-58F8,Regional External Passthrough Network Load Balancer Inbound Data Processing for Iowa (us-central1),BB93-3F28-5082,0.001,gibibyte,0.00,0.00,0.00,0.000000,0.00,0%
+Networking,E505-1604-58F8,Network Intelligence Center Internet to Google Cloud Performance Resource Hours,BDBA-22FA-3925,548,count,0.44,0.00,-0.44,0.000000,0.00,0%
+Networking,E505-1604-58F8,Network Intelligence Center Topology and Google Cloud Performance Resource Hours,D9AD-28F8-05D8,548,count,0.60,0.00,-0.60,0.000000,0.00,0%
+Compute Engine,6F81-5844-456A,E2 Instance Core running free tier discount,168E-35F8-9C79,11.386,hour,-0.25,0.00,0.00,-0.248373,-0.25,New

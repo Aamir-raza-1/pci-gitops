@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario-Based Cloud Migration Platform</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+            min-height: 100vh;
+            color: #e4e4e7;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #d4d4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #a1a1aa;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Steps Navigation */
+        .steps-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .step.active .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: transparent;
+        }
+
+        .step-label {
+            font-weight: 600;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        /* Step 1: Describe Section */
+        .describe-section {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-subtitle {
+            color: #a1a1aa;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .requirements-examples {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .example-box {
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .example-box.good {
+            border-left: 3px solid #10b981;
+        }
+
+        .example-box.bad {
+            border-left: 3px solid #ef4444;
+        }
+
+        .example-label {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example-box.good .example-label {
+            color: #10b981;
+        }
+
+        .example-box.bad .example-label {
+            color: #ef4444;
+        }
+
+        .example-text {
+            color: #d4d4d8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .main-textarea {
+            width: 100%;
+            min-height: 300px;
+            background: rgba(0,0,0,0.4);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            color: #fff;
+            resize: vertical;
+            font-family: 'Monaco', 'Menlo', monospace;
+            line-height: 1.6;
+            transition: all 0.3s;
+        }
+
+        .main-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(0,0,0,0.5);
+            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+        }
+
+        /* Step 2: Customize Section */
+        .customize-section {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .scenario-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background: rgba(255,255,255,0.02);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            background: rgba(102,126,234,0.05);
+        }
+
+        .category-card.selected {
+            border-color: #667eea;
+            background: rgba(102,126,234,0.1);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-description {
+            font-size: 0.9rem;
+            color: #a1a1aa;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #e4e4e7;
+        }
+
+        .form-input,
+        .form-select {
+            padding: 0.875rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(0,0,0,0.4);
+        }
+
+        /* Step 3: Review Section */
+        .review-section {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .preview-container {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .preview-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .edit-button {
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .edit-button:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #667eea;
+        }
+
+        .preview-content {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .preview-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+        }
+
+        .preview-label {
+            font-weight: 600;
+            color: #a1a1aa;
+        }
+
+        .preview-value {
+            color: #fff;
+            white-space: pre-wrap;
+        }
+
+        .preview-value.editable {
+            background: rgba(255,255,255,0.05);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: text;
+        }
+
+        .output-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .output-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .output-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .output-card:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+        }
+
+        .output-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .output-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: #e4e4e7;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Tabs for showing/hiding sections */
+        .section-tab {
+            display: none;
+        }
+
+        .section-tab.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .requirements-examples {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-item {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Scenario-Based Cloud Migration Platform</h1>
+            <p>Create detailed migration scenarios with infrastructure-as-code generation for your specific use case</p>
+        </div>
+
+        <!-- Steps Navigation -->
+        <div class="steps-nav">
+            <div class="step active" id="step1-nav">
+                <div class="step-number">1</div>
+                <div class="step-label">Describe Your Needs</div>
+            </div>
+            <div class="step" id="step2-nav">
+                <div class="step-number">2</div>
+                <div class="step-label">Customize Scenario</div>
+            </div>
+            <div class="step" id="step3-nav">
+                <div class="step-number">3</div>
+                <div class="step-label">Review & Generate</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Step 1: Describe Your Needs -->
+            <div id="step1" class="section-tab active">
+                <div class="describe-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span>📝</span>
+                            Step 1: Describe Your Migration Needs
+                        </h2>
+                        <p class="section-subtitle">
+                            Describe your infrastructure needs in detail. Upload source code or attach PDFs and images for additional context.
+                            Output quality depends on requirement clarity.
+                        </p>
+                    </div>
+
+                    <div class="requirements-examples">
+                        <div class="example-box good">
+                            <div class="example-label">
+                                <span>✅</span>
+                                Good Requirements
+                            </div>
+                            <div class="example-text">Set up a highly available web application on AWS using ECS Fargate with ALB. Include RDS PostgreSQL Multi-AZ database, ElastiCache Redis for session management, S3 for static assets, CloudFront CDN, and deploy across 3 availability zones with auto-scaling (min: 2, max: 10 tasks). Implement blue-green deployment with CodeDeploy, CloudWatch monitoring, and SNS alerting. Require 99.99% uptime SLA with automatic failover and disaster recovery to secondary region.</div>
+                        </div>
+
+                        <div class="example-box bad">
+                            <div class="example-label">
+                                <span>❌</span>
+                                Vague Requirements
+                            </div>
+                            <div class="example-text">Deploy my app to the cloud.</div>
+                        </div>
+                    </div>
+
+                    <!-- Predefined Scenarios Dropdown -->
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label for="scenario-selector" style="font-weight: 600; color: #e4e4e7; margin-bottom: 0.5rem; display: block;">
+                            Or select a predefined scenario:
+                        </label>
+                        <select id="scenario-selector" class="form-select" style="padding: 0.875rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff;" onchange="loadPredefinedScenario()">
+                            <option value="">-- Select a scenario template --</option>
+                            <option value="static_website">Static Website - S3/CloudFront with GitHub Actions</option>
+                            <option value="containerized_api">Containerized API - ECS/ALB/RDS Production Service</option>
+                            <option value="kubernetes_platform">Kubernetes Platform - EKS Microservices</option>
+                            <option value="data_pipeline">Data Processing Pipeline - Lambda/Step Functions</option>
+                            <option value="saas_webapp">SaaS Web Application - Multi-tenant with Zero Downtime</option>
+                            <option value="custom">Custom - Current Example</option>
+                        </select>
+                    </div>
+
+                    <textarea
+                        id="requirements-text"
+                        class="main-textarea"
+                        placeholder="Describe your migration scenario in detail..."
+                    >We need to migrate our current infrastructure consisting of:
+
+Current Setup:
+- 15 AWS Lambda functions (Node.js 18) handling API endpoints
+- 3 ECS Fargate services running microservices
+- PostgreSQL RDS (db.t3.large, Multi-AZ) with 500GB storage
+- ElastiCache Redis cluster for session management
+- S3 buckets for static assets and user uploads
+- CloudFront distribution for content delivery
+- GitHub Actions for CI/CD
+- Team of 3 junior developers
+
+Migration Requirements:
+- Move to multi-region active-active setup (us-east-1 primary, us-west-2 secondary)
+- Implement disaster recovery with RTO < 1 hour, RPO < 15 minutes
+- Zero-downtime migration approach
+- Auto-scaling based on CPU/memory metrics
+- Cost optimization using spot instances where possible
+- Maintain SOC2 compliance
+- Budget: $3000-5000/month
+- Timeline: Complete within 6 weeks
+- Monitoring with DataDog integration
+- Implement canary deployments for all services</textarea>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="goToStep(2)">
+                            Continue to Customize →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Customize Scenario -->
+            <div id="step2" class="section-tab">
+                <div class="customize-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span>⚙️</span>
+                            Step 2: Customize Your Migration Scenario
+                        </h2>
+                        <p class="section-subtitle">
+                            Select your migration categories and customize parameters for your specific needs
+                        </p>
+                    </div>
+
+                    <div class="scenario-categories">
+                        <div class="category-card selected" onclick="toggleCategory(this)">
+                            <div class="category-icon">☁️</div>
+                            <div class="category-title">Cloud Provider</div>
+                            <div class="category-description">AWS Multi-Region</div>
+                        </div>
+
+                        <div class="category-card selected" onclick="toggleCategory(this)">
+                            <div class="category-icon">⚡</div>
+                            <div class="category-title">Compute</div>
+                            <div class="category-description">Serverless + Containers</div>
+                        </div>
+
+                        <div class="category-card selected" onclick="toggleCategory(this)">
+                            <div class="category-icon">💾</div>
+                            <div class="category-title">Storage</div>
+                            <div class="category-description">RDS + S3 + Redis</div>
+                        </div>
+
+                        <div class="category-card selected" onclick="toggleCategory(this)">
+                            <div class="category-icon">🌐</div>
+                            <div class="category-title">Networking</div>
+                            <div class="category-description">Multi-Region VPC</div>
+                        </div>
+
+                        <div class="category-card" onclick="toggleCategory(this)">
+                            <div class="category-icon">🔄</div>
+                            <div class="category-title">CI/CD Pipeline</div>
+                            <div class="category-description">GitHub Actions</div>
+                        </div>
+
+                        <div class="category-card" onclick="toggleCategory(this)">
+                            <div class="category-icon">🔐</div>
+                            <div class="category-title">Security</div>
+                            <div class="category-description">SOC2 Compliance</div>
+                        </div>
+
+                        <div class="category-card" onclick="toggleCategory(this)">
+                            <div class="category-icon">📊</div>
+                            <div class="category-title">Monitoring</div>
+                            <div class="category-description">DataDog + CloudWatch</div>
+                        </div>
+
+                        <div class="category-card" onclick="toggleCategory(this)">
+                            <div class="category-icon">🔀</div>
+                            <div class="category-title">Hybrid Setup</div>
+                            <div class="category-description">Cloud + On-Premise</div>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Migration Type</label>
+                            <select class="form-select" id="migration-type">
+                                <option value="replatform" selected>Replatform (Lift & Optimize)</option>
+                                <option value="rehost">Rehost (Lift & Shift)</option>
+                                <option value="refactor">Refactor (Re-architect)</option>
+                                <option value="rebuild">Rebuild (From Scratch)</option>
+                                <option value="repurchase">Repurchase (SaaS)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Timeline</label>
+                            <select class="form-select" id="timeline">
+                                <option value="2-4weeks">2-4 weeks</option>
+                                <option value="4-6weeks" selected>4-6 weeks</option>
+                                <option value="2-3months">2-3 months</option>
+                                <option value="3-6months">3-6 months</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Team Size</label>
+                            <select class="form-select" id="team-size">
+                                <option value="1-3" selected>1-3 engineers</option>
+                                <option value="4-10">4-10 engineers</option>
+                                <option value="11-25">11-25 engineers</option>
+                                <option value="26+">26+ engineers</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Budget Range</label>
+                            <select class="form-select" id="budget">
+                                <option value="1000-3000">$1,000-3,000/month</option>
+                                <option value="3000-5000" selected>$3,000-5,000/month</option>
+                                <option value="5000-10000">$5,000-10,000/month</option>
+                                <option value="10000+">$10,000+/month</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Primary Region</label>
+                            <select class="form-select" id="primary-region">
+                                <option value="us-east-1" selected>US East (N. Virginia)</option>
+                                <option value="us-west-2">US West (Oregon)</option>
+                                <option value="eu-west-1">EU (Ireland)</option>
+                                <option value="ap-southeast-1">Asia Pacific (Singapore)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Disaster Recovery</label>
+                            <select class="form-select" id="dr-strategy">
+                                <option value="backup">Backup & Restore</option>
+                                <option value="pilot-light">Pilot Light</option>
+                                <option value="warm-standby" selected>Warm Standby</option>
+                                <option value="multi-site">Multi-Site Active-Active</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Downtime Tolerance</label>
+                            <select class="form-select" id="downtime">
+                                <option value="zero" selected>Zero Downtime</option>
+                                <option value="1-hour">< 1 hour</option>
+                                <option value="4-hours">< 4 hours</option>
+                                <option value="24-hours">< 24 hours</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Compliance</label>
+                            <select class="form-select" id="compliance">
+                                <option value="none">None</option>
+                                <option value="soc2" selected>SOC2</option>
+                                <option value="hipaa">HIPAA</option>
+                                <option value="pci">PCI-DSS</option>
+                                <option value="gdpr">GDPR</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" onclick="goToStep(1)">
+                            ← Back
+                        </button>
+                        <button class="btn btn-primary" onclick="goToStep(3)">
+                            Review Scenario →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Review & Generate -->
+            <div id="step3" class="section-tab">
+                <div class="review-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span>✅</span>
+                            Step 3: Review & Generate Migration Package
+                        </h2>
+                        <p class="section-subtitle">
+                            Review your migration scenario and make any final adjustments before generating
+                        </p>
+                    </div>
+
+                    <div class="preview-container">
+                        <div class="preview-header">
+                            <div class="preview-title">Migration Scenario Summary</div>
+                            <button class="edit-button" onclick="enableEditing()">
+                                ✏️ Edit
+                            </button>
+                        </div>
+
+                        <div class="preview-content">
+                            <div class="preview-item">
+                                <div class="preview-label">Scenario Name:</div>
+                                <div class="preview-value editable" contenteditable="false">Multi-Region Serverless & Container Migration</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Current Stack:</div>
+                                <div class="preview-value editable" contenteditable="false">15 Lambda functions, 3 ECS services, PostgreSQL RDS, Redis, S3, CloudFront</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Target Architecture:</div>
+                                <div class="preview-value editable" contenteditable="false">Multi-region active-active with disaster recovery, auto-scaling, canary deployments</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Migration Type:</div>
+                                <div class="preview-value">Replatform (Lift & Optimize)</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Timeline:</div>
+                                <div class="preview-value">4-6 weeks</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Budget:</div>
+                                <div class="preview-value">$3,000-5,000/month</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Team Size:</div>
+                                <div class="preview-value">1-3 engineers</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Regions:</div>
+                                <div class="preview-value">Primary: us-east-1, Secondary: us-west-2</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">DR Strategy:</div>
+                                <div class="preview-value">Warm Standby (RTO: 1hr, RPO: 15min)</div>
+                            </div>
+
+                            <div class="preview-item">
+                                <div class="preview-label">Compliance:</div>
+                                <div class="preview-value">SOC2</div>
+                            </div>
+                        </div>
+
+                        <div class="output-section">
+                            <div class="output-title">📦 Generated Outputs</div>
+                            <div class="output-grid">
+                                <div class="output-card">
+                                    <div class="output-icon">📄</div>
+                                    <div class="output-name">Terraform Modules</div>
+                                </div>
+                                <div class="output-card">
+                                    <div class="output-icon">🐳</div>
+                                    <div class="output-name">Dockerfiles</div>
+                                </div>
+                                <div class="output-card">
+                                    <div class="output-icon">⚙️</div>
+                                    <div class="output-name">CI/CD Pipelines</div>
+                                </div>
+                                <div class="output-card">
+                                    <div class="output-icon">📊</div>
+                                    <div class="output-name">Architecture Diagrams</div>
+                                </div>
+                                <div class="output-card">
+                                    <div class="output-icon">📈</div>
+                                    <div class="output-name">Monitoring Configs</div>
+                                </div>
+                                <div class="output-card">
+                                    <div class="output-icon">💰</div>
+                                    <div class="output-name">Cost Analysis</div>
+                                </div>
+                                <div class="output-card">
+                                    <div class="output-icon">📋</div>
+                                    <div class="output-name">Migration Runbook</div>
+                                </div>
+                                <div class="output-card">
+                                    <div class="output-icon">🔐</div>
+                                    <div class="output-name">Security Policies</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" onclick="goToStep(2)">
+                            ← Back to Customize
+                        </button>
+                        <button class="btn btn-primary" onclick="generateMigration()">
+                            🚀 Generate Migration Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Predefined scenarios
+        const scenarios = {
+            static_website: `Use Case: Static Website Migration
+
+Current Setup:
+We run a marketing website on AWS using S3 and CloudFront. Updates are deployed through GitHub Actions.
+There is no backend or database. The site is public, low-risk, but we lack observability and environment separation.
+
+Current Infrastructure:
+- S3 bucket for static content hosting
+- CloudFront distribution for global CDN
+- Route 53 for DNS management
+- GitHub repository with HTML/CSS/JavaScript
+- GitHub Actions for deployment automation
+- No staging environment
+- Limited monitoring (only CloudFront metrics)
+
+Migration Requirements:
+- Implement proper environment separation (dev/staging/production)
+- Add comprehensive monitoring and alerting
+- Improve deployment pipeline with rollback capabilities
+- Implement proper caching strategies
+- Add security headers and WAF protection
+- Multi-region failover for high availability
+- Budget: $100-500/month
+- Timeline: 2 weeks
+- Zero downtime during migration`,
+
+            containerized_api: `Use Case: Containerized API Migration
+
+Current Setup:
+We operate a REST API on AWS ECS behind an Application Load Balancer, backed by RDS.
+Images are built in GitHub Actions and pushed to ECR. It's a production, stateful service with strict uptime requirements.
+
+Current Infrastructure:
+- ECS Fargate cluster with 3 services
+- Application Load Balancer with health checks
+- RDS PostgreSQL (db.t3.medium) with automated backups
+- ECR for container registry
+- VPC with private subnets
+- Security groups and NACLs configured
+- CloudWatch logs and basic metrics
+- GitHub Actions CI/CD pipeline
+
+Migration Requirements:
+- Migrate to multi-AZ setup for high availability
+- Implement blue-green deployment strategy
+- Add auto-scaling based on request count and CPU
+- Enhance monitoring with APM tools
+- Implement disaster recovery with cross-region backup
+- Add API rate limiting and DDoS protection
+- Maintain 99.9% uptime during migration
+- Budget: $2000-4000/month
+- Timeline: 4-6 weeks`,
+
+            kubernetes_platform: `Use Case: Kubernetes Platform Migration
+
+Current Setup:
+Our platform runs multiple microservices on EKS with Ingress, Redis, and RDS.
+GitLab pipelines build Docker images. There is internal service-to-service traffic,
+a public API gateway, and analytics data pipelines. It is mission-critical.
+
+Current Infrastructure:
+- EKS cluster (version 1.27) with 15 microservices
+- NGINX Ingress Controller for routing
+- Redis cluster for caching and session storage
+- RDS Aurora PostgreSQL cluster
+- Kafka for event streaming
+- ElasticSearch for logging
+- Prometheus + Grafana for monitoring
+- GitLab CI/CD with Harbor registry
+- Service mesh (Istio) for internal communication
+
+Migration Requirements:
+- Upgrade to latest EKS version with minimal downtime
+- Implement multi-region active-active setup
+- Add automatic disaster recovery
+- Enhance security with Pod Security Policies
+- Implement cost optimization with Spot instances
+- Add GitOps with ArgoCD
+- Achieve 99.99% uptime SLA
+- Budget: $10000-20000/month
+- Timeline: 8-12 weeks
+- Compliance: SOC2, HIPAA`,
+
+            data_pipeline: `Use Case: Data Processing Pipeline Migration
+
+Current Setup:
+We process files uploaded to S3 using Lambda and Step Functions, storing results in DynamoDB and S3.
+Terraform manages infrastructure. Workloads are bursty, batch-oriented, and data integrity is critical.
+
+Current Infrastructure:
+- S3 buckets for input/output data storage
+- 20+ Lambda functions for data processing
+- Step Functions for workflow orchestration
+- DynamoDB for metadata and job tracking
+- SQS for job queuing
+- EventBridge for scheduling
+- CloudWatch for monitoring
+- Terraform for IaC
+- Daily processing of 10TB+ data
+
+Migration Requirements:
+- Optimize costs during low-usage periods
+- Implement data partitioning for better performance
+- Add data validation and quality checks
+- Enhance error handling and retry logic
+- Implement data lineage tracking
+- Add real-time processing capabilities
+- Ensure GDPR compliance for data handling
+- Budget: $5000-10000/month
+- Timeline: 6-8 weeks
+- Zero data loss tolerance`,
+
+            saas_webapp: `Use Case: SaaS Web Application Migration
+
+Current Setup:
+We run a multi-tenant SaaS with a React frontend on CloudFront and a Node.js backend on ECS with PostgreSQL on RDS.
+CI/CD is handled by GitHub Actions. We require zero-downtime deploys and strong tenant isolation.
+
+Current Infrastructure:
+- React SPA hosted on S3/CloudFront
+- Node.js API on ECS Fargate (10 containers)
+- RDS PostgreSQL Multi-AZ (db.r5.xlarge)
+- ElastiCache Redis for sessions
+- Cognito for authentication
+- Multi-tenant with schema-per-tenant
+- GitHub Actions for CI/CD
+- DataDog for monitoring
+- 500+ active tenants
+
+Migration Requirements:
+- Implement true multi-region architecture
+- Enhance tenant isolation with VPC-per-tenant option
+- Add automatic scaling based on tenant activity
+- Implement zero-downtime database migrations
+- Add comprehensive audit logging
+- Enhance security with WAF and Shield
+- Implement automated backup and recovery
+- Maintain SOC2 and GDPR compliance
+- Budget: $8000-15000/month
+- Timeline: 10-12 weeks
+- 99.99% uptime requirement`,
+
+            custom: `We need to migrate our current infrastructure consisting of:
+
+Current Setup:
+- 15 AWS Lambda functions (Node.js 18) handling API endpoints
+- 3 ECS Fargate services running microservices
+- PostgreSQL RDS (db.t3.large, Multi-AZ) with 500GB storage
+- ElastiCache Redis cluster for session management
+- S3 buckets for static assets and user uploads
+- CloudFront distribution for content delivery
+- GitHub Actions for CI/CD
+- Team of 3 junior developers
+
+Migration Requirements:
+- Move to multi-region active-active setup (us-east-1 primary, us-west-2 secondary)
+- Implement disaster recovery with RTO < 1 hour, RPO < 15 minutes
+- Zero-downtime migration approach
+- Auto-scaling based on CPU/memory metrics
+- Cost optimization using spot instances where possible
+- Maintain SOC2 compliance
+- Budget: $3000-5000/month
+- Timeline: Complete within 6 weeks
+- Monitoring with DataDog integration
+- Implement canary deployments for all services`
+        };
+
+        // Load predefined scenario
+        function loadPredefinedScenario() {
+            const selector = document.getElementById('scenario-selector');
+            const textarea = document.getElementById('requirements-text');
+
+            if (selector.value && scenarios[selector.value]) {
+                textarea.value = scenarios[selector.value];
+
+                // Auto-save after loading scenario
+                saveDraft();
+
+                // Highlight the textarea briefly to show it changed
+                textarea.style.border = '2px solid #667eea';
+                textarea.style.boxShadow = '0 0 20px rgba(102,126,234,0.5)';
+                setTimeout(() => {
+                    textarea.style.border = '2px solid rgba(255,255,255,0.1)';
+                    textarea.style.boxShadow = '';
+                }, 1000);
+            }
+        }
+
+        // Step navigation
+        function goToStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.section-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active from all nav items
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show selected step
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            document.getElementById(`step${stepNumber}-nav`).classList.add('active');
+
+            // Mark previous steps as active too
+            for (let i = 1; i <= stepNumber; i++) {
+                document.getElementById(`step${i}-nav`).classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Update preview if going to step 3
+            if (stepNumber === 3) {
+                updatePreview();
+            }
+        }
+
+        // Toggle category selection
+        function toggleCategory(card) {
+            card.classList.toggle('selected');
+        }
+
+        // Enable editing in preview
+        function enableEditing() {
+            const editables = document.querySelectorAll('.preview-value.editable');
+            const button = event.target;
+
+            if (button.textContent === '✏️ Edit') {
+                editables.forEach(el => {
+                    el.contentEditable = 'true';
+                    el.style.background = 'rgba(255,255,255,0.08)';
+                    el.style.padding = '0.5rem';
+                    el.style.borderRadius = '4px';
+                    el.style.cursor = 'text';
+                });
+                button.textContent = '💾 Save';
+            } else {
+                editables.forEach(el => {
+                    el.contentEditable = 'false';
+                    el.style.background = 'rgba(255,255,255,0.05)';
+                });
+                button.textContent = '✏️ Edit';
+            }
+        }
+
+        // Update preview based on form inputs
+        function updatePreview() {
+            // This would normally update the preview based on form values
+            // For demo purposes, it's pre-filled
+        }
+
+        // Generate migration package
+        function generateMigration() {
+            const requirements = document.getElementById('requirements-text').value;
+            const migrationType = document.getElementById('migration-type').value;
+            const timeline = document.getElementById('timeline').value;
+            const budget = document.getElementById('budget').value;
+
+            alert(`🚀 Migration Package Generation Started!
+
+Your custom migration scenario is being processed...
+
+Scenario Details:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Migration Type: ${migrationType}
+Timeline: ${timeline}
+Budget: ${budget}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generating:
+✓ Terraform modules for multi-region setup
+✓ Kubernetes manifests for ECS migration
+✓ GitHub Actions workflows
+✓ CloudFormation templates
+✓ Migration runbooks
+✓ Architecture diagrams
+✓ Cost optimization reports
+✓ Security compliance documentation
+
+Estimated completion: 2-3 minutes
+
+The Maestro Input Engine will process this scenario and deliver:
+• Complete infrastructure-as-code
+• Step-by-step migration guide
+• Rollback procedures
+• Testing strategies
+• Performance benchmarks`);
+
+            console.log('Migration Scenario:', {
+                requirements,
+                migrationType,
+                timeline,
+                budget
+            });
+        }
+
+        // Auto-save draft
+        function saveDraft() {
+            const data = {
+                requirements: document.getElementById('requirements-text').value,
+                migrationType: document.getElementById('migration-type').value,
+                timeline: document.getElementById('timeline').value,
+                teamSize: document.getElementById('team-size').value,
+                budget: document.getElementById('budget').value,
+                primaryRegion: document.getElementById('primary-region').value,
+                drStrategy: document.getElementById('dr-strategy').value,
+                downtime: document.getElementById('downtime').value,
+                compliance: document.getElementById('compliance').value
+            };
+
+            localStorage.setItem('migrationScenarioDraft', JSON.stringify(data));
+        }
+
+        // Load draft on page load
+        window.addEventListener('load', function() {
+            const draft = localStorage.getItem('migrationScenarioDraft');
+            if (draft) {
+                const data = JSON.parse(draft);
+                if (data.requirements) {
+                    document.getElementById('requirements-text').value = data.requirements;
+                }
+                // Load other fields...
+            }
+
+            // Auto-save every 30 seconds
+            setInterval(saveDraft, 30000);
+        });
+
+        // Save on input change
+        document.querySelectorAll('input, textarea, select').forEach(element => {
+            element.addEventListener('change', saveDraft);
+        });
+    </script>
+</body>
+</html>

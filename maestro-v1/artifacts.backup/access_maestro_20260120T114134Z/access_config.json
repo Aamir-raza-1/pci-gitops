@@ -1,0 +1,45 @@
+{
+  "run_id": "maestro_20260120T114134Z",
+  "timestamp": "20260120T114134Z",
+  "provider": "gcp",
+  "auth_mode": "adc",
+  "project": "qa-ezo",
+  "validations": {
+    "core_tools": {
+      "required": true,
+      "tools": [
+        "bash",
+        "python3",
+        "curl",
+        "jq"
+      ]
+    },
+    "cloud_auth": {
+      "required": true,
+      "skip_if_docs_only": false
+    },
+    "kubernetes": {
+      "required": false,
+      "contexts": []
+    },
+    "databases": {
+      "required": false,
+      "types": []
+    },
+    "repositories": {
+      "required": true,
+      "repos": {
+        "application": [
+          "https://github.com/Eazy-Ops/frontend"
+        ],
+        "infrastructure": []
+      }
+    },
+    "terraform": {
+      "required": false,
+      "repo": ""
+    }
+  },
+  "skip_all_if_docs_only": false,
+  "next_phase": "discovery"
+}

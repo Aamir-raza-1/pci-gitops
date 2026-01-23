@@ -1,0 +1,44 @@
+{
+  "run_id": "validation_20260120_153838",
+  "timestamp": "20260120T103839Z",
+  "provider": "aws",
+  "mode": "full",
+  "status": "SUCCESS",
+  "validations": {
+    "core_tools": {
+      "bash": {
+        "status": "present",
+        "message": "/opt/homebrew/bin/bash"
+      },
+      "python3": {
+        "status": "present",
+        "message": "/opt/homebrew/bin/python3"
+      },
+      "curl": {
+        "status": "present",
+        "message": "/usr/bin/curl"
+      }
+    },
+    "provider_tools": {
+      "aws": {
+        "status": "present",
+        "message": "aws-cli/2.31.39 Python/3.13.9 Darwin/25.0.0 source/arm64"
+      }
+    },
+    "authentication": {
+      "aws": {
+        "status": "active",
+        "message": "Account: 576469620807"
+      }
+    }
+  },
+  "missing_tools": [],
+  "missing_permissions": [],
+  "remediation": {
+    "tools": [],
+    "permissions": [],
+    "auth": []
+  },
+  "ready_for_discovery": true,
+  "issue_count": 0
+}

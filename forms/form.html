@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestro Input Form - Enhanced</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        .form-content {
+            padding: 3rem;
+        }
+        .section {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #007bff;
+            margin-right: 12px;
+            border-radius: 2px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .required::after {
+            content: ' *';
+            color: #dc3545;
+        }
+        textarea, input[type="text"], input[type="url"], input[type="email"], select {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        .info {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        .info::before {
+            content: 'ℹ️';
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 0.75rem;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+            transition: all 0.2s;
+        }
+        .checkbox-item:hover {
+            border-color: #007bff;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.1);
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .radio-item:hover {
+            border-color: #007bff;
+            background: #f0f8ff;
+        }
+        .radio-item input[type="radio"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        .radio-item.selected {
+            border-color: #007bff;
+            background: #e7f3ff;
+        }
+        button {
+            width: 100%;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,123,255,0.3);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #28a745;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .badge.optional {
+            background: #6c757d;
+        }
+        .example {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            border-radius: 4px;
+        }
+        .example strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Maestro Input Form</h1>
+            <p>Cloud Migration Assessment - Enhanced Edition</p>
+        </div>
+
+        <form class="form-content" action="#" method="POST">
+
+            <!-- Section 1: Core Information -->
+            <div class="section">
+                <h2 class="section-title">Core Information</h2>
+
+                <div class="form-group">
+                    <label for="use_case" class="required">Use-Case Description</label>
+                    <textarea id="use_case" name="use_case" required
+                        placeholder="Describe your current environment, architecture, and migration goals..."></textarea>
+                    <p class="info">Provide a comprehensive description of your current setup, including key technologies, team size, and business objectives. This helps us understand your unique requirements.</p>
+                    <div class="example">
+                        <strong>Example:</strong> "We run a multi-tenant SaaS platform with React frontend, Node.js microservices on ECS, PostgreSQL on RDS, and Redis for caching. Our team of 20 engineers deploys 5-10 times daily via GitHub Actions. We need to maintain 99.9% uptime during migration."
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="company_name">Company Name</label>
+                    <input type="text" id="company_name" name="company_name" placeholder="Acme Corporation">
+                    <p class="info">Your organization's name for identification and customization purposes.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry" name="industry">
+                        <option value="">Select your industry...</option>
+                        <option value="technology">Technology</option>
+                        <option value="finance">Finance & Banking</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="retail">Retail & E-commerce</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="education">Education</option>
+                        <option value="government">Government</option>
+                        <option value="media">Media & Entertainment</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <p class="info">Industry-specific compliance and best practices will be considered.</p>
+                </div>
+            </div>
+
+            <!-- Section 2: Infrastructure Inputs -->
+            <div class="section">
+                <h2 class="section-title">Infrastructure & Code Repositories</h2>
+
+                <div class="form-group">
+                    <label for="terraform_path">Terraform Path (Local) <span class="badge">High Accuracy</span></label>
+                    <input type="text" id="terraform_path" name="terraform_path" placeholder="./infra or /path/to/terraform">
+                    <p class="info">Path to your local Terraform configuration files. This provides the highest accuracy for architecture mapping as we can analyze your actual infrastructure-as-code.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="terraform_repo">Terraform Repository URL <span class="badge">High Accuracy</span></label>
+                    <input type="url" id="terraform_repo" name="terraform_repo"
+                        placeholder="https://github.com/your-org/infrastructure">
+                    <p class="info">Git repository containing your Terraform configurations. We'll analyze your IaC to understand your infrastructure patterns.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="app_repo_url">Application Repository URL</label>
+                    <input type="url" id="app_repo_url" name="app_repo_url"
+                        placeholder="https://github.com/your-org/application">
+                    <p class="info">Your application source code repository. Helps us understand runtime requirements, dependencies, and migration complexity.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="cicd_repo">CI/CD Pipeline Repository</label>
+                    <input type="url" id="cicd_repo" name="cicd_repo"
+                        placeholder="https://github.com/your-org/.github">
+                    <p class="info">Repository containing your CI/CD configurations (GitHub Actions, GitLab CI, Jenkins, etc.). Essential for understanding deployment processes.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="artifact_registry">Container Registry Reference</label>
+                    <input type="text" id="artifact_registry" name="artifact_registry"
+                        placeholder="us-docker.pkg.dev/project/repository or 123456789.dkr.ecr.us-east-1.amazonaws.com">
+                    <p class="info">Your container/artifact registry URL. Helps identify runtime environments and deployment targets.</p>
+                </div>
+            </div>
+
+            <!-- Section 3: Cloud & Access -->
+            <div class="section">
+                <h2 class="section-title">Cloud Access & Discovery</h2>
+
+                <div class="form-group">
+                    <label for="cloud_token">Cloud Access Token <span class="badge">Highest Accuracy</span></label>
+                    <input type="text" id="cloud_token" name="cloud_token" placeholder="Read-only access token">
+                    <p class="info">Provide a read-only cloud access token for live discovery. This enables the most accurate assessment by analyzing your actual cloud resources.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="website_url">Public Website URL</label>
+                    <input type="url" id="website_url" name="website_url" placeholder="https://www.your-app.com">
+                    <p class="info">Your application's public URL. Used to assess public exposure, performance, and user-facing architecture.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="current_provider">Current Cloud Provider</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="current_provider" value="on-premises"> On-Premises
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="current_provider" value="aws"> AWS
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="current_provider" value="azure"> Azure
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="current_provider" value="gcp"> GCP
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="current_provider" value="other"> Other
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Migration Preferences -->
+            <div class="section">
+                <h2 class="section-title">Migration Preferences</h2>
+
+                <div class="form-group">
+                    <label for="cost_preference">Cost Optimization Level</label>
+                    <select id="cost_preference" name="cost_preference">
+                        <option value="cheap">Cheap - Basic cost optimization</option>
+                        <option value="cheaper">Cheaper - Aggressive cost reduction</option>
+                        <option value="cheapest">Cheapest - Maximum cost efficiency</option>
+                    </select>
+                    <p class="info">Balance between cost savings and performance/features.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="reliability">Reliability Requirements</label>
+                    <select id="reliability" name="reliability">
+                        <option value="reliable">Reliable - Standard availability (99.9%)</option>
+                        <option value="more_reliable">More Reliable - High availability (99.99%)</option>
+                        <option value="most_reliable">Most Reliable - Maximum uptime (99.999%)</option>
+                    </select>
+                    <p class="info">Your uptime requirements and tolerance for failures.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="deployment_model">Deployment Model</label>
+                    <select id="deployment_model" name="deployment_model">
+                        <option value="basic_hybrid">Basic Hybrid - Simple cloud integration</option>
+                        <option value="balanced_hybrid">Balanced Hybrid - Optimized architecture</option>
+                        <option value="enterprise_hybrid">Enterprise Hybrid - Full enterprise features</option>
+                    </select>
+                    <p class="info">How you want to integrate cloud services with existing systems.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="security_level">Security Requirements</label>
+                    <select id="security_level" name="security_level">
+                        <option value="basic">Basic - Standard security controls</option>
+                        <option value="hardened">Hardened - Enhanced security measures</option>
+                        <option value="maximum">Maximum - Zero-trust architecture</option>
+                    </select>
+                    <p class="info">Security posture and compliance requirements.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="scaling">Scaling Strategy</label>
+                    <select id="scaling" name="scaling">
+                        <option value="manual">Manual - Scale on demand</option>
+                        <option value="auto">Automatic - Reactive scaling</option>
+                        <option value="predictive">Predictive - AI-driven scaling</option>
+                    </select>
+                    <p class="info">How your infrastructure should handle load changes.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="downtime_tolerance">Downtime Tolerance</label>
+                    <select id="downtime_tolerance" name="downtime_tolerance">
+                        <option value="4-8h">4-8 Hours - Maintenance windows acceptable</option>
+                        <option value="1-4h">1-4 Hours - Limited downtime</option>
+                        <option value="near-zero">Near Zero - Blue-green deployment required</option>
+                    </select>
+                    <p class="info">Maximum acceptable downtime during migration.</p>
+                </div>
+            </div>
+
+            <!-- Section 5: Documentation -->
+            <div class="section">
+                <h2 class="section-title">Supporting Documentation</h2>
+
+                <div class="form-group">
+                    <label for="docs_path">Documentation Path <span class="badge optional">Optional</span></label>
+                    <input type="text" id="docs_path" name="docs_path"
+                        placeholder="./docs/architecture.pdf or ./README.md">
+                    <p class="info">Path to architecture diagrams, runbooks, or assessment documents (PDF, MD, DOCX supported).</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="additional_notes">Additional Notes <span class="badge optional">Optional</span></label>
+                    <textarea id="additional_notes" name="additional_notes"
+                        placeholder="Any special requirements, constraints, or context..."></textarea>
+                    <p class="info">Include any specific requirements, compliance needs, timeline constraints, or other relevant information.</p>
+                </div>
+            </div>
+
+            <button type="submit">🚀 Generate Migration Assessment</button>
+        </form>
+    </div>
+
+    <script>
+        // Add interactivity
+        document.querySelectorAll('.radio-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                const name = radio.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                    r.parentElement.classList.remove('selected');
+                });
+                radio.checked = true;
+                this.classList.add('selected');
+            });
+        });
+
+        // Form submission handler
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('In a production environment, this form would be processed by process-form.sh\n\nThe data would be sent to the Maestro Input Engine for analysis.');
+        });
+    </script>
+</body>
+</html>

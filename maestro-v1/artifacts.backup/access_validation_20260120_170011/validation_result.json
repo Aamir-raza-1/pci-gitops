@@ -1,0 +1,32 @@
+{
+  "run_id": "validation_20260120_170011",
+  "timestamp": "20260120T120012Z",
+  "provider": "unknown",
+  "mode": "targeted",
+  "status": "SUCCESS",
+  "validations": {
+    "core_tools": {
+      "bash": {
+        "status": "present",
+        "message": "/opt/homebrew/bin/bash"
+      },
+      "python3": {
+        "status": "present",
+        "message": "/opt/homebrew/bin/python3"
+      },
+      "curl": {
+        "status": "present",
+        "message": "/usr/bin/curl"
+      }
+    }
+  },
+  "missing_tools": [],
+  "missing_permissions": [],
+  "remediation": {
+    "tools": [],
+    "permissions": [],
+    "auth": []
+  },
+  "ready_for_discovery": true,
+  "issue_count": 0
+}

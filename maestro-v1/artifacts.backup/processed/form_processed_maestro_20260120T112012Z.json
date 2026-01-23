@@ -1,0 +1,126 @@
+{
+  "run_id": "maestro_20260120T112012Z",
+  "timestamp": "20260120T112012Z",
+  "confidence_score": 40,
+  "raw_form": {
+    "company_name": "yoke",
+    "website_url": "https://yoke.com",
+    "contact_email": "yoke@gmail.com",
+    "industry": "healthcare",
+    "serving_customers": "yes",
+    "migration_timeline": "immediate",
+    "current_budget": "<1000",
+    "cloud_provider": "aws",
+    "auth_mode": "adc",
+    "iac_mode": "no_iac",
+    "k8s_mode": "custom",
+    "form_version": "2.0",
+    "submitted_at": "2026-01-20T15:33:21.736552",
+    "run_id": "maestro_20260120_153321",
+    "uploaded_files": [
+      "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+    ],
+    "uploaded_files_details": [
+      {
+        "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+        "saved_as": "20260120_153321_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+        "path": "docs/20260120_153321_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+        "size": 18267
+      }
+    ]
+  },
+  "discovery_config": {
+    "version": "2.0",
+    "run_id": "maestro_20260120T112012Z",
+    "timestamp": "20260120T112012Z",
+    "confidence": 40,
+    "confidence_factors": [
+      "company_name",
+      "cloud_provider",
+      "auth_mode",
+      "uploaded_docs"
+    ],
+    "source": "form_submission",
+    "discovery": {
+      "mode": "targeted",
+      "provider": "aws",
+      "auth": {
+        "mode": "adc",
+        "project": "",
+        "region": "us-central1",
+        "service_account_key": ""
+      },
+      "scope": {
+        "compute": true,
+        "storage": true,
+        "networking": true,
+        "databases": false,
+        "kubernetes": false,
+        "serverless": true,
+        "iam": true,
+        "repositories": false,
+        "websites": false,
+        "terraform": false
+      }
+    },
+    "repositories": {
+      "scan": false,
+      "application": [],
+      "infrastructure": [],
+      "helm": [],
+      "cicd": "",
+      "terraform": ""
+    },
+    "kubernetes": {
+      "enabled": false,
+      "mode": "custom",
+      "contexts": [],
+      "clusters": []
+    },
+    "databases": {
+      "enabled": false,
+      "types": []
+    },
+    "websites": {
+      "enabled": false,
+      "urls": []
+    },
+    "iac": {
+      "available": false,
+      "mode": "no_iac",
+      "terraform_repo": ""
+    },
+    "uploaded_docs": {
+      "available": true,
+      "files": [
+        {
+          "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+          "saved_as": "20260120_153321_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+          "path": "docs/20260120_153321_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+          "size": 18267
+        }
+      ],
+      "billing_reports": [
+        "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+      ],
+      "architecture_docs": []
+    },
+    "validation_required": {
+      "cloud_auth": true,
+      "kubernetes": false,
+      "databases": false,
+      "repositories": false,
+      "storage": true,
+      "terraform": false,
+      "only_docs": false
+    },
+    "metadata": {
+      "company_name": "yoke",
+      "form_version": "2.0",
+      "submitted_at": "2026-01-20T15:33:21.736552",
+      "migration_timeline": "immediate",
+      "downtime_tolerance": "",
+      "compliance": []
+    }
+  }
+}

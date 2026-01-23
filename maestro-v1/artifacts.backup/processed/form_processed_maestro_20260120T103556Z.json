@@ -1,0 +1,80 @@
+{
+  "run_id": "maestro_20260120T103556Z",
+  "timestamp": "20260120T103556Z",
+  "confidence_score": 60,
+  "company": {
+    "name": "yoke",
+    "website": "https://yoke.com",
+    "email": "yoke@gmail.com",
+    "industry": "healthcare",
+    "budget": "<1000",
+    "serving_customers": "yes",
+    "timeline": "immediate"
+  },
+  "infrastructure": {
+    "current": {
+      "hosting": "unknown",
+      "hosting_other": "",
+      "regions": [],
+      "customer_regions": []
+    },
+    "target": {
+      "provider": "aws",
+      "project": "",
+      "regions": [],
+      "auth_mode": "adc"
+    }
+  },
+  "repositories": {
+    "application": [],
+    "infrastructure": "",
+    "helm": "",
+    "cicd": ""
+  },
+  "containers": {
+    "registries": {
+      "gcr": "",
+      "ecr": "",
+      "acr": "",
+      "artifact": "",
+      "additional": []
+    }
+  },
+  "kubernetes": {
+    "mode": "custom",
+    "contexts": [],
+    "providers": []
+  },
+  "data": {
+    "databases": [],
+    "total_size_gb": 0,
+    "transfer_window": "unknown",
+    "billing": {
+      "uploaded": true,
+      "files": [
+        "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+      ],
+      "note": "Billing data files should be processed in Phase 02 for cost analysis"
+    }
+  },
+  "requirements": {
+    "compliance": [],
+    "special": [],
+    "cost_sensitivity": "balanced",
+    "reliability": "high",
+    "deployment_model": "balanced",
+    "scaling": "automatic",
+    "support": "shared",
+    "downtime_tolerance": "1_4_hours",
+    "change_freeze": "no",
+    "freeze_dates": "",
+    "additional": ""
+  },
+  "monitoring": {
+    "tools": []
+  },
+  "iac": {
+    "available": false,
+    "terraform_repo": ""
+  }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test File Upload</title>
+    <style>
+        body { font-family: monospace; padding: 40px; }
+        .container { max-width: 600px; margin: auto; }
+        .upload-box {
+            border: 2px dashed #4a5568;
+            padding: 40px;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .upload-box:hover { background: #e9ecef; }
+        #fileList { margin-top: 20px; }
+        .file-item {
+            background: #d4edda;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover { background: #218838; }
+        #result { margin-top: 20px; padding: 20px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test File Upload</h1>
+
+        <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" multiple style="display: none;" accept=".csv,.pdf,.xlsx,.json">
+            <p>📎 Click to select files</p>
+            <p style="font-size: 12px; color: #666;">CSV, PDF, Excel, JSON files</p>
+        </div>
+
+        <div id="fileList"></div>
+
+        <button onclick="testUpload()">Test Upload to Server</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let selectedFiles = [];
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            selectedFiles = Array.from(e.target.files);
+            displayFiles();
+        });
+
+        function displayFiles() {
+            const fileList = document.getElementById('fileList');
+            if (selectedFiles.length === 0) {
+                fileList.innerHTML = '';
+                return;
+            }
+
+            fileList.innerHTML = '<h3>Selected Files:</h3>';
+            selectedFiles.forEach(file => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.innerHTML = `
+                    📄 <strong>${file.name}</strong>
+                    (${(file.size / 1024).toFixed(1)} KB)
+                `;
+                fileList.appendChild(item);
+            });
+        }
+
+        function testUpload() {
+            if (selectedFiles.length === 0) {
+                showResult('Please select files first', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+
+            // Add some test form fields
+            formData.append('company_name', 'Test Company');
+            formData.append('cloud_provider', 'gcp');
+            formData.append('gcloud_project', 'test-project');
+
+            // Add files
+            selectedFiles.forEach(file => {
+                formData.append('uploaded_files', file);
+            });
+
+            showResult('Uploading files...', 'info');
+
+            fetch('http://localhost:8080/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Server error');
+                return response.text();
+            })
+            .then(html => {
+                showResult(`✅ Upload successful!<br>${html}`, 'success');
+            })
+            .catch(error => {
+                showResult(`❌ Upload failed: ${error.message}`, 'error');
+            });
+        }
+
+        function showResult(message, type) {
+            const result = document.getElementById('result');
+            result.className = type;
+            result.innerHTML = message;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "run_id": "maestro_20260120T102430Z",
+  "timestamp": "20260120T102430Z",
+  "confidence": 15,
+  "discovery": {
+    "mode": "full",
+    "provider": "gcp",
+    "auth": {
+      "mode": "adc",
+      "project": "qa-ezo",
+      "region": "us-central1"
+    },
+    "scope": {
+      "compute": true,
+      "storage": true,
+      "networking": true,
+      "databases": true,
+      "kubernetes": false,
+      "serverless": true,
+      "iam": true
+    }
+  },
+  "repositories": {
+    "scan": true,
+    "application": [],
+    "infrastructure": "",
+    "helm": "",
+    "cicd": ""
+  },
+  "containers": {
+    "registries": []
+  },
+  "kubernetes": {
+    "enabled": false,
+    "contexts": []
+  },
+  "data": {
+    "databases": [],
+    "total_size_gb": 0,
+    "migration_window": "unknown"
+  },
+  "requirements": {
+    "compliance": [],
+    "special": [],
+    "downtime_tolerance": "1_4_hours"
+  },
+  "output": {
+    "format": "json",
+    "artifacts_dir": "/Users/aamirraza/asr/maestro-v1/artifacts",
+    "reports": [
+      "inventory",
+      "access",
+      "dependencies",
+      "risks"
+    ]
+  }
+}

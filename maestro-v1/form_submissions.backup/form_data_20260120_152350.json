@@ -1,0 +1,19 @@
+{
+  "company_name": "Final Clean Test",
+  "cloud_provider": "gcp",
+  "gcloud_project": "qa-ezo",
+  "form_version": "2.0",
+  "submitted_at": "2026-01-20T15:23:50.001015",
+  "run_id": "maestro_20260120_152350",
+  "uploaded_files": [
+    "test-upload-file.csv"
+  ],
+  "uploaded_files_details": [
+    {
+      "original_name": "test-upload-file.csv",
+      "saved_as": "20260120_152350_test-upload-file.csv",
+      "path": "docs/20260120_152350_test-upload-file.csv",
+      "size": 113
+    }
+  ]
+}

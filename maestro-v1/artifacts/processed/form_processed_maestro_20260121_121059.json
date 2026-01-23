@@ -1,0 +1,130 @@
+{
+  "run_id": "maestro_20260121_121059",
+  "timestamp": "20260121T071327Z",
+  "confidence_score": 25,
+  "raw_form": {
+    "company_name": "Test Company",
+    "current_hosting": "gcp",
+    "auth_mode": "adc",
+    "iac_mode": "no_iac",
+    "k8s_mode": "custom",
+    "form_version": "2.0",
+    "submitted_at": "2026-01-21T12:10:59.646043",
+    "run_id": "maestro_20260121_121059",
+    "uploaded_files": [
+      "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+    ],
+    "uploaded_files_details": [
+      {
+        "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+        "saved_as": "20260121_121059_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+        "path": "docs/20260121_121059_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+        "size": 18267
+      }
+    ]
+  },
+  "discovery_config": {
+    "version": "2.0",
+    "run_id": "maestro_20260121_121059",
+    "timestamp": "20260121T071327Z",
+    "confidence": 25,
+    "confidence_factors": [
+      "company_name",
+      "auth_mode",
+      "uploaded_docs"
+    ],
+    "source": "form_submission",
+    "discovery": {
+      "mode": "targeted",
+      "provider": "unknown",
+      "auth": {
+        "mode": "adc",
+        "project": "",
+        "region": "us-central1",
+        "service_account_key": ""
+      },
+      "scope": {
+        "compute": false,
+        "storage": false,
+        "networking": false,
+        "databases": false,
+        "kubernetes": false,
+        "serverless": false,
+        "iam": false,
+        "repositories": false,
+        "websites": false,
+        "terraform": false,
+        "containers": false
+      }
+    },
+    "repositories": {
+      "scan": false,
+      "application": [],
+      "infrastructure": [],
+      "helm": [],
+      "cicd": "",
+      "terraform": ""
+    },
+    "kubernetes": {
+      "enabled": false,
+      "mode": "custom",
+      "contexts": [],
+      "clusters": []
+    },
+    "databases": {
+      "enabled": false,
+      "types": []
+    },
+    "websites": {
+      "enabled": false,
+      "urls": []
+    },
+    "containers": {
+      "enabled": false,
+      "registries": {
+        "gcr": "",
+        "ecr": "",
+        "acr": "",
+        "artifact": ""
+      }
+    },
+    "iac": {
+      "available": false,
+      "mode": "no_iac",
+      "terraform_repo": ""
+    },
+    "uploaded_docs": {
+      "available": true,
+      "files": [
+        {
+          "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+          "saved_as": "20260121_121059_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+          "path": "docs/20260121_121059_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+          "size": 18267
+        }
+      ],
+      "billing_reports": [
+        "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+      ],
+      "architecture_docs": []
+    },
+    "validation_required": {
+      "cloud_auth": false,
+      "kubernetes": false,
+      "databases": false,
+      "repositories": false,
+      "storage": false,
+      "terraform": false,
+      "containers": false,
+      "only_docs": false
+    },
+    "metadata": {
+      "company_name": "Test Company",
+      "form_version": "2.0",
+      "submitted_at": "2026-01-21T12:10:59.646043",
+      "migration_timeline": "",
+      "downtime_tolerance": "",
+      "compliance": []
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "company_name": "Test Company",
+  "current_hosting": "gcp",
+  "auth_mode": "adc",
+  "iac_mode": "no_iac",
+  "k8s_mode": "custom",
+  "form_version": "2.0",
+  "submitted_at": "2026-01-20T16:35:29.638392",
+  "run_id": "maestro_20260120_163529",
+  "uploaded_files": [
+    "001000000000082143_001_251294047_C55_117_1.pdf"
+  ],
+  "uploaded_files_details": [
+    {
+      "original_name": "001000000000082143_001_251294047_C55_117_1.pdf",
+      "saved_as": "20260120_163529_001000000000082143_001_251294047_C55_117_1.pdf",
+      "path": "docs/20260120_163529_001000000000082143_001_251294047_C55_117_1.pdf",
+      "size": 79982
+    }
+  ]
+}

@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestro Migration Assessment - Start Here</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Quick Start Card */
+        .quick-start {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .quick-start h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+
+        .website-input-group {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #667eea;
+        }
+
+        .website-input-group h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        .input-with-button {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-with-button input {
+            flex: 1;
+        }
+
+        .btn-detect {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-detect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.3);
+        }
+
+        .auto-detected {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .auto-detected.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detected-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #166534;
+        }
+
+        .detected-item .icon {
+            color: #22c55e;
+        }
+
+        /* Form Sections */
+        .form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+        .section-title h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .optional {
+            color: #9ca3af;
+            font-size: 0.85em;
+        }
+
+        .help-text {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Assessment Mode Toggle */
+        .mode-selector {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .mode-card {
+            flex: 1;
+            padding: 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mode-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .mode-card.selected {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-color: #667eea;
+        }
+
+        .mode-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .mode-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .confidence-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .confidence-low { background: #fef3c7; color: #92400e; }
+        .confidence-medium { background: #fed7aa; color: #9a3412; }
+        .confidence-high { background: #bbf7d0; color: #166534; }
+
+        /* Preferences Grid */
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .pref-card {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pref-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .pref-card.selected {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-color: #667eea;
+        }
+
+        .pref-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pref-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .pref-title {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .pref-description {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        /* Compliance Checkboxes */
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .compliance-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .compliance-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .compliance-item label {
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Scenario Selection */
+        .scenario-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .scenario-tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .scenario-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .scenario-content {
+            display: none;
+        }
+
+        .scenario-content.active {
+            display: block;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .scenario-card {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .scenario-card.selected {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-color: #667eea;
+        }
+
+        /* File Upload Areas */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .upload-card {
+            padding: 30px;
+            border: 2px dashed #667eea;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9ff;
+        }
+
+        .upload-card:hover {
+            background: #f0f2ff;
+            border-color: #764ba2;
+        }
+
+        .upload-card.has-files {
+            background: #f0fdf4;
+            border-color: #22c55e;
+            border-style: solid;
+        }
+
+        .upload-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .upload-title {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .upload-description {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .file-list {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        /* Summary Section */
+        .summary-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .summary-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .summary-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .confidence-meter {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .confidence-bar {
+            height: 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .summary-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .summary-value {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Loading and Messages */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(102,126,234,0.2);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+            display: block;
+        }
+
+        .message.error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            display: block;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Maestro Migration Assessment</h1>
+            <p>Start your cloud migration journey with confidence</p>
+        </div>
+
+        <!-- Quick Start Section -->
+        <div class="quick-start">
+            <h2>Let's Start with Your Business</h2>
+
+            <!-- Website Auto-Detection -->
+            <div class="website-input-group">
+                <h3>
+                    <span>🌐</span>
+                    <span>Enter Your Business Website</span>
+                </h3>
+                <p style="color: #666; margin-bottom: 20px;">We'll automatically detect your industry, compliance needs, and technology stack</p>
+
+                <div class="input-with-button">
+                    <input type="url" id="website_url" placeholder="https://www.your-company.com"
+                           value="https://www.example.com">
+                    <button class="btn-detect" onclick="detectFromWebsite()">
+                        <span id="detect-text">Auto Detect</span>
+                        <span id="detect-loading" class="hidden">Detecting...</span>
+                    </button>
+                </div>
+
+                <div id="auto-detected" class="auto-detected">
+                    <h4 style="color: #166534; margin-bottom: 15px;">✨ We detected:</h4>
+                    <div class="detected-item">
+                        <span class="icon">✓</span>
+                        <span>Industry: <strong id="detected-industry">E-commerce</strong></span>
+                    </div>
+                    <div class="detected-item">
+                        <span class="icon">✓</span>
+                        <span>Company Size: <strong id="detected-size">Medium (201-1000)</strong></span>
+                    </div>
+                    <div class="detected-item">
+                        <span class="icon">✓</span>
+                        <span>Compliance: <strong id="detected-compliance">PCI-DSS, GDPR</strong></span>
+                    </div>
+                    <div class="detected-item">
+                        <span class="icon">✓</span>
+                        <span>Technology: <strong id="detected-tech">Node.js, React, PostgreSQL</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basic Company Info -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Company Name <span class="required">*</span></label>
+                    <input type="text" id="company_name" placeholder="Acme Corporation">
+                </div>
+                <div class="form-group">
+                    <label>Customer Type</label>
+                    <select id="customer_type">
+                        <option value="quick_poc">Quick POC (Fast evaluation)</option>
+                        <option value="self_service">Self Service (SMB)</option>
+                        <option value="enterprise" selected>Enterprise</option>
+                        <option value="developer">Developer (Technical)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Estimated Monthly Cloud Spend</label>
+                    <select id="monthly_spend">
+                        <option value="<1k">Less than $1,000</option>
+                        <option value="1k-10k">$1,000 - $10,000</option>
+                        <option value="10k-50k" selected>$10,000 - $50,000</option>
+                        <option value="50k-100k">$50,000 - $100,000</option>
+                        <option value=">100k">More than $100,000</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assessment Mode Selection -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">📊</div>
+                <div class="section-title">
+                    <h3>Choose Assessment Mode</h3>
+                    <p>Select based on what information you can provide</p>
+                </div>
+            </div>
+
+            <div class="mode-selector">
+                <div class="mode-card" onclick="selectMode('offline')">
+                    <h4>📄 Offline Mode</h4>
+                    <p>Describe your environment or select scenarios</p>
+                    <span class="confidence-badge confidence-low">30-50% Confidence</span>
+                </div>
+                <div class="mode-card selected" onclick="selectMode('online')">
+                    <h4>🔐 Online Mode</h4>
+                    <p>Connect credentials for live scanning</p>
+                    <span class="confidence-badge confidence-high">85-95% Confidence</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Migration Details -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <div class="section-title">
+                    <h3>Migration Details</h3>
+                    <p>Tell us about your migration plans</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Current Cloud/Infrastructure</label>
+                    <select id="source_cloud">
+                        <option value="aws">AWS</option>
+                        <option value="azure">Azure</option>
+                        <option value="gcp">Google Cloud</option>
+                        <option value="on-premises">On-Premises</option>
+                        <option value="other">Other Cloud</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Target Cloud</label>
+                    <select id="target_cloud">
+                        <option value="gcp" selected>Google Cloud</option>
+                        <option value="aws">AWS</option>
+                        <option value="azure">Azure</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Current Region(s)</label>
+                    <input type="text" id="source_regions" placeholder="us-east-1, eu-west-1" value="us-east-1">
+                </div>
+                <div class="form-group">
+                    <label>Target Region(s)</label>
+                    <input type="text" id="target_regions" placeholder="us-central1, europe-west1" value="us-central1">
+                </div>
+                <div class="form-group">
+                    <label>Infrastructure Regions</label>
+                    <input type="text" id="infra_regions" placeholder="Where infrastructure is located">
+                </div>
+                <div class="form-group">
+                    <label>Customer Serving Regions</label>
+                    <input type="text" id="serving_regions" placeholder="Where customers are served from">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Are you currently serving production customers? <span class="required">*</span></label>
+                <select id="serving_customers">
+                    <option value="yes">Yes - Production traffic</option>
+                    <option value="no">No - Pre-production</option>
+                    <option value="partial">Partial - Some production</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">⚙️</div>
+                <div class="section-title">
+                    <h3>Migration Preferences</h3>
+                    <p>Select your priorities (choose multiple)</p>
+                </div>
+            </div>
+
+            <div class="preferences-grid">
+                <div class="pref-card" onclick="togglePreference(this, 'cost')">
+                    <div class="pref-icon">💰</div>
+                    <div class="pref-title">Cost Optimization</div>
+                    <div class="pref-description">Minimize expenses</div>
+                </div>
+                <div class="pref-card selected" onclick="togglePreference(this, 'security')">
+                    <div class="pref-icon">🔒</div>
+                    <div class="pref-title">Security First</div>
+                    <div class="pref-description">Maximum protection</div>
+                </div>
+                <div class="pref-card" onclick="togglePreference(this, 'performance')">
+                    <div class="pref-icon">⚡</div>
+                    <div class="pref-title">Performance</div>
+                    <div class="pref-description">Speed & efficiency</div>
+                </div>
+                <div class="pref-card selected" onclick="togglePreference(this, 'scalability')">
+                    <div class="pref-icon">📈</div>
+                    <div class="pref-title">Scalability</div>
+                    <div class="pref-description">Growth ready</div>
+                </div>
+                <div class="pref-card" onclick="togglePreference(this, 'simplicity')">
+                    <div class="pref-icon">🎯</div>
+                    <div class="pref-title">Simplicity</div>
+                    <div class="pref-description">Easy to manage</div>
+                </div>
+                <div class="pref-card" onclick="togglePreference(this, 'compliance')">
+                    <div class="pref-icon">✓</div>
+                    <div class="pref-title">Compliance</div>
+                    <div class="pref-description">Meet regulations</div>
+                </div>
+            </div>
+
+            <!-- Compliance Requirements -->
+            <div style="margin-top: 30px;">
+                <label style="display: block; margin-bottom: 15px; font-weight: 600; color: #333;">
+                    Compliance Requirements
+                </label>
+                <div class="compliance-grid">
+                    <div class="compliance-item">
+                        <input type="checkbox" id="soc2" checked>
+                        <label for="soc2">SOC 2</label>
+                    </div>
+                    <div class="compliance-item">
+                        <input type="checkbox" id="hipaa">
+                        <label for="hipaa">HIPAA</label>
+                    </div>
+                    <div class="compliance-item">
+                        <input type="checkbox" id="pci">
+                        <label for="pci">PCI-DSS</label>
+                    </div>
+                    <div class="compliance-item">
+                        <input type="checkbox" id="gdpr" checked>
+                        <label for="gdpr">GDPR</label>
+                    </div>
+                    <div class="compliance-item">
+                        <input type="checkbox" id="iso27001">
+                        <label for="iso27001">ISO 27001</label>
+                    </div>
+                    <div class="compliance-item">
+                        <input type="checkbox" id="fedramp">
+                        <label for="fedramp">FedRAMP</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Offline Mode: Scenarios -->
+        <div class="form-section" id="offline-section">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <div class="section-title">
+                    <h3>Migration Scenario</h3>
+                    <p>Select a template or describe your custom scenario</p>
+                </div>
+            </div>
+
+            <div class="scenario-tabs">
+                <button class="scenario-tab active" onclick="switchScenarioTab('templates')">Use Templates</button>
+                <button class="scenario-tab" onclick="switchScenarioTab('custom')">Custom Scenario</button>
+            </div>
+
+            <div id="templates-tab" class="scenario-content active">
+                <div class="scenario-grid">
+                    <div class="scenario-card" onclick="selectScenario(this, 'eks-to-gke')">
+                        <h4>EKS → GKE</h4>
+                        <p>Migrate from Amazon EKS to Google Kubernetes Engine</p>
+                    </div>
+                    <div class="scenario-card" onclick="selectScenario(this, 'lambda-to-functions')">
+                        <h4>Lambda → Cloud Functions</h4>
+                        <p>Migrate AWS Lambda to Google Cloud Functions</p>
+                    </div>
+                    <div class="scenario-card" onclick="selectScenario(this, 'ec2-to-gce')">
+                        <h4>EC2 → Compute Engine</h4>
+                        <p>Migrate Amazon EC2 to Google Compute Engine</p>
+                    </div>
+                    <div class="scenario-card" onclick="selectScenario(this, 'rds-to-cloudsql')">
+                        <h4>RDS → Cloud SQL</h4>
+                        <p>Migrate Amazon RDS to Google Cloud SQL</p>
+                    </div>
+                    <div class="scenario-card" onclick="selectScenario(this, 's3-to-gcs')">
+                        <h4>S3 → Cloud Storage</h4>
+                        <p>Migrate Amazon S3 to Google Cloud Storage</p>
+                    </div>
+                    <div class="scenario-card" onclick="selectScenario(this, 'full-stack')">
+                        <h4>Full Stack Migration</h4>
+                        <p>Complete application and infrastructure migration</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="custom-tab" class="scenario-content">
+                <div class="form-group">
+                    <label>Describe Your Migration Scenario <span class="required">*</span></label>
+                    <textarea id="custom_scenario" rows="4"
+                              placeholder="Example: We have a microservices application running on AWS ECS with RDS PostgreSQL. We want to migrate to GKE with Cloud SQL for better Kubernetes support and cost optimization..."></textarea>
+                </div>
+            </div>
+
+            <!-- Upload Section for Offline Mode -->
+            <div style="margin-top: 30px;">
+                <h4 style="margin-bottom: 20px; color: #333;">Optional: Upload Supporting Documents</h4>
+                <div class="upload-grid">
+                    <div class="upload-card" onclick="document.getElementById('billing-files').click()">
+                        <input type="file" id="billing-files" multiple accept=".csv,.xlsx,.pdf" hidden>
+                        <div class="upload-icon">💰</div>
+                        <div class="upload-title">Cloud Bills</div>
+                        <div class="upload-description">CSV, Excel, PDF</div>
+                        <div class="file-list" id="billing-list"></div>
+                    </div>
+                    <div class="upload-card" onclick="document.getElementById('architecture-files').click()">
+                        <input type="file" id="architecture-files" multiple accept="image/*,.pdf" hidden>
+                        <div class="upload-icon">📐</div>
+                        <div class="upload-title">Architecture Diagrams</div>
+                        <div class="upload-description">Images or PDFs</div>
+                        <div class="file-list" id="architecture-list"></div>
+                    </div>
+                    <div class="upload-card" onclick="document.getElementById('screenshot-files').click()">
+                        <input type="file" id="screenshot-files" multiple accept="image/*" hidden>
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-title">Console Screenshots</div>
+                        <div class="upload-description">EC2, RDS, etc.</div>
+                        <div class="file-list" id="screenshot-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Online Mode: Credentials & Repos -->
+        <div class="form-section hidden" id="online-section">
+            <div class="section-header">
+                <div class="section-icon">🔐</div>
+                <div class="section-title">
+                    <h3>Connect Your Infrastructure</h3>
+                    <p>Provide access for live scanning and analysis</p>
+                </div>
+            </div>
+
+            <!-- Repository URLs -->
+            <div style="margin-bottom: 30px;">
+                <h4 style="margin-bottom: 20px; color: #333;">📦 Code Repositories</h4>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Terraform/IaC Repository <span class="optional">(+15% confidence)</span></label>
+                        <input type="url" id="terraform_repo" placeholder="https://github.com/company/infrastructure">
+                    </div>
+                    <div class="form-group">
+                        <label>Application Repository <span class="optional">(+10% confidence)</span></label>
+                        <input type="url" id="app_repo" placeholder="https://github.com/company/application">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud Credentials -->
+            <div style="margin-bottom: 30px;">
+                <h4 style="margin-bottom: 20px; color: #333;">☁️ Cloud Access</h4>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Cloud Provider</label>
+                        <select id="cloud_provider">
+                            <option value="aws">AWS</option>
+                            <option value="gcp">Google Cloud</option>
+                            <option value="azure">Azure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Access Token / Service Account</label>
+                        <input type="password" id="cloud_token" placeholder="Paste token or upload service account">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container Registries -->
+            <div style="margin-bottom: 30px;">
+                <h4 style="margin-bottom: 20px; color: #333;">🐳 Container Registries</h4>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Registry URL <span class="optional">(+10% confidence)</span></label>
+                        <input type="text" id="registry_url" placeholder="gcr.io/project or 123456.dkr.ecr.region.amazonaws.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Kubernetes Context <span class="optional">(+15% confidence)</span></label>
+                        <input type="text" id="k8s_context" placeholder="my-cluster-context">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secret Managers -->
+            <div>
+                <h4 style="margin-bottom: 20px; color: #333;">🔑 Secret Management</h4>
+                <div class="form-group">
+                    <label>Secret Manager Access <span class="optional">(Optional)</span></label>
+                    <select id="secret_manager">
+                        <option value="">None</option>
+                        <option value="aws-secrets">AWS Secrets Manager</option>
+                        <option value="gcp-secret">Google Secret Manager</option>
+                        <option value="azure-vault">Azure Key Vault</option>
+                        <option value="hashicorp-vault">HashiCorp Vault</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Needs -->
+        <div class="form-section">
+            <div class="section-header">
+                <div class="section-icon">💡</div>
+                <div class="section-title">
+                    <h3>Special Requirements</h3>
+                    <p>Any specific needs or constraints?</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Special Needs or Constraints</label>
+                <textarea id="special_needs" rows="3"
+                          placeholder="Example: Zero downtime migration required, must maintain data residency in EU, need 24/7 support during migration..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Notes</label>
+                <textarea id="additional_notes" rows="3"
+                          placeholder="Any other information that might help us provide better assessment..."></textarea>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="summary-section">
+            <div class="summary-header">
+                <h2>Assessment Summary</h2>
+                <p>Review your configuration before generating the assessment</p>
+            </div>
+
+            <div class="confidence-meter">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>Confidence Level</span>
+                    <span id="confidence-percent">45%</span>
+                </div>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" id="confidence-fill" style="width: 45%;">
+                        45%
+                    </div>
+                </div>
+                <p style="margin-top: 10px; opacity: 0.9;" id="confidence-message">
+                    Good baseline assessment. Add credentials for higher confidence.
+                </p>
+            </div>
+
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Assessment Mode</div>
+                    <div class="summary-value" id="summary-mode">Offline</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Customer Type</div>
+                    <div class="summary-value" id="summary-customer">Enterprise</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Migration Path</div>
+                    <div class="summary-value" id="summary-path">AWS → GCP</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Data Sources</div>
+                    <div class="summary-value" id="summary-sources">3</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="saveProgress()">
+                    💾 Save Progress
+                </button>
+                <button class="btn btn-primary" onclick="generateAssessment()">
+                    🚀 Start Assessment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let assessmentData = {
+            mode: 'offline',
+            preferences: ['security', 'scalability'],
+            scenario: '',
+            files: {},
+            confidence: 45
+        };
+
+        // Auto-detect from website
+        function detectFromWebsite() {
+            const url = document.getElementById('website_url').value;
+            if (!url) {
+                alert('Please enter a website URL');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('detect-text').classList.add('hidden');
+            document.getElementById('detect-loading').classList.remove('hidden');
+
+            // Simulate detection (in real app, would call an API)
+            setTimeout(() => {
+                // Mock detection results
+                const detections = {
+                    'example.com': {
+                        industry: 'E-commerce',
+                        size: 'Medium (201-1000)',
+                        compliance: 'PCI-DSS, GDPR',
+                        tech: 'Node.js, React, PostgreSQL'
+                    },
+                    'default': {
+                        industry: 'Technology',
+                        size: 'Small (51-200)',
+                        compliance: 'SOC 2',
+                        tech: 'Python, Vue.js, MySQL'
+                    }
+                };
+
+                const domain = new URL(url).hostname.replace('www.', '');
+                const detected = detections[domain] || detections['default'];
+
+                // Update UI
+                document.getElementById('detected-industry').textContent = detected.industry;
+                document.getElementById('detected-size').textContent = detected.size;
+                document.getElementById('detected-compliance').textContent = detected.compliance;
+                document.getElementById('detected-tech').textContent = detected.tech;
+
+                // Show results
+                document.getElementById('auto-detected').classList.add('active');
+
+                // Reset button
+                document.getElementById('detect-text').classList.remove('hidden');
+                document.getElementById('detect-loading').classList.add('hidden');
+
+                // Update confidence
+                updateConfidence();
+            }, 1500);
+        }
+
+        // Mode selection
+        function selectMode(mode) {
+            assessmentData.mode = mode;
+
+            // Update UI
+            document.querySelectorAll('.mode-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+
+            // Show/hide sections
+            if (mode === 'offline') {
+                document.getElementById('offline-section').classList.remove('hidden');
+                document.getElementById('online-section').classList.add('hidden');
+            } else {
+                document.getElementById('offline-section').classList.add('hidden');
+                document.getElementById('online-section').classList.remove('hidden');
+            }
+
+            updateConfidence();
+        }
+
+        // Preference toggle
+        function togglePreference(element, pref) {
+            element.classList.toggle('selected');
+
+            const index = assessmentData.preferences.indexOf(pref);
+            if (index > -1) {
+                assessmentData.preferences.splice(index, 1);
+            } else {
+                assessmentData.preferences.push(pref);
+            }
+        }
+
+        // Scenario tabs
+        function switchScenarioTab(tab) {
+            document.querySelectorAll('.scenario-tab').forEach(t => {
+                t.classList.remove('active');
+            });
+            document.querySelectorAll('.scenario-content').forEach(c => {
+                c.classList.remove('active');
+            });
+
+            event.currentTarget.classList.add('active');
+            document.getElementById(`${tab}-tab`).classList.add('active');
+        }
+
+        // Scenario selection
+        function selectScenario(element, scenario) {
+            document.querySelectorAll('.scenario-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            assessmentData.scenario = scenario;
+            updateConfidence();
+        }
+
+        // Update confidence calculation
+        function updateConfidence() {
+            let confidence = 30; // Base
+
+            // Website detection
+            if (document.getElementById('auto-detected').classList.contains('active')) {
+                confidence += 10;
+            }
+
+            // Mode bonus
+            if (assessmentData.mode === 'online') {
+                confidence += 40;
+
+                // Check for credentials
+                if (document.getElementById('cloud_token').value) confidence += 15;
+                if (document.getElementById('terraform_repo').value) confidence += 10;
+                if (document.getElementById('registry_url').value) confidence += 5;
+            }
+
+            // Scenario selected
+            if (assessmentData.scenario) confidence += 10;
+
+            // Files uploaded
+            const fileTypes = ['billing', 'architecture', 'screenshot'];
+            fileTypes.forEach(type => {
+                if (assessmentData.files[type] && assessmentData.files[type].length > 0) {
+                    confidence += 5;
+                }
+            });
+
+            // Cap at 95
+            confidence = Math.min(confidence, 95);
+            assessmentData.confidence = confidence;
+
+            // Update UI
+            document.getElementById('confidence-percent').textContent = confidence + '%';
+            document.getElementById('confidence-fill').style.width = confidence + '%';
+            document.getElementById('confidence-fill').textContent = confidence + '%';
+
+            // Update message
+            let message = '';
+            if (confidence < 40) {
+                message = 'Basic assessment. Add more data for better accuracy.';
+            } else if (confidence < 60) {
+                message = 'Good baseline assessment. Consider adding credentials.';
+            } else if (confidence < 80) {
+                message = 'Strong assessment. Add more sources for maximum confidence.';
+            } else {
+                message = 'Excellent! High-confidence assessment ready.';
+            }
+            document.getElementById('confidence-message').textContent = message;
+
+            // Update summary
+            updateSummary();
+        }
+
+        // Update summary
+        function updateSummary() {
+            document.getElementById('summary-mode').textContent =
+                assessmentData.mode === 'offline' ? 'Offline' : 'Online';
+
+            document.getElementById('summary-customer').textContent =
+                document.getElementById('customer_type').options[document.getElementById('customer_type').selectedIndex].text;
+
+            const source = document.getElementById('source_cloud').value.toUpperCase();
+            const target = document.getElementById('target_cloud').value.toUpperCase();
+            document.getElementById('summary-path').textContent = `${source} → ${target}`;
+
+            // Count data sources
+            let sources = 0;
+            if (document.getElementById('website_url').value) sources++;
+            if (assessmentData.scenario) sources++;
+            if (document.getElementById('terraform_repo').value) sources++;
+            if (document.getElementById('cloud_token').value) sources++;
+            Object.keys(assessmentData.files).forEach(key => {
+                if (assessmentData.files[key] && assessmentData.files[key].length > 0) sources++;
+            });
+            document.getElementById('summary-sources').textContent = sources;
+        }
+
+        // File handling
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const type = this.id.replace('-files', '');
+                const files = Array.from(this.files);
+                assessmentData.files[type] = files;
+
+                // Update UI
+                const listEl = document.getElementById(`${type}-list`);
+                if (listEl) {
+                    listEl.innerHTML = '';
+                    files.forEach(file => {
+                        const item = document.createElement('div');
+                        item.className = 'file-item';
+                        item.innerHTML = `
+                            <span>${file.name}</span>
+                            <span>${(file.size / 1024).toFixed(1)} KB</span>
+                        `;
+                        listEl.appendChild(item);
+                    });
+                }
+
+                // Update card appearance
+                const card = this.closest('.upload-card');
+                if (card && files.length > 0) {
+                    card.classList.add('has-files');
+                }
+
+                updateConfidence();
+            });
+        });
+
+        // Save progress
+        function saveProgress() {
+            const formData = {
+                website_url: document.getElementById('website_url').value,
+                company_name: document.getElementById('company_name').value,
+                customer_type: document.getElementById('customer_type').value,
+                source_cloud: document.getElementById('source_cloud').value,
+                target_cloud: document.getElementById('target_cloud').value,
+                assessmentData: assessmentData,
+                timestamp: new Date().toISOString()
+            };
+
+            localStorage.setItem('maestro-assessment', JSON.stringify(formData));
+            alert('✅ Progress saved! You can continue later.');
+        }
+
+        // Generate assessment
+        function generateAssessment() {
+            if (!document.getElementById('company_name').value) {
+                alert('Please enter your company name');
+                return;
+            }
+
+            // Build command
+            const customerType = document.getElementById('customer_type').value;
+            const mode = assessmentData.mode;
+
+            let command = `./00/maestro-input-v2.sh --customer-type ${customerType}`;
+
+            if (document.getElementById('terraform_repo').value) {
+                command += ` ${document.getElementById('terraform_repo').value}`;
+            }
+
+            if (document.getElementById('custom_scenario').value) {
+                command += ` --use-case "${document.getElementById('custom_scenario').value.substring(0, 50)}..."`;
+            }
+
+            // Show result
+            alert(`Assessment Configuration Complete!\n\nConfidence Level: ${assessmentData.confidence}%\nMode: ${mode}\n\nGenerated Command:\n${command}\n\nClick OK to copy command to clipboard.`);
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(command);
+
+            // Save everything
+            saveProgress();
+        }
+
+        // Load saved data on page load
+        window.onload = function() {
+            const saved = localStorage.getItem('maestro-assessment');
+            if (saved) {
+                const data = JSON.parse(saved);
+                // Restore form fields
+                Object.keys(data).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element && element.tagName !== 'DIV') {
+                        element.value = data[key];
+                    }
+                });
+
+                // Restore assessment data
+                if (data.assessmentData) {
+                    assessmentData = data.assessmentData;
+                    // Update UI based on saved state
+                    if (assessmentData.mode === 'online') {
+                        selectMode('online');
+                    }
+                }
+            }
+
+            // Initial update
+            updateConfidence();
+        };
+    </script>
+</body>
+</html>

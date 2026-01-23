@@ -1,0 +1,28 @@
+{
+  "run_id": "maestro_20260120T102430Z",
+  "timestamp": "20260120T102430Z",
+  "phase": "00-input",
+  "status": "completed",
+  "confidence_score": 15,
+  "provider": "gcp",
+  "auth_mode": "adc",
+  "artifacts_created": [
+    "raw/form_data_maestro_20260120T102430Z.json",
+    "processed/form_processed_maestro_20260120T102430Z.json",
+    "processed/discovery_config_maestro_20260120T102430Z.json",
+    "processed/execute_phase_01_maestro_20260120T102430Z.sh",
+    "metadata/run_metadata_maestro_20260120T102430Z.json"
+  ],
+  "next_steps": [
+    "Review the discovery configuration",
+    "Execute Phase 01: ./artifacts/processed/execute_phase_01_maestro_20260120T102430Z.sh",
+    "Or run directly: ./01-discover/run-discovery.sh --config ./artifacts/processed/discovery_config_maestro_20260120T102430Z.json --run-id maestro_20260120T102430Z"
+  ],
+  "estimated_discovery_time": "5-10 minutes",
+  "recommendations": [
+    "Low confidence score - consider providing more information",
+    "Add repository URLs for better code analysis",
+    "Specify Kubernetes contexts if using K8s",
+    "Ensure gcloud CLI is authenticated: gcloud auth application-default login"
+  ]
+}

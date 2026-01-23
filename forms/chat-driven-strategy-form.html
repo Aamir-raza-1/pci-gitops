@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat-Driven Migration Strategy Form</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 20s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .phase-step.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .phase-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .phase-step.active .phase-number {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .form-content {
+            padding: 3rem;
+        }
+
+        .phase-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: linear-gradient(to bottom, #f8f9fa, #fff);
+            border-radius: 16px;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+
+        .phase-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .phase-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .phase-emoji {
+            font-size: 2rem;
+        }
+
+        .chat-bubble {
+            background: #f1f3f5;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            max-width: 80%;
+        }
+
+        .chat-bubble.ai {
+            background: linear-gradient(135deg, #e7f3ff, #f0f8ff);
+            margin-left: 0;
+        }
+
+        .chat-bubble.user {
+            background: #e8f5e9;
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .chat-label {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .preference-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .preference-card {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .preference-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .preference-card.selected {
+            background: linear-gradient(135deg, #e7f3ff, #f0f8ff);
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .preference-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .preference-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .preference-options {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .option-pill {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .option-pill:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+        }
+
+        .option-pill.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #495057;
+            font-size: 1rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .deliverable-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deliverable-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #28a745, #20c997);
+        }
+
+        .deliverable-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .deliverable-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .deliverable-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .deliverable-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            justify-content: center;
+        }
+
+        button {
+            padding: 1.25rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102,126,234,0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108,117,125,0.3);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+
+        .status-draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-planning {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-executing {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-complete {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .info-box {
+            background: linear-gradient(to right, #d1ecf1, #e7f3ff);
+            border-left: 4px solid #0c5460;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: linear-gradient(to right, #fff3cd, #ffeeba);
+            border-left: 4px solid #856404;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .preference-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-indicator {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .chat-bubble {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI Chat-Driven Migration Strategy</h1>
+            <p>Experience our conversational AI-guided cloud migration journey with intelligent recommendations and automated document generation</p>
+
+            <div class="phase-indicator">
+                <div class="phase-step active">
+                    <div class="phase-number">1</div>
+                    <span>Discovery</span>
+                </div>
+                <div class="phase-step">
+                    <div class="phase-number">2</div>
+                    <span>Planning</span>
+                </div>
+                <div class="phase-step">
+                    <div class="phase-number">3</div>
+                    <span>Approvals</span>
+                </div>
+                <div class="phase-step">
+                    <div class="phase-number">4</div>
+                    <span>Execution</span>
+                </div>
+                <div class="phase-step">
+                    <div class="phase-number">5</div>
+                    <span>Validation</span>
+                </div>
+                <div class="phase-step">
+                    <div class="phase-number">6</div>
+                    <span>Closure</span>
+                </div>
+            </div>
+        </div>
+
+        <form class="form-content" id="chatStrategyForm">
+
+            <!-- Phase 1: Discovery -->
+            <div class="phase-section">
+                <h2 class="phase-title">
+                    <span class="phase-emoji">✅</span>
+                    Step 1: Discovery (Draft Phase)
+                    <span class="status-badge status-draft">DRAFT</span>
+                </h2>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI Super Agent:</div>
+                    <p><strong>Welcome!</strong> Let's start planning your cloud migration. First, tell me about your current environment. What are your key applications, teams, and cloud experience?</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="environment_description">👉 Your Environment Description:</label>
+                    <textarea id="environment_description" name="environment_description" required>We have Lambda serverless and ECS applications with a team of 3 people with junior level experience. We run microservices for e-commerce with PostgreSQL databases and need high availability.</textarea>
+                </div>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI:</div>
+                    <p>Got it! Please select your <strong>migration preference package:</strong></p>
+                </div>
+
+                <div class="preference-grid">
+                    <div class="preference-card">
+                        <div class="preference-icon">💸</div>
+                        <div class="preference-title">Cost Optimization</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="cost_pref" value="cheap" hidden> Cheap
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="cost_pref" value="cheaper" hidden checked> Cheaper
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="cost_pref" value="cheapest" hidden> Cheapest
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="preference-card">
+                        <div class="preference-icon">🛡️</div>
+                        <div class="preference-title">Reliability</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="reliability_pref" value="reliable" hidden> Reliable
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="reliability_pref" value="more_reliable" hidden checked> More Reliable
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="reliability_pref" value="most_reliable" hidden> Most Reliable
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="preference-card">
+                        <div class="preference-icon">☁️</div>
+                        <div class="preference-title">Deployment Model</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="deployment_pref" value="basic_hybrid" hidden> Basic Hybrid
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="deployment_pref" value="balanced_hybrid" hidden checked> Balanced Hybrid
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="deployment_pref" value="enterprise_hybrid" hidden> Enterprise Hybrid
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI:</div>
+                    <p>Understood. Do you need to add any <strong>custom preferences?</strong></p>
+                </div>
+
+                <div class="preference-grid">
+                    <div class="preference-card">
+                        <div class="preference-icon">🔒</div>
+                        <div class="preference-title">Security</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="security_pref" value="basic" hidden> Basic
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="security_pref" value="hardened" hidden> Hardened
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="security_pref" value="maximum" hidden checked> Maximum
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="preference-card">
+                        <div class="preference-icon">⚙️</div>
+                        <div class="preference-title">Scaling</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="scaling_pref" value="manual" hidden> Manual
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="scaling_pref" value="auto" hidden checked> Auto
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="scaling_pref" value="predictive" hidden> Predictive
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="preference-card">
+                        <div class="preference-icon">🖥️</div>
+                        <div class="preference-title">Support</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="support_pref" value="self_service" hidden> Self-Service
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="support_pref" value="shared" hidden> Shared
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="support_pref" value="dedicated" hidden checked> Dedicated
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="preference-card">
+                        <div class="preference-icon">⏱️</div>
+                        <div class="preference-title">Downtime Tolerance</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="downtime_pref" value="4-8h" hidden> 4-8h
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="downtime_pref" value="1-4h" hidden> 1-4h
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="downtime_pref" value="near_zero" hidden checked> Near Zero
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="preference-card">
+                        <div class="preference-icon">✅</div>
+                        <div class="preference-title">Compliance</div>
+                        <div class="preference-options">
+                            <label class="option-pill">
+                                <input type="radio" name="compliance_pref" value="minimal" hidden> Minimal
+                            </label>
+                            <label class="option-pill">
+                                <input type="radio" name="compliance_pref" value="standard" hidden> Standard
+                            </label>
+                            <label class="option-pill selected">
+                                <input type="radio" name="compliance_pref" value="strict" hidden checked> Strict
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3>📂 Your Draft Outputs (Auto-Generated):</h3>
+                    <div class="deliverables-grid" style="margin-top: 1rem;">
+                        <div class="deliverable-card">
+                            <div class="deliverable-icon">✅</div>
+                            <div class="deliverable-title">Business Use Case</div>
+                            <div class="deliverable-description">AI-generated business rationale</div>
+                        </div>
+                        <div class="deliverable-card">
+                            <div class="deliverable-icon">📄</div>
+                            <div class="deliverable-title">Draft SoW</div>
+                            <div class="deliverable-description">Statement of Work template</div>
+                        </div>
+                        <div class="deliverable-card">
+                            <div class="deliverable-icon">🏗️</div>
+                            <div class="deliverable-title">Architecture Diagram</div>
+                            <div class="deliverable-description">Cloud architecture design</div>
+                        </div>
+                        <div class="deliverable-card">
+                            <div class="deliverable-icon">🌐</div>
+                            <div class="deliverable-title">Network Diagram</div>
+                            <div class="deliverable-description">Network topology layout</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: Planning -->
+            <div class="phase-section">
+                <h2 class="phase-title">
+                    <span class="phase-emoji">✅</span>
+                    Step 2: Planning (Draft Phase)
+                    <span class="status-badge status-planning">PLANNING</span>
+                </h2>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI:</div>
+                    <p>Based on your preferences and environment, I recommend a <strong>Replatforming strategy</strong> with minimal downtime and improved reliability.</p>
+                    <p>I've prepared a draft migration plan, TCO estimate, and Migration Level Objects (MLOs) for your review.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="migration_strategy">Recommended Migration Strategy:</label>
+                    <select id="migration_strategy" name="migration_strategy">
+                        <option value="rehost">Rehost (Lift and Shift)</option>
+                        <option value="replatform" selected>Replatform (Lift and Optimize)</option>
+                        <option value="refactor">Refactor (Move and Improve)</option>
+                        <option value="rearchitect">Re-architect (Cloud Native)</option>
+                        <option value="rebuild">Rebuild (From Scratch)</option>
+                        <option value="repurchase">Repurchase (SaaS)</option>
+                    </select>
+                </div>
+
+                <div class="info-box">
+                    <h3>📄 Planning Documents Ready:</h3>
+                    <ul style="margin-top: 1rem; list-style: none; padding: 0;">
+                        <li>📄 <strong>Draft Migration Plan</strong> - Step-by-step migration roadmap</li>
+                        <li>📊 <strong>Draft TCO Report</strong> - Total cost of ownership analysis</li>
+                        <li>📂 <strong>Draft Migration Level Objects</strong> - Success criteria and SLOs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Phase 3: Approvals -->
+            <div class="phase-section">
+                <h2 class="phase-title">
+                    <span class="phase-emoji">✅</span>
+                    Step 3: Approvals (Propose Phase)
+                    <span class="status-badge status-approved">READY FOR APPROVAL</span>
+                </h2>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI:</div>
+                    <p>I've locked your migration plan. Please review and approve the following:</p>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="approve_premigration" checked>
+                        <strong>Pre-Migration Approval</strong> (Overall Plan)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="approve_mlo" checked>
+                        <strong>MLO Approval</strong> (Detailed Migration Objects)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="approve_tco" checked>
+                        <strong>TCO & Cost Structure</strong> (Financial Approval)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="approval_notes">Approval Notes:</label>
+                    <textarea id="approval_notes" name="approval_notes" placeholder="Any conditions or notes for approval...">Approved with condition to maintain 99.99% uptime during migration window.</textarea>
+                </div>
+            </div>
+
+            <!-- Phase 4: Execution -->
+            <div class="phase-section">
+                <h2 class="phase-title">
+                    <span class="phase-emoji">✅</span>
+                    Step 4: Migration Execution (Publish Phase)
+                    <span class="status-badge status-executing">IN PROGRESS</span>
+                </h2>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI:</div>
+                    <p>Migration has started. Here's the real-time status:</p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">✅</div>
+                        <div class="timeline-content">
+                            <strong>Cloud Infrastructure Provisioned</strong>
+                            <p style="color: #666; font-size: 0.9rem;">VPCs, subnets, and core infrastructure deployed</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">🔄</div>
+                        <div class="timeline-content">
+                            <strong>Service Migrations In Progress</strong>
+                            <p style="color: #666; font-size: 0.9rem;">Migrating Lambda functions and ECS services</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">📊</div>
+                        <div class="timeline-content">
+                            <strong>Live Progress: 75% Complete</strong>
+                            <p style="color: #666; font-size: 0.9rem;">Estimated completion in 2 hours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="approve_realtime" checked>
+                        <strong>Approve real-time AI migration adjustments if required</strong>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Phase 5: Validation -->
+            <div class="phase-section">
+                <h2 class="phase-title">
+                    <span class="phase-emoji">✅</span>
+                    Step 5: Validation Phase
+                    <span class="status-badge status-complete">VALIDATION COMPLETE</span>
+                </h2>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI:</div>
+                    <p>Migration Completed. Here are the validation results:</p>
+                </div>
+
+                <div class="deliverables-grid">
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">⚡</div>
+                        <div class="deliverable-title">Performance</div>
+                        <div class="deliverable-description">Improved by 40%</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">🔒</div>
+                        <div class="deliverable-title">Security</div>
+                        <div class="deliverable-description">Maximum Compliance Met</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">⏱️</div>
+                        <div class="deliverable-title">Downtime</div>
+                        <div class="deliverable-description">1 Hour Total</div>
+                    </div>
+                    <div class="deliverable-card">
+                        <div class="deliverable-icon">💰</div>
+                        <div class="deliverable-title">Cost Savings</div>
+                        <div class="deliverable-description">35% Monthly Reduction</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="validation_approval">Validation Approval:</label>
+                    <select id="validation_approval" name="validation_approval">
+                        <option value="approved" selected>Approved - All criteria met</option>
+                        <option value="conditional">Conditional - Minor issues to address</option>
+                        <option value="rejected">Rejected - Major issues found</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Phase 6: Closure -->
+            <div class="phase-section">
+                <h2 class="phase-title">
+                    <span class="phase-emoji">✅</span>
+                    Step 6: Closure Phase
+                    <span class="status-badge status-complete">COMPLETE</span>
+                </h2>
+
+                <div class="chat-bubble ai">
+                    <div class="chat-label">💬 AI:</div>
+                    <p>Your migration is now officially complete. Here's your <strong>Final Migration Package:</strong></p>
+                </div>
+
+                <div class="warning-box">
+                    <h3>🎁 Your Final Deliverables Package:</h3>
+                    <table style="width: 100%; margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left; padding: 0.5rem;">Document</th>
+                                <th style="text-align: left; padding: 0.5rem;">Description</th>
+                                <th style="text-align: left; padding: 0.5rem;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem;">📄 Final SoW</td>
+                                <td style="padding: 0.5rem;">Signed migration agreement</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">📚 Business Use Case</td>
+                                <td style="padding: 0.5rem;">Full migration rationale</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">🗺️ Cloud Architecture Diagram</td>
+                                <td style="padding: 0.5rem;">Final cloud design</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">🌐 Network Diagram</td>
+                                <td style="padding: 0.5rem;">Final network layout</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">🧩 Application Topology</td>
+                                <td style="padding: 0.5rem;">Service dependency map</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">✅ Migration Fit Report</td>
+                                <td style="padding: 0.5rem;">Strategy validation</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">💸 TCO & Cost Report</td>
+                                <td style="padding: 0.5rem;">Total cost overview</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">📊 Performance Validation</td>
+                                <td style="padding: 0.5rem;">Post-migration verification</td>
+                                <td style="padding: 0.5rem;">✅ Ready</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem;">📈 Active SLO Dashboard</td>
+                                <td style="padding: 0.5rem;">Ongoing monitoring</td>
+                                <td style="padding: 0.5rem;">🔄 Active</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="enable_monitoring" checked>
+                        <strong>Enable SLO Monitoring</strong> - Track ongoing performance and receive optimization alerts
+                    </label>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="phase-section">
+                <h2 class="phase-title">
+                    <span class="phase-emoji">📞</span>
+                    Contact Information
+                </h2>
+
+                <div class="form-group">
+                    <label for="company_name">Company Name:</label>
+                    <input type="text" id="company_name" name="company_name" value="TechCorp Solutions" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_name">Primary Contact:</label>
+                    <input type="text" id="contact_name" name="contact_name" value="John Smith" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_email">Email:</label>
+                    <input type="email" id="contact_email" name="contact_email" value="john.smith@techcorp.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="team_size">Team Size:</label>
+                    <input type="text" id="team_size" name="team_size" value="3 engineers (junior level)" required>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-secondary" onclick="saveChatDraft()">💾 Save Progress</button>
+                <button type="submit" class="btn-primary">🚀 Generate Migration Package</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        // Option pill selection
+        document.querySelectorAll('.option-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                const input = this.querySelector('input');
+                const name = input.name;
+
+                // Clear other selections in same group
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.parentElement.classList.remove('selected');
+                });
+
+                // Select this option
+                input.checked = true;
+                this.classList.add('selected');
+
+                // Update preference card selection
+                this.closest('.preference-card').classList.add('selected');
+            });
+        });
+
+        // Save draft functionality
+        function saveChatDraft() {
+            const formData = new FormData(document.getElementById('chatStrategyForm'));
+            const data = Object.fromEntries(formData.entries());
+            localStorage.setItem('chatStrategyDraft', JSON.stringify(data));
+            alert('✅ Progress saved! Your conversation and preferences have been stored.');
+        }
+
+        // Load draft on page load
+        window.addEventListener('load', function() {
+            const draft = localStorage.getItem('chatStrategyDraft');
+            if (draft) {
+                const data = JSON.parse(draft);
+                const form = document.getElementById('chatStrategyForm');
+
+                Object.keys(data).forEach(key => {
+                    const element = form.elements[key];
+                    if (element) {
+                        if (element.type === 'checkbox' || element.type === 'radio') {
+                            element.checked = true;
+                            if (element.type === 'radio') {
+                                element.parentElement?.classList.add('selected');
+                            }
+                        } else {
+                            element.value = data[key];
+                        }
+                    }
+                });
+            }
+        });
+
+        // Form submission
+        document.getElementById('chatStrategyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            // Show success message
+            alert(`🎉 Migration Package Generated Successfully!
+
+Your AI-driven migration strategy has been created with:
+• Migration Strategy: ${data.migration_strategy || 'Replatform'}
+• Security Level: ${data.security_pref || 'Maximum'}
+• Downtime: ${data.downtime_pref || 'Near Zero'}
+• Support: ${data.support_pref || 'Dedicated'}
+
+All documents and dashboards are now ready for download.
+The Maestro Input Engine will process this data for final assessment.`);
+
+            console.log('Migration Strategy Data:', data);
+        });
+
+        // Simulate phase progression
+        let currentPhase = 1;
+        function progressToNextPhase() {
+            if (currentPhase < 6) {
+                currentPhase++;
+                document.querySelectorAll('.phase-step').forEach((step, index) => {
+                    if (index < currentPhase) {
+                        step.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Auto-progress demo (optional)
+        // setInterval(progressToNextPhase, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "company_name": "Test Company",
+  "current_hosting": "gcp",
+  "auth_mode": "adc",
+  "iac_mode": "no_iac",
+  "k8s_mode": "custom",
+  "form_version": "2.0",
+  "submitted_at": "2026-01-21T12:10:59.646043",
+  "run_id": "maestro_20260121_121059",
+  "uploaded_files": [
+    "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv"
+  ],
+  "uploaded_files_details": [
+    {
+      "original_name": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+      "saved_as": "20260121_121059_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+      "path": "docs/20260121_121059_Altumatim_Billing_Reports_2025-10-01__2025-10-22.csv",
+      "size": 18267
+    }
+  ]
+}

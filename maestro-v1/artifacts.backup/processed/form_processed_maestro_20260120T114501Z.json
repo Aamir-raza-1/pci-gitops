@@ -1,0 +1,143 @@
+{
+  "run_id": "maestro_20260120T114501Z",
+  "timestamp": "20260120T114501Z",
+  "confidence_score": 75,
+  "raw_form": {
+    "company_name": "alpachho",
+    "website_url": "https://altumatim.com",
+    "contact_email": "amir@altumatim.com",
+    "industry": "finance",
+    "serving_customers": "partial",
+    "migration_timeline": "short",
+    "current_budget": "5000-10000",
+    "cloud_provider": "gcp",
+    "gcloud_project": "qa-ezo",
+    "region": "us-central1",
+    "current_hosting": "gcp",
+    "current_regions": "us-central1",
+    "customer_regions": "Global",
+    "preferred_target_regions": "us-central1",
+    "app_repos": "https://github.com/Eazy-Ops/frontend",
+    "gcr_registry": "us-central1-docker.pkg.dev/fluted-polymer-376517/ez-repo",
+    "current_context": "Using current kubectl context",
+    "databases": "postgresql",
+    "postgresql_size": "30gb",
+    "uploaded_files": "Altumatim Billing_Reports, 2025-10-01 \u2014 2025-10-22.csv",
+    "special_requirements": "sole_tenancy",
+    "cost_sensitivity": "efficient",
+    "reliability": "maximum",
+    "deployment_model": "basic",
+    "scaling_preference": "manual",
+    "support_model": "dedicated",
+    "downtime_tolerance": "4_8_hours",
+    "compliance": "PCI-DSS",
+    "form_version": "2.0",
+    "submitted_at": "2026-01-20T14:37:11.548996",
+    "run_id": "maestro_20260120_143711"
+  },
+  "discovery_config": {
+    "version": "2.0",
+    "run_id": "maestro_20260120T114501Z",
+    "timestamp": "20260120T114501Z",
+    "confidence": 75,
+    "confidence_factors": [
+      "company_name",
+      "cloud_provider",
+      "project_id",
+      "auth_mode",
+      "app_repos",
+      "databases",
+      "uploaded_docs"
+    ],
+    "source": "form_submission",
+    "discovery": {
+      "mode": "full",
+      "provider": "gcp",
+      "auth": {
+        "mode": "adc",
+        "project": "qa-ezo",
+        "region": "us-central1",
+        "service_account_key": ""
+      },
+      "scope": {
+        "compute": true,
+        "storage": true,
+        "networking": true,
+        "databases": true,
+        "kubernetes": false,
+        "serverless": true,
+        "iam": true,
+        "repositories": true,
+        "websites": false,
+        "terraform": false,
+        "containers": true
+      }
+    },
+    "repositories": {
+      "scan": true,
+      "application": [
+        "https://github.com/Eazy-Ops/frontend"
+      ],
+      "infrastructure": [],
+      "helm": [],
+      "cicd": "",
+      "terraform": ""
+    },
+    "kubernetes": {
+      "enabled": false,
+      "mode": "none",
+      "contexts": [],
+      "clusters": []
+    },
+    "databases": {
+      "enabled": true,
+      "types": [
+        "postgresql"
+      ]
+    },
+    "websites": {
+      "enabled": false,
+      "urls": []
+    },
+    "containers": {
+      "enabled": true,
+      "registries": {
+        "gcr": "us-central1-docker.pkg.dev/fluted-polymer-376517/ez-repo",
+        "ecr": "",
+        "acr": "",
+        "artifact": ""
+      }
+    },
+    "iac": {
+      "available": false,
+      "mode": "no_iac",
+      "terraform_repo": ""
+    },
+    "uploaded_docs": {
+      "available": true,
+      "files": [],
+      "billing_reports": [],
+      "architecture_docs": []
+    },
+    "validation_required": {
+      "cloud_auth": true,
+      "kubernetes": false,
+      "databases": true,
+      "repositories": true,
+      "storage": true,
+      "terraform": false,
+      "containers": true,
+      "only_docs": false
+    },
+    "metadata": {
+      "company_name": "alpachho",
+      "form_version": "2.0",
+      "submitted_at": "2026-01-20T14:37:11.548996",
+      "migration_timeline": "short",
+      "downtime_tolerance": "4_8_hours",
+      "compliance": [
+        "PCI-DSS"
+      ]
+    }
+  }
+}
